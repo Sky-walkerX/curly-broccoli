@@ -14,6 +14,7 @@ import json
 import requests
 
 from .canonical import WRITABLE_FIELDS, coerce
+from .streamjson import MappingStream
 
 OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://localhost:11434")
 OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "qwen2.5:3b")
@@ -149,26 +150,75 @@ def _clean(raw_mappings, valid_lines):
     return out
 
 
-def propose_mappings(lines):
-    """Ask the local model to map unknown lines. Returns [] on any failure."""
-    lines = [l for l in (ln.strip() for ln in lines) if l and not l.startswith(("!", "#"))]
-    if not lines:
-        return []
-    payload = {
+def _payload(lines, stream):
+    return {
         "model": OLLAMA_MODEL,
         "messages": [
             {"role": "system", "content": _SYSTEM},
             {"role": "user", "content": _user_prompt(lines)},
         ],
-        "stream": False,
+        "stream": stream,
         "format": "json",
         "options": {"temperature": 0},
     }
+
+
+def _usable(lines):
+    return [l for l in (ln.strip() for ln in lines) if l and not l.startswith(("!", "#"))]
+
+
+def propose_mappings(lines, on_mapping=None):
+    """Ask the local model to map unknown lines. Returns [] on any failure.
+
+    Pass on_mapping to stream: it is called with each validated mapping the moment the
+    model finishes writing it, so the UI can show the learning happen instead of
+    staring at a spinner. The returned list is identical either way.
+    """
+    lines = _usable(lines)
+    if not lines:
+        return []
+    if on_mapping is None:
+        return _propose_blocking(lines)
+    return _propose_streaming(lines, on_mapping)
+
+
+def _propose_blocking(lines):
     try:
-        r = requests.post(f"{OLLAMA_URL}/api/chat", json=payload, timeout=TIMEOUT)
+        r = requests.post(f"{OLLAMA_URL}/api/chat", json=_payload(lines, False), timeout=TIMEOUT)
         r.raise_for_status()
         content = r.json().get("message", {}).get("content", "")
         data = json.loads(content)
         return _clean(data.get("mappings", []), lines)
     except (requests.RequestException, json.JSONDecodeError, KeyError, ValueError):
         return []
+
+
+def _propose_streaming(lines, on_mapping):
+    """Same call with stream=True, surfacing each mapping as its closing brace lands.
+
+    A mid-stream failure keeps whatever the model already produced: those mappings are
+    real, they were validated, and the admin has already seen them on screen.
+    """
+    reader = MappingStream()
+    out = []
+    try:
+        with requests.post(f"{OLLAMA_URL}/api/chat", json=_payload(lines, True),
+                           stream=True, timeout=TIMEOUT) as r:
+            r.raise_for_status()
+            for raw in r.iter_lines():
+                if not raw:
+                    continue
+                try:
+                    chunk = json.loads(raw)
+                except json.JSONDecodeError:
+                    continue
+                content = chunk.get("message", {}).get("content", "")
+                if not content:
+                    continue
+                for mp in reader.feed(content):
+                    for cleaned in _clean([mp], lines):   # never surface unvalidated output
+                        out.append(cleaned)
+                        on_mapping(cleaned)
+    except (requests.RequestException, ValueError):
+        return out
+    return out

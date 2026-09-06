@@ -1,0 +1,73 @@
+{
+  "marks": [
+    {
+      "name": "open",
+      "t": 0.67
+    },
+    {
+      "name": "act1.click",
+      "t": 3.63
+    },
+    {
+      "name": "act1.report",
+      "t": 3.92
+    },
+    {
+      "name": "act1.findings",
+      "t": 10.86
+    },
+    {
+      "name": "act1.copyfix",
+      "t": 16.09
+    },
+    {
+      "name": "act1b.click",
+      "t": 21.06
+    },
+    {
+      "name": "act1b.report",
+      "t": 21.8
+    },
+    {
+      "name": "act2.click",
+      "t": 28.04
+    },
+    {
+      "name": "act2.learning",
+      "t": 28.82
+    },
+    {
+      "name": "act2.proposals",
+      "t": 47.15
+    },
+    {
+      "name": "act2.mappings",
+      "t": 53.94
+    },
+    {
+      "name": "act3.click",
+      "t": 61.46
+    },
+    {
+      "name": "act3.learned",
+      "t": 61.53
+    },
+    {
+      "name": "pdf.saved",
+      "t": 68.8
+    },
+    {
+      "name": "end",
+      "t": 71.4
+    }
+  ],
+  "hosts": [
+    {
+      "host": "127.0.0.1:8099",
+      "count": 17
+    }
+  ],
+  "model": "qwen2.5:3b",
+  "rules": 13,
+  "learnedBadge": "deterministic (learned) ·\n4 ms"
+}

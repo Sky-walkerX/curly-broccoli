@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Download, Loader2, ShieldCheck, ShieldQuestion, GraduationCap } from "lucide-react";
+import { Download, Loader2, ShieldCheck, ShieldQuestion, GraduationCap, Zap, Cpu } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
@@ -14,7 +14,31 @@ const SEV_RANK = { high: 0, medium: 1, low: 2 };
 const STATUS_ORDER = { fail: 0, na: 1, pass: 2 };
 const SEG_COLOR = { fail: "var(--fail)", pass: "var(--pass)", na: "var(--faint)" };
 
-export function DeviceIdentity({ device, onExport, exporting, canExport }) {
+// How the answer was reached, and how long it took. This is the whole point of teaching
+// a vendor: the same config that needed the model for ~18s now parses in milliseconds.
+function HowItParsed({ timing }) {
+  if (!timing) return null;
+  const ms = timing.elapsed_ms;
+  const pretty = ms < 1000 ? `${ms} ms` : `${(ms / 1000).toFixed(1)} s`;
+  const fast = timing.mode !== "local model";
+  return (
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
+          {fast ? <Zap className="h-3.5 w-3.5" style={{ color: "var(--pass)" }} />
+                : <Cpu className="h-3.5 w-3.5 text-primary" />}
+          {timing.mode} · <span className="tabular font-medium text-foreground">{pretty}</span>
+        </span>
+      </TooltipTrigger>
+      <TooltipContent>
+        {fast ? "Parsed by deterministic rules — no model involved."
+              : "A vendor with no parser yet: the local model read it line by line."}
+      </TooltipContent>
+    </Tooltip>
+  );
+}
+
+export function DeviceIdentity({ device, timing, onExport, exporting, canExport }) {
   const v = VENDOR[device.vendor_status] || VENDOR.provisional;
   const Icon = v.icon;
   const d = device.detect;
@@ -29,6 +53,8 @@ export function DeviceIdentity({ device, onExport, exporting, canExport }) {
             match {d.learned > 0 ? `learned ${Math.round(d.learned * 100)}%` : `cisco ${Math.round(d.cisco * 100)}%`}
           </span>
         )}
+        <span className="text-faint">·</span>
+        <HowItParsed timing={timing} />
       </div>
       <Button variant="outline" size="sm" onClick={onExport} disabled={exporting || !canExport}>
         {exporting ? <Loader2 className="animate-spin" /> : <Download />} Export PDF

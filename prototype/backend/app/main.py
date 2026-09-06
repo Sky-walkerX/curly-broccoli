@@ -6,9 +6,13 @@ vendors, rule checks, SQLite persistence, and offline PDF export. No config data
 leaves the machine -- built for the air-gapped networks NTRO cares about.
 """
 import os
+import json
+import queue
+import threading
+
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import Response
+from fastapi.responses import Response, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 
 from . import store, llm
@@ -60,6 +64,46 @@ def audit(req: AuditRequest):
     result = run_audit(req.config, req.vendor_hint)
     result["audit_id"] = store.save_audit(result)
     return result
+
+
+@app.post("/api/audit/stream")
+def audit_stream(req: AuditRequest):
+    """The same audit, reported as it happens (Server-Sent Events).
+
+    Unknown vendors take as long as the local model takes to think -- roughly a mapping
+    a second. Streaming lets the admin watch it read a syntax it has never seen instead
+    of watching a spinner. /api/audit stays the plain request/response path.
+    """
+    if not req.config.strip():
+        raise HTTPException(400, "Empty config")
+
+    events = queue.Queue()
+
+    def work():
+        try:
+            result = run_audit(req.config, req.vendor_hint,
+                               on_event=lambda kind, data: events.put((kind, data)))
+            result["audit_id"] = store.save_audit(result)
+            events.put(("done", result))
+        except Exception as e:                      # surfaced to the UI, never swallowed
+            events.put(("failed", {"message": str(e)}))
+        finally:
+            events.put(None)
+
+    def stream():
+        threading.Thread(target=work, daemon=True).start()
+        while True:
+            item = events.get()
+            if item is None:
+                break
+            kind, data = item
+            yield f"event: {kind}\ndata: {json.dumps(data)}\n\n"
+
+    return StreamingResponse(stream(), media_type="text/event-stream", headers={
+        "Cache-Control": "no-cache",
+        "Connection": "keep-alive",
+        "X-Accel-Buffering": "no",              # don't let a proxy sit on the events
+    })
 
 
 @app.post("/api/teach")

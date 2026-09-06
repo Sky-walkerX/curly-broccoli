@@ -12,3 +12,8 @@ prototype/backend/*.log
 node_modules/
 prototype/frontend/dist/
 prototype/frontend/*.log
+
+# Demo video: large binaries + the raw take (rebuildable via video/record_demo.mjs)
+video/raw/
+video/build/
+video/*.mp4

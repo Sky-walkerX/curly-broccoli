@@ -10,6 +10,8 @@ Order of attack for any uploaded config:
 
 Rules then grade the canonical model the same way regardless of how we got there.
 """
+import time
+
 from .parsers import cisco, learned
 from .parsers.heuristics import heuristic_proposals
 from . import llm, store
@@ -85,21 +87,38 @@ def _best_learned(text):
     return best
 
 
-def run_audit(config_text, vendor_hint=None):
+def run_audit(config_text, vendor_hint=None, on_event=None):
+    """Grade one config.
+
+    on_event, when given, reports progress as it happens -- which path was taken and
+    each mapping the local model produces while it is still writing. It changes no
+    outcome: with on_event=None this behaves exactly as it always has.
+    """
+    emit = on_event or (lambda kind, data: None)
+    started = time.perf_counter()
+
     cisco_conf = cisco.detect(config_text)
     l_vendor, l_conf, l_maps = _best_learned(config_text)
 
     if cisco_conf >= CISCO_MIN and cisco_conf >= l_conf:
+        emit("parsing", {"mode": "deterministic", "vendor": "cisco_ios"})
         model = cisco.parse(config_text)
         status = "known"
+        mode = "deterministic"
         learning = {"needed": False, "proposals": [], "unknown_lines": []}
     elif l_conf >= LEARNED_MIN:
+        emit("parsing", {"mode": "deterministic", "vendor": l_vendor})
         model = learned.parse(config_text, l_vendor, l_maps)
         status = "learned"
+        mode = "deterministic (learned)"
         learning = {"needed": False, "proposals": [], "unknown_lines": []}
     else:
         lines = _clean_lines(config_text)
-        llm_props = llm.propose_mappings(lines)
+        emit("learning", {"lines": lines, "vendor_guess": vendor_hint or "new-vendor",
+                          "model": llm.OLLAMA_MODEL})
+        mode = "local model"
+        llm_props = llm.propose_mappings(
+            lines, on_mapping=(lambda p: emit("mapping", p)) if on_event else None)
         heur_props = heuristic_proposals(lines)
         proposals = _merge_proposals(llm_props, heur_props)
         model = _model_from_proposals(proposals)
@@ -114,6 +133,7 @@ def run_audit(config_text, vendor_hint=None):
         }
 
     report = engine.evaluate(model)
+    elapsed_ms = int(round((time.perf_counter() - started) * 1000))
     device = {
         "vendor": model.get("vendor"),
         "vendor_status": status,
@@ -121,4 +141,5 @@ def run_audit(config_text, vendor_hint=None):
         "detect": {"cisco": round(cisco_conf, 2), "learned": round(l_conf, 2),
                    "learned_vendor": l_vendor},
     }
-    return {"device": device, "canonical": model, "report": report, "learning": learning}
+    return {"device": device, "canonical": model, "report": report, "learning": learning,
+            "timing": {"elapsed_ms": elapsed_ms, "mode": mode}}

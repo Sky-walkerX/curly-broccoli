@@ -38,7 +38,7 @@ export default function App() {
           <aside className="flex min-h-0 flex-col overflow-y-auto scroll-thin border-b border-border bg-surface-2 p-4 lg:border-b-0 lg:border-r">
             <ConfigPane
               fixtures={a.fixtures} config={a.config} setConfig={a.setConfig}
-              onAudit={() => a.runAudit()} loading={a.status === "loading"} onSample={a.loadSample}
+              onAudit={() => a.runAudit()} loading={a.status === "loading"} phase={a.phase} onSample={a.loadSample}
             />
           </aside>
 
@@ -46,12 +46,12 @@ export default function App() {
             <div className="mx-auto max-w-4xl">
               <AnimatePresence mode="wait">
                 {a.status === "loading" ? (
-                  <motion.div key="loading" {...fade}><LoadingState phase={a.phase} elapsed={a.elapsed} /></motion.div>
+                  <motion.div key="loading" {...fade}><LoadingState phase={a.phase} elapsed={a.elapsed} live={a.live} /></motion.div>
                 ) : a.status === "error" ? (
                   <motion.div key="error" {...fade}><ErrorState message={a.error} onRetry={() => a.runAudit()} /></motion.div>
                 ) : a.result ? (
                   <motion.div key="result" {...fade} className="flex flex-col gap-4">
-                    <DeviceIdentity device={a.result.device} onExport={a.exportPdf} exporting={a.exporting} canExport={!!a.config.trim()} />
+                    <DeviceIdentity device={a.result.device} timing={a.result.timing} onExport={a.exportPdf} exporting={a.exporting} canExport={!!a.config.trim()} />
                     <PostureSummary report={a.result.report} />
                     {needsTeach && <TeachPanel learning={a.result.learning} onTeach={a.teach} teaching={a.teaching} />}
                     <Findings checks={a.result.report.checks} />

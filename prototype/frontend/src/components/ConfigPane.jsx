@@ -19,7 +19,7 @@ function SampleButton({ f, onClick, disabled }) {
   );
 }
 
-export function ConfigPane({ fixtures, config, setConfig, onAudit, loading, onSample }) {
+export function ConfigPane({ fixtures, config, setConfig, onAudit, loading, phase, onSample }) {
   const lines = config ? config.split("\n").length : 0;
   return (
     <div className="flex min-h-0 flex-col gap-4">
@@ -57,7 +57,9 @@ export function ConfigPane({ fixtures, config, setConfig, onAudit, loading, onSa
       </section>
 
       <Button size="lg" onClick={onAudit} disabled={loading || !config.trim()} className="w-full">
-        {loading ? <><Loader2 className="animate-spin" /> Analyzing…</> : <><Play /> Audit configuration</>}
+        {loading
+          ? <><Loader2 className="animate-spin" /> {phase === "learning" ? "Learning…" : "Analyzing…"}</>
+          : <><Play /> Audit configuration</>}
       </Button>
     </div>
   );
