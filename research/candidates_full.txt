@@ -1,0 +1,1250 @@
+==========================================================================================
+SIH26051 | ~112 teams | Miscellaneous | DRDO
+TITLE: Software Based Model Development for Design of Area Specific Shelter for Thermal Comfort Maintenance.
+---
+• Background:
+ The ambient atmospheric condition affects the temperature inside the shelter and makes thermal management necessary for maintenance of temperature in the comfortable range. The existing shelters for any region are generally not designed as per the requirements of a particular region and hence not energy efficient thus demands external thermal comfort maintenance system. Area specific designed shelters looks smart and one time solution for thermal management as per the atmospheric condition of the region.
+ This model development project work is specifically conceptualised keeping in mind the tough climatic condition of High Altitude cold Region like Ladakh and can be used for studying the design requirements of other climatic region shelters as well.
+ • Description:
+ The Ladakh region is blessed with high solar energy irradiance (1900-2100 kwh/m2/year) along with long average sunshine duration of 7.9 hours with 300 plus average annual cloud free days. The temperatures inside the shelters found suitable during day hours even during the winter period due to trapping of thermal energy from solar radiation, but approach nearly the ambient atmospheric temperature after sunset. High thermal losses through the material of the shelter and openings contributed towards such low temperature inside shelters.
+ A detailed thermal analysis of the shelter including size, shape orientation etc.
+ along with, study related to application of suitable materials and application of thermal mass storage material, composite multi-material etc. and effect of openings on outcome looks to be a potential solution for development of self-sufficient passive shelter for the region in terms of temperature maintenance.
+ A general model development in ANSYS software to thermally simulate the shelter for study of heat losses and capture of real time atmospheric ambient climatic condition data will prove to be helpful. The project is conceptualised for the development of general model in ANSYS software. The model should be user friendly and works on user defined values (real time data, material properties etc.)to simulate the cases along with comparative analysis with different materials under same ambient condition to predict the most efficient combination of materials, shape, and size etc.in terms of temperature maintenance.
+ The primary objective of the work/project is to minimize the energy utilisation for thermal comfort maintenance in particular and minimization of fossil fuel application in general by designing of area specific self-sustained standalone passive shelter at defined atmospheric climatic condition.
+ • Expected Solution:
+ Development of Software based model for predicating the suitable shelter design including suitable material, size, shape etc. with the objective of thermal comfort maintenance in passive shelter installed in different atmospheric conditions. This work involves simple feeding of collected data and material properties in developed model and outcome shows in terms of most efficient design with materials for thermal comfort maintenance in a particular region The Developed Model should be capable of giving/solving the following tasks:
+ 1. Prediction of shelter inside temperature based on the user defined inputs.
+ 2. Prediction of thermal energy generated from solar radiation.
+ 3. Heat flow details as per the temperature difference between ambient and shelter temperature for a defined time period.
+
+==========================================================================================
+SIH26053 | ~102 teams | Smart Vehicles | DRDO
+TITLE: Adaptive Variable Resolution 2.5D Lidar Mapping for Dynamic Environment Perception
+---
+• Background:
+ Autonomous navigation depends on the ability of a vehicle to perceive its surroundings with high precision. While 3D Lidar point clouds provide rich spatial data, processing millions of points in real-time creates immense computational bottlenecks and memory latency. Conversely, standard 2D occupancy grids lose critical height information necessary for detecting curbs, potholes, or overhanging obstacles. To balance precision and performance, there is a need for a 'foveated' mapping approachâ€”similar to human visionâ€” where the immediate vicinity is rendered in high detail for safety, and distant areas are simplified to reduce the processing load.
+ • Description:
+ The goal is to build a deep learning pipeline that transforms raw Lidar point clouds into a variable resolution 2.5D grid (an elevation map with semantic layers). The system must perform three primary tasks:
+ 1. Terrain Analysis: Distinguish between drivable surfaces and non-drivable terrain.
+ 2. Object Detection: Identify and classify static obstacles (walls, poles) and dynamic objects (pedestrians, other vehicles).
+ 3. Adaptive Spatial Representation: Implement a non-uniform grid where the cell size increases as the distance from the sensor increases. This requires a sophisticated data structure that can handle variable resolution without causing alignment errors or data loss during the projection from 3D to 2.5D.
+ • Expected Solution:
+ A software framework consisting of:
+ • A Deep Learning Model: A network (e.g., PointNet++ or a Sparse Convolutional Neural Network) capable of semantic segmentation of point clouds into terrain, static obstacles, and moving objects.
+ • Variable Resolution Grid Engine: An algorithm that projects classified 3D points into a 2.5D grid where the resolution is high (e.g., 5cm cells)
+ within a 10m radius and decreases (e.g., 50cm cells) up to a 100m radius.
+ • Real-time Visualization: A dashboard showing the 2.5D map with distinct color-coding for terrain and objects, demonstrating a significant reduction in memory usage compared to a uniform high-resolution 3D map.
+ • Performance Metrics: Evidence of low latency (high FPS) and high accuracy in object classification across varying distances.
+
+==========================================================================================
+SIH26054 | ~102 teams | Robotics and Drones | DRDO
+TITLE: AI-Enabled Real-Time Digital Twin System for Health Monitoring, Fault Prediction and Mission Reliability Enhancement of Aero Piston Engines used in MALE UAVs.
+---
+• Background:
+ Medium Altitude Long Endurance (MALE) UAV are increasingly being deployed for Long-duration intelligence, surveillance, reconnaissance (ISR).
+ Communication relay maritime surveillance and strategic defence missions Reliability and availability of propulsion systems are critical for mission success because piston-engine failures during flight may lead to mission abort, asset loss, or unsafe recovery conditions.
+ Conventional engine monitoring systems used in UAVs are primarily thresholdbased and reactive in nature. These systems generally indicate failures only after abnormality has already occurred. Present approaches also have limited capability to estimate remaining useful life (RUL) predict degradation trends, or simulate mission-wise engine behavior under varying environmental and operating conditions.
+ A Digital Twin (DT) framework for aero piston engines can significantly improve predictive maintenance, operational reliability, mission planning, and life cycle management by creating a continuously synchronized virtual representation of the physical engine using real-time sensor data physics-based models and AI/ML techniques.
+ The proposed problem aims to develop an indigenous Digital Twin framework suitable for deployment in MALE UAV ground control and health monitoring architecture. The solution should support real-time engine state estimation, anomaly detection degradation tracking, faultprediction, and mission replay capability.
+ • Description:
+ Develop a scalable and modular digital Twin System for an aero piston engine used in MALE UAV applications. The system shall create a real-time virtual representation of the engine by integrating.
+ • Engine sensor data
+ • Thermodynamic behavior models
+ • Engine performance maps
+ • Failure/degradation logit
+ • AI/ML based predictive analytics The proposed system should be capable of:
+ • Real-time engine parameter visualization
+ • Monitoring of engine health indicators
+ • Defection of abnormal operating conditions
+ • Predicting probable failures before occurrence
+ • Estimating degradation trends and Remaining Useful Life (RUL)
+ • Simulating engine behavior under different mission profiles and environmental conditions
+ • Supporting post-flight analysis and mission replay The system may utilize
+ • CAN bus/Socket CAN-based engine data acquisition
+ • ECU/FADEC communication interfaces Edge computing architecture Cloud or local server-based analytics
+ • AI/ML algorithms far anomaly detection
+ • Physics informed modelling approaches
+ • Dash board/HMI for operators and maintenance engineers
+ • Expected Solution:
+ The digital twin core framework shall act as the central intelligence layer that continuously mirrors the real aero-piston engine operating onboard the MALE UAV. The framework should establish a dynamic and continuously synchronized virtual representation of the engine using live telemetry, physicsbased models, operational history and AI-Driven analytics. The framework should be designed considering future deployment in defence grade Ground Control Station (GCS), engine test rigs, and fleet-level health monitoring infrastructures. The expected solution should include:
+ A. Digital Twin Core Framework
+ • Virtual engine model synchronized with live engine data
+ • Modular architecture for future scalability
+ • Real-time data ingestion capability B. Health Monitoring System: The health monitoring system shall continuously assess the condition of engine sub-systems and generate health indices for predictive maintenance. Monitoring of following engine parameter are required:
+ • RPM
+ • Cylinder Head Temperature (CHT)
+ • Exhaust Gas Temperature (EGT)
+ • Oil Pressure & Temperature
+ • Fuel flow
+ • Vibration signatures
+ • Battery Alternator health
+ • Injection timing parameters C. Fault Detection & Predictive Analytics: The system should transition from conventional threshold-based monitoring to intelligent predictive diagnostics. The detection/prediction of following parameters are required:
+ • Misfire conditions
+ • Injector abnormalities
+ • Coding degradation
+ • Lubrication issues
+ • Sensor drift/ failure
+ • Combustion instability
+ • Overheating trends
+ • Abnormal vibration patterns D. AE/ML Layer: The AI/ML layer shall provide adaptive learning capability for predictive diagnostic and intelligent maintenance planning. Following parameters are required to be captured:
+ • Anomaly detection algorithms
+ • Remaining Useful Life (RUL) estimation
+ • Trend analysis
+ • Predictive maintenance recommendations E. Simulation & Replay Capability: The system should include simulation tools to reproduce engine behavior and analyses mission scenarios. Following parameters are required to be captured:
+ • Replay of historical mission data
+ • Environmental condition simulation
+ • Engine behavior simulation during
+ • High Altitude
+ • Endurance mission
+ • Hot-weather operation
+ • Rapid throttle transitions F. Visualization Dashboard: The dashboard shall provide an intuitive operational interface for UAV operators, propulsion engineers and maintenance team. A user Interface displaying dashboard should support following:
+ • Real-time engine health status
+ • Fault alerts
+ • Engine efficiency trends
+ • Maintenance advisory
+ • Mission-wise health reports Deliverables Expected from Teams:
+ • Functional prototype/software demonstrator
+ • Digital twin architecture design
+ • Engine Simulation model
+ • AI/ML-based anomaly detection module
+ • Visualization dashboard
+ • Demonstration using simulated or real engine datasets
+ • Technical documentation and deployment roadmap Desired Innovation Areas: Participants are encouraged to explore:
+ • Physics-informed AI
+ • Edge AI for UAV applications
+ • Lightweight onboard analytics
+ • Hybrid thermodynamic + data-driven models
+ • Federated learning approaches
+ • Explainable AI for fault diagnosis
+ • Secure telemetry architecture
+ • Autonomous maintenance advisory systems Technical Expectations from Participants: Teams are expected to demonstrate understanding of:
+ • IC engine fundamentals
+ • UAV propulsion systems
+ • Sensor fusion
+ • Embedded systems
+ • CAN communication
+ • AI/ML analytics
+ • Data visualization
+ • Simulation modelling
+ • Reliability engineering
+
+==========================================================================================
+SIH26055 | ~112 teams | Robotics and Drones | DRDO
+TITLE: Smart Scan strategy for Electronic Warfare
+---
+Development of Smart Scan Strategy for Electronic Warfare in the absence of prior reliable intelligence of emitters and their operating characteristics.
+ • Background Detection of hostile communication or radar signals starts with search / scan of a wide frequency spectrum which covers relevant emitters. Sensors with typically high sensitivity but with at least an order lower instantaneous bandwidth compared to overall bandwidth of the system are used to maintain surveillance over the entire spectrum. This requires a receiver / receivers to sweep over frequency bands. Hitherto strategies based on pre mission data / prior data (Open loop) are used. Usually the first priority is to rapidly sweep the entire band with the best speed possible. Open loop strategies focus only on this requirement and may lose time to nonthreatening emitters by not giving time to new or threatening ones.
+ • Detailed Description This problem statement focusses on development of Smart Scan Strategy for Electronic Warfare. Interception of signals is a two dimensional search problem since it involves adjusting receiverâ€™s frequency at correct time. This includes building up figures of merit for interception performance such as probability of detection, probability of false alarm, sensitivity, Avg intercept rate, Avg Reward / cost function, percentage of correct predictions and average intercept time error. A system model for the receiver needs to be developed with measurements obtained from a simulated RF environment which has truth information on status of emitters in each band and at each time slot. The frequency spectrum for own receiver consists of many bands.
+ The status of environment for each frequency band at each time step can be recorded as a transmission or a non-transmission. The model should enable prediction of intercept time and interception ratio of a scanning receiver against spatially scanning and frequency agile emitters. Development of a robust scheduler using machine learning to minimize intercept time and ensure a high interception rate is the primary objective of the strategy. The model should then be trained based on hits and misses. Further, approaches to intercept a periodic scan receiver optimally should be outlined. Algorithms and techniques for the same need to be developed.
+ • Expected Solution Machine learning based Electronic Support receiver scheduler software
+
+==========================================================================================
+SIH26104 | ~140 teams | Blockchain & Cybersecurity | All India Council for Technical Education (Cyber Security Cell)
+TITLE: AI-Powered Real-Time Detection and Prevention of Voice Cloning Impersonation Attacks
+---
+• Background Recent advancements in generative AI and neural speech synthesis have made high-fidelity voice cloning possible from only a few seconds of recorded audio. Threat actors are exploiting these capabilities to impersonate CXOs,government officials, and trusted individuals in order to initiate fraudulent financial transactions, manipulate employees,or bypass verification procedures in high-risk workflows. Conventional call verification methodsâ€”such as caller ID, manual call-back, and basic voice familiarityâ€”are no longer sufficient to distinguish genuine callers from AI-generated or manipulated voices, especially in high-pressure social engineering scenarios.
+ These attacks are increasingly orchestrated over VoIP, mobile networks, and enterprise collaboration platforms,sometimes combined with leaked personal information to create highly convincing narratives. The absence of automated detection of synthetic or cloned voices in real time significantly increases the likelihood of large-scale financial fraud and reputational damage to institutions that rely heavily on telephonic instructions and approvals.
+ • Problem Statement Current telephony and communication ecosystems lack a robust, AI-driven mechanism to detect and flag voice cloning or synthetic speech impersonation during live calls. Existing solutions rarely perform granular analysis of acoustic artifacts, prosody, and speech generation patterns and typically cannot provide an actionable risk score while the conversation is ongoing.There is a need for an end-to-end security framework that can analyze incoming voice streams in near real time,determine the likelihood that the caller is using a cloned or AI-generated voice, and provide timely alerts and recommendations before sensitive actionsâ€”such as approval of fund transfers or disclosure of confidential informationâ€”are taken. The solution must be privacy-preserving, scalable across telecom and enterprise environments, and support multilingual contexts with diverse Indian accents and dialects.
+ • Proposed Solution Develop an AI-powered, real-time voice integrity verification framework that integrates advanced deep learning,digital signal processing, and contextual analysis to detect AI-generated or manipulated voices. The system should continuously process live or near live audio streams from telephony, VoIP, and collaboration platforms,extract discriminative features, and compute a dynamic impersonation risk score.The framework should expose APIs and SDKs for seamless integration with banking applications, enterprise communication systems, and telecom operator infrastructures, enabling proactive fraud prevention and enhanced cyber resilience in voice channels.
+ • Key Components
+ • Multi-Layer Voice Authenticity Analysis o Acoustic and spectral analysis using deep learning models to detect synthesis artifacts, phase inconsistencies, and spectral signatures indicative of cloned or AI-generated audio.
+ o Prosody and behavioral analysis to model speech rhythm, pitch contours, pauses, and microvariations, differentiating natural human speech from neural TTS outputs.
+ o Cross-session consistency checks comparing ongoing call features against historical genuine samples (where available) to detect anomalies in speaker identity.
+ • Real-Time Risk Scoring Engine o Continuous computation of a confidence/risk score indicating the probability of impersonation or synthetic speech.
+ o Threshold-based alerting logic configurable for different risk scenarios (for example, high-value transaction calls, privileged access approvals).
+ o Contextual enrichment using metadata such as call origin, known contact information, transaction context, and historical fraud indicators.
+ • Alerting and User Interaction Layer o Multi-channel alert mechanisms (UI prompts, SMS/email, in-app notifications) for frontline staff and end users.
+ o Pre-transaction warning prompts recommending secondary verification such as call-back, multifactor authentication, or escalation to supervisors.
+ o Configurable workflows for banks,enterprises, and government agencies to define automated responses when impersonation risk crosses thresholds.
+ • Privacy and Compliance Module o Minimal retention of voice recordings with options for on-device or edge inference to reduce central storage of sensitive audio data.
+ o Support for anonymization or feature-only logging to comply with data protection and privacy requirements.
+ • Platform and Integration APIs o REST/gRPC APIs and SDKs for integration with core banking systems, contact center platforms, enterprise communication tools, and telecom networks.
+ o Support for multiple Indian languages and regional accents through language-agnostic feature extraction and language-specific acoustic models.
+ • Expected Outcomes
+ • Significant reduction in financial fraud and social engineering incidents driven by voice cloning and AIenabled impersonation.
+ • Improved trust and assurance in voice-based communication channels for individuals, financial institutions, enterprises, and government organizations.
+ • Early detection of AI-driven social engineering attacks, enabling proactive containment and incident response.
+ • A reusable security layer for telecom operators and enterprises that strengthens overall cyber resilience and aligns with national cybersecurity objectives.
+
+==========================================================================================
+SIH26105 | ~140 teams | Blockchain & Cybersecurity | All India Council for Technical Education (Cyber Security Cell)
+TITLE: AI-Powered Continuous Cyber Risk Quantification and Investment Optimization Platform
+---
+• Background Enterprises and institutions invest heavily in cybersecurity tools, compliance programs, and risk management initiatives, yet cyber risk is still predominantly communicated using qualitative ratings such as 'Low','Medium', or 'High'.
+ These coarse categories fail to express the potential financial impact of cyber threats,making it difficult for senior management, boards, and regulators to evaluate whether current cyber investments are adequate or optimally allocated.
+ Cyber risk is inherently dynamic: new vulnerabilities emerge, threat actors change tactics, business services are added or retired, and security controls mature over time. Most current risk assessment practices rely on periodic, manual exercises, resulting in stale risk registers and limited visibility into the organizationâ€™s real-time cyber exposure. This gap leads to suboptimal prioritization of remediation efforts, under- or over-spending on security controls, and weak alignment between technical risk metrics and business decision-making.
+ • Problem Statement Design and develop an AI-powered platform that continuously quantifies cyber risk in monetary terms by correlating technical security telemetry with business asset criticality and control effectiveness. The platform must estimate the likelihood and financial impact of cyber incidents, identify key risk drivers, and recommend cost-effective mitigation strategies under explicit budget constraints.The solution should bridge the gap between technical cybersecurity metrics and business language, enabling CISOs, risk officers, and executive leadership to make informed, data-driven decisions about cyber risk and security investment.
+ • Proposed Solution Develop a cloud-ready cyber risk analytics platform that ingests data from multiple enterprise security and IT sourcesâ€”such as vulnerability management, SIEM, IAM, EDR, CSPM, asset inventories, and threat intelligence feedsâ€”and uses AI/ML models to compute continuous risk scores and estimated financial exposure, such as Expected Annual Loss. The system should provide interactive dashboards and decision-support tools that allow stakeholders to simulate remediation scenarios, evaluate investment options, and understand the return on security investment.The platform must be capable of mapping risk metrics to established cybersecurity frameworks, including ISO/IEC 27001, NIST Cybersecurity Framework, CIS Controls, RBI Cyber Security Framework, and SEBI Cybersecurity and Cyber Resilience Framework, supporting both regulatory reporting and internal governance.
+ • Key Components
+ • Risk Quantification Engine o Continuous aggregation and normalization of data from vulnerability scanners, SIEM, IAM, EDR,CSPM, asset inventory, and other security tools.
+ o Statistical and ML-based estimation of incident likelihood and potential business impact, including downtime costs, data breach costs, regulatory penalties, and reputational effects.
+ o Calculation of enterprise cyber risk as financial exposure metrics (for example, Expected Annual Loss and Value at Risk) at organization, business unit, and asset levels.
+ o Asset criticality modeling to weigh technical findings based on business importance and service dependencies.
+ o Control effectiveness evaluation using telemetry about configuration strength,incident history, and compliance status.
+ • AI Decision Support Layer o Predictive analytics for emerging threats and evolving risk based on trends in vulnerabilities, threat intelligence, and control performance.
+ o AI-generated mitigation recommendations that propose prioritized actionsâ€”such as patch deployment, access control tightening, network segmentation, and additional monitoringâ€”with quantified risk reduction.
+ o Natural language query interface for non-technical stakeholders, enabling questions like 'What is our highest financial cyber risk today?' or 'Which vulnerabilities contribute most to our expected losses?'.
+ o Scenario simulation tools for exploring 'what-if' analyses, such as 'What happens if MFA is implemented across all privileged accounts?' or 'How will delaying remediation by 30 days affect our financial exposure?'.
+ • Investment Optimization Module o Optimization models that recommend sets of controls and remediation actions delivering maximum risk reduction for a specified budget (for example, ?1 crore).
+ o Computation of ROSI and cost-benefit metrics for different security initiatives to support strategic planning and board-level approvals.
+ o Visualization of 'Investment vs. Risk Reduction' curves to highlight diminishing returns and optimal spend zones.
+ • Executive and Technical Dashboards o Unified views for CISOs and executives, including Enterprise Risk Score, total Financial Exposure, Risk Trend Analysis, Top Risk Contributors, and Risk Reduction Opportunities.
+ o Drill-down capability for technical teams to see control-level and asset-level findings, remediation backlogs, and mapping to frameworks and policies.
+ • Compliance and Framework Mapping o Built-in mapping against frameworks such as ISO/IEC 27001, NIST Cybersecurity Framework, CIS Controls, RBI Cyber Security Framework, and SEBI Cybersecurity and Cyber Resilience Framework.
+ o Support for generating evidence-based reports and dashboards for audits, regulatory filings, and internal governance committees.
+ • Expected Outcomes
+ • Continuous, near real-time visibility into enterprise cyber risk, expressed in monetary terms understandable to business stakeholders.
+ • Improved prioritization of cybersecurity initiatives based on quantified impact rather than subjective risk ratings.
+ • Enhanced communication of cyber risk to executive management, boards, and regulators through intuitive, data-driven dashboards and narratives.
+ • More rational and optimized cybersecurity investment decisions, maximizing risk reduction per unit of spend.
+ • Reduction in both the likelihood and financial impact of cyber incidents through targeted remediation and investment strategies.
+
+==========================================================================================
+SIH26106 | ~127 teams | Blockchain & Cybersecurity | All India Council for Technical Education (Cyber Security Cell)
+TITLE: AI-Powered Email Threat Detection, GeoLocation and Forensic Intelligence Platform
+---
+• Background Email continues to be one of the most widely used communication channels in government, education, banking,and enterprise ecosystems. However, it also remains one of the most exploited attack vectors for phishing,impersonation, business email compromise, financial fraud, credential theft, and malware delivery. Threat actors increasingly use spoofed domains, deceptive sender identities, social engineering techniques, and compromised infrastructure to send highly convincing fraudulent emails that appear legitimate to end users.Traditional email security controls such as spam filters, static blacklists, and rule-based signature mechanisms are often insufficient to detect sophisticated fraudulent emails. Attackers now use AI-generated language,domain lookalikes, display-name spoofing, hidden redirection links, and relay chains to evade standard detection systems. In many cases, even when a suspicious email is identified, organizations lack the technical capability to effectively trace the source path, identify probable sender infrastructure, correlate geolocation clues, and support investigation into the origin of the email.This gap creates major challenges for cybersecurity teams, law enforcement support, fraud response units, and institutional administrators who need not only to detect malicious emails but also to investigate their source and reveal indicators that may help identify the actor or infrastructure behind the attack.
+ • Problem Statement Current email security ecosystems primarily focus on filtering or blocking suspicious content but provide limited intelligence for deep forensic tracing of fraudulent email origins. Existing tools often do not adequately correlate email headers, SMTP relay paths, SPF/DKIM/DMARC validation results, IP reputation, geolocation indicators, domain registration intelligence, and behavioral patterns to build a complete picture of the senderâ€™s identity or operating location.There is a need for an AI-powered platform capable of detecting phishing, spoofed, impersonated, and fraudulent emails in real time or near real time, analyzing the complete technical structure of an email, tracing its transmission path across mail servers, estimating its origin with location, and generating forensic intelligence and investigative insights that assist in identifying malicious infrastructure, compromised systems, or threat actors behind the attack.The solution should support forensic analysis, fraud prevention, institutional email security, and investigation workflows while maintaining legal, privacy, and evidentiary standards.
+ • Proposed Solution Develop an AI-Powered Email Threat Detection, GeoLocation and Forensic Intelligence Platform that combines Natural Language Processing (NLP), Machine Learning (ML), email header forensics, IP intelligence, domain analysis, and graph-based correlation to identify suspicious emails,detect advanced email threats, and investigate their probable origin.
+ The system should ingest raw email content, metadata, and headers; validate sender authentication mechanisms;
+ extract indicators of compromise; reconstruct relay paths; analyze originating IP addresses and associated geolocation data; and generate a confidence-based assessment of fraud risk and probable sender origin. The platform should provide actionable alerts, visual trace maps, and forensic reports for security analysts,administrators, and investigators.
+ • Key Components
+ • Fraudulent Email Detection Engine o NLP-based analysis of email subject lines, body text, urgency cues, impersonation language, and social engineering patterns.
+ o Detection of phishing indicators such as spoofed sender addresses, deceptive domains, suspicious attachments, malicious links, and obfuscated URLs.
+ o AI/ML models to classify emails as legitimate, suspicious, impersonated, phishing, or fraud-related.
+ o Identification of business email compromise patterns such as payment diversion, fake invoice requests, credential harvesting attempts, and executive impersonation.
+ • Email Header and Protocol Analysis Module o Deep analysis of email headers including Return-Path, Received headers, Message-ID, Reply-To,DKIM signatures, SPF alignment, and DMARC status.
+ o Detection of anomalies in mail routing, forged sender fields, relay manipulation, and spoofed transmission records.
+ o Validation of whether the email was sent through authorized infrastructure or suspicious relay paths.
+ • Origin Traceability and Location Analysis o Extraction of originating IP addresses from header chains and identification of the earliest reliable sending node.
+ o IP geolocation mapping to estimate the likely country, region, city, ISP, hosting provider, or proxy service associated with the email source.
+ o Correlation with VPN, TOR, open relay, botnet, or cloud-hosted infrastructure indicators where applicable.
+ o Domain intelligence analysis using WHOIS data, DNS records, MX records, hosting fingerprints,and registrar details to identify suspicious sender infrastructure.
+ • Identity Correlation and Attribution Support o Correlation of email indicators with known threat intelligence, blacklists, previous incidents,domain clusters, and repeated fraud campaigns.
+ o Graph-based relationship analysis between sender domains, IP addresses, aliases, reply chains, and linked infrastructure.
+ o Confidence-based investigative assessment to assist in revealing probable sender identity, associated infrastructure, or campaign-level attribution patterns.
+ o Support for flagging whether the email likely originated from a compromised account, spoofed domain, anonymized infrastructure, or direct malicious actor environment.
+ • Alerting, Dashboard, and Forensic Reporting o Real-time alerts for high-risk emails before user interaction or administrative approval.
+ o Analyst dashboard showing fraud score, spoofing indicators, sender trace path, geolocation map,and attribution confidence.
+ o Generation of structured forensic reports for institutional action, legal review, cyber incident response, and support to law enforcement agencies.
+ o Searchable case management view for grouping related fraudulent emails into campaigns.
+ • Privacy, Legal, and Compliance Safeguards o Controlled handling of personal data and metadata in accordance with organizational privacy policies.
+ o Logging, evidence preservation, and chain-of-custody support for investigation purposes.
+ oConfigurable retention and masking mechanisms for sensitive communication data.
+ • Expected Outcomes
+ • Early and accurate detection of fraudulent, spoofed, and phishing-based email attacks.
+ • Improved ability to trace suspicious email origin paths and identify probable source infrastructure.
+ • Enhanced fraud investigation capability through geolocation analysis, domain intelligence, and sender attribution support.
+ • Reduced financial loss, reputational damage, and unauthorized disclosure of confidential information caused by email-based fraud.
+ • Better institutional readiness for cyber incident response, forensic investigation, and enforcement coordination.
+
+==========================================================================================
+SIH26123 | ~112 teams | Smart Automation | Bharat Electronics Limited
+TITLE: Edge-AI Based Distributed Fleet Coordination for Autonomous Mobile Robots (AMRs) in Smart Warehouses
+---
+• Background Modern smart warehouses rely on fleets of Autonomous Mobile Robots (AMRs) to move goods efficiently. As fleet sizes grow, relying entirely on a centralized cloud server for path planning causes high network latency, Wi-Fi dead-zone vulnerabilities, and single-point-of-failure risks.To ensure continuous operation, modern robotics is shifting toward decentralized, edge-computing solutions where robots can talk to each other directly and make split-second decisions on the fly.
+ • Description The objective is to design a decentralized coordination and collision-avoidance framework for a multi-robot fleet (at least 3 AMRs) operating in a dynamic warehouse environment. The system must run locally on edge hardware (e.g., Raspberry Pi or Jetson Nano onboard each robot) and handle:
+ 1. Decentralized Communication: Inter-robot messaging to share position and intent without a central server.
+ 2. Dynamic Multi-Agent Conflict Resolution: Resolving deadlocks and avoiding collisions at narrow intersections or choke points in real-time.
+ 3. Task Allocation & Re-routing: Automatically re-assigning pickup points or changing paths if one robot encounters a blocked aisle.
+ • Expected Solution A multi-robot simulation featuring:
+ • Decentralized Network Stack: A peer-to-peer communication protocol where robots share localization data locally.
+ • Multi-Agent Path Planning: Implementation of algorithms for edge hardware.
+ • Fleet Dashboard: A lightweight monitoring UI that visualizes the entire fleet's real-time positions and battery status.
+ • Success Criteria: Zero inter-robot collisions and a minimum 20% reduction in total task completion time compared to traditional stop-and-wait methods when handling overlapping paths.
+
+==========================================================================================
+SIH26124 | ~112 teams | Smart Automation | Bharat Electronics Limited
+TITLE: AI-Powered Mobile Urban Intelligence Platform Using Public Transport Fleet
+---
+• Background Urban public transport buses traverse almost every major road in a city every day. Modern buses are increasingly equipped with multiple cameras covering the front, rear, sides, and passenger cabin. However, these cameras are primarily used for recording incidents and are not leveraged as intelligent sensing platforms. At the same time, city authorities rely on fixed CCTV cameras, manual inspections and citizen complaints to identify road defects, traffic congestion,missing infrastructure and unsafe driving behaviour. This results in delayed response,incomplete situational awareness and inefficient maintenance planning.
+ • Description Develop an AI-powered onboard and centralized software platform that transforms public transport buses into mobile urban sensing units. The onboard software shall analyse video streams from multiple bus-mounted cameras to detect road defects such as potholes, damaged roads, missing road dividers, missing zebra crossings, damaged or missing traffic signboards,waterlogging and other road hazards. It shall estimate vehicle density through vehicle detection, classification and counting, identify traffic bottlenecks, and detect vulnerable pedestrian situations such as school children crossing roads. During incidents such as hit-and-run or rash driving, the system should detect and track the offending vehicle, extract the registration number with a confidence score, timestamp and GPS location, and securely share alerts with a central command system. The centralized platform shall aggregate information from the entire bus fleet, visualize events on a GIS map, generate congestion heat maps,identify infrastructure deficiencies, analyse originâ€“destination traffic patterns, estimate route delays and provide actionable insights for transport authorities.
+ • Expected Solution The solution should provide an edge-AI onboard processing framework integrated with a centralized urban intelligence platform. It should generate reliable alerts, GIS-based dashboards, road condition maps, traffic analytics and incident reports to support proactive road maintenance, improved traffic management, enhanced public safety and evidence-based decision making while minimizing bandwidth through intelligent edge processing.
+
+==========================================================================================
+SIH26125 | ~112 teams | Blockchain & Cybersecurity | Bharat Electronics Limited
+TITLE: Blockchain-Based Secure Platform for Identity,Access Control, and Digital Asset Management
+---
+• Background Organizations today rely heavily on centralized identity and access management systems, which create significant security and operational risks. These systems are vulnerable to cyber attacks, identity theft, unauthorized access, and single points of failure. Additionally, digital and physical asset ownership is often managed through disconnected or semi-centralized systems, making verification of authenticity, access rights, and ownership history difficult and unreliable. There is a growing need for a decentralized, tamper-proof system that can securely manage user identities, control access permissions, and ensure transparent ownership of digital assets
+ • Detailed Description The system aims to introduce a blockchain-based framework that integrates decentralized identity management, access control, and NFT-based digital asset ownership. Each user is assigned a decentralized identifier, which serves as a secure and verifiable digital identity independent of centralized authorities and authenticated using cryptographic proofs. Digital assets are represented as Non-Fungible Tokens (NFTs),ensuring each asset is unique, traceable, and permanently recorded on the blockchain.These NFTs are directly allocated to user identities, establishing verifiable ownership that cannot be altered or duplicated.Smart contracts govern all operations within the platform, allowing only authorized administrators to mint NFTs and assign them to user identities, ensuring controlled asset creation and secure distribution. The system also implements Role-Based Access Control (RBAC), where administrators define roles such as Admin, Manager, Auditor,and User and assign specific access rights to each identity. These permissions are enforced automatically by smart contracts during all operations. Every activity, including identity creation, NFT creation, asset allocation, access rights assignment, ownership transfers, and permission updates, is immutably recorded on the blockchain, providing a transparent and tamper-proof audit trail for verifying ownership, authenticity, and access history.
+ • Expected Solution The expected solution is a decentralized blockchain-based platform that integrates secure digital identity management, NFT-based asset ownership, and access control into a unified and trustless system. It utilizes decentralized identifiers to provide users with self-sovereign, cryptographically verifiable identities that function independently of centralized authorities. Digital assets are issued as Non-Fungible Tokens (NFTs), ensuring uniqueness, traceability, and immutable ownership, with each NFT directly linked to a userâ€™s decentralized identity to establish a permanent and verifiable connection between assets and their owners.The system should be governed by smart contracts that enforce strict rules for NFT creation, allocation, transfer, and validation. Only authorized administrators are allowed to create NFTs and assign them to identities, ensuring secure and controlled asset governance while preventing unauthorized duplication or reassignment. Additionally, the platform should implement Role-Based Access Control (RBAC), where administrators define roles and assign access permissions that determine user privileges within the system. All identity operations, NFT transactions, and access control updates are permanently recorded on the blockchain, ensuring complete transparency, auditability,and tamper-proof verification of ownership, permissions, and transaction history.
+
+==========================================================================================
+SIH26126 | ~112 teams | Smart Automation | Bharat Electronics Limited
+TITLE: Vision Based Autonomous Navigation for Unmanned Ground Vehicle for Outdoor environment
+---
+• Background Outdoor Unmanned Ground Vehicles (UGVs) face unpredictable terrain, changing light, and unreliable GPS signals. To achieve true autonomy in applications like search-and-rescue,agriculture, or delivery, UGVs must rely on onboard computer vision. Visual perception provides a cost-effective, data-rich way for vehicles to understand and safely navigate complex,unstructured outdoor surroundings.
+ • Description The objective is to build an autonomous navigation system for a UGV operating in a GPS-denied outdoor environment using camera feeds as the primary sensor. Students must solve three key challenges:
+ 1. Path Detection: Real-time identification of safe, traversable paths vs. hazards (e.g., rocks,ditches, trees).
+ 2. Visual Localization: Estimating the UGVâ€™s position and orientation without GPS using visual data.
+ 3. Collision Avoidance: Dynamically routing the vehicle around sudden obstacles toward a destination.
+ • Expected Solution A functional software module consisting of:
+ • Perception AI: A lightweight model for obstacle and path detection.
+ • Visual SLAM/Odometry: A pipeline to track vehicle movement.
+ • Path Planner: An algorithm to translate visual data into wheel/motor commands.
+ • Success Criteria: Successful, collision-free navigation from Point A to Point B across outdoor scenarios
+
+==========================================================================================
+SIH26127 | ~102 teams | Smart Automation | Bharat Electronics Limited
+TITLE: City-Wide AI Engine for Multi-Camera ANPR Trajectory Tracking and Urban Traffic Analytics
+---
+• Background Modern urban centers deploy vast networks of CCTV and Automatic Number Plate Recognition(ANPR) cameras to manage traffic, enforce traffic laws, and maintain public security. However,most existing systems process these feeds in isolated silos, performing basic license plate detection without effectively linking data across space and time. This lack of integration prevents city authorities from automatically tracking high-interest vehicles across different sectors and limits their ability to extract macro-level traffic movement trends from the existing camera infrastructure.
+ • Description The objective is to develop a robust, centralized AI software platform that processes multicamera feeds across a city-wide ANPR network to accomplish three core functionalities. First, the platform must feature a High-Accuracy ANPR and OCR Engine, which utilizes an advanced Optical Character Recognition model capable of achieving greater than 90% accuracy across diverse realworld conditions such as varying lighting, poor weather, angled shots, motion blur, and dirty or damaged license plates. Second, it requires a Single Plate Trajectory Tracking module to build a spatial-temporal tracking system capable of reconstructing the complete travel trajectory of any specific vehicle plate across the entire city network. This system will map a vehicle's movement history, timestamps, direction, and route on a GIS map using inputs from geographically distributed ANPR cameras. Third, the system must perform Macro Traffic Flow and Movement Analytics by analyzing aggregated camera data to compute and visualize general city-wide traffic dynamics. This includes measuring traffic density, identifying origin-destination patterns,detecting congestion bottlenecks, and providing real-time heatmaps of city traffic movement.
+ • Expected Solution The expected solution is a scalable, enterprise-grade software platform equipped with four key components. It will feature a High-Precision OCR Module powered by a deep-learning model exceeding 90% recognition accuracy for license plates in multi-lane traffic streams. It will include a Trajectory Reconstruction Engine providing a query-based tracking interface that plots a vehicle's historical path chronologically across the city map with accurate timestamps and camera locations. Furthermore, it will integrate a City Traffic Analytics Dashboard to serve as a centralized, GIS-integrated web platform displaying heatmaps, average vehicle speeds, route densities, and traffic flow trends across all camera nodes. Finally, the platform will incorporate an Alert System capable of flagging blacklisted vehicles and suspicious route anomalies in real time.
+
+==========================================================================================
+SIH26142 | ~102 teams | Space Technology | National Technical Research Organisation (NTRO)
+TITLE: Deep Learning Based Super Resolution Mapping (SRM) from Medium Resolution Satellite Imageries
+---
+• Background Medium-resolution satellite imagery, typically ranging from 10 to 30 meters, is widely used in change detection, agriculture, land-cover mapping, disaster monitoring, and urban planning because it offers broad coverage and frequent revisit time. However, the spatial detail is often insufficient for fine-scale analysis, such as identifying small buildings, narrow roads, field boundaries, or localized damage assessment. This creates a need for advanced deep learning based generative enhancement techniques that can extract greater value from existing Earth observation data.
+ • Description Medium-resolution satellite imagery, usually ranging from 10 to 30 meters, is widely used in remote sensing for agriculture monitoring, land-cover mapping, urban planning, disaster assessment, and environmental observation because it provides large-area coverage and frequent revisit capability. However, its spatial resolution is often not sufficient to clearly identify fine details such as narrow roads, small buildings, field boundaries, water edges, or localized damage. This limitation reduces the accuracy and confidence of interpretation and decision-making in applications that require detailed ground-level information. Generative AI super-resolution addresses this problem by using advanced models such as GANs, diffusion models, and deep neural networks to enhance medium-resolution satellite images into sharper and more information-rich finer outputs. These models learn spatial textures, patterns, edges, and spectral relationships from training data containing both medium-resolution and high-resolution image pairs. The goal is not simply to make the image visually clearer, but to reconstruct useful fine-scale details while preserving the original geographic and spectral consistency of the satellite data.
+ The expected solution is a robust AI-based super-resolution framework that can take medium-resolution satellite imagery as input, perform pre-processing, apply a trained generative model, and produce an enhanced spatial resolution image, suitable for analysis. The system should improve feature visibility, support better classification, change detection, crop monitoring, urban mapping, and disaster response. At the same time, it must clearly manage uncertainty because some reconstructed details are inferred by the model and not directly observed. Therefore, validation against high-resolution reference data is essential to ensure that the enhanced outputs are scientifically reliable and useful for real-world remote sensing applications.
+ • Expected Solution The expected solution is a robust super-resolution framework model based on the choice of participating team (Transformers/Generative/CNN etc.) that can transform the input medium-resolution satellite imagery (10m Sentinel-2 Satellite Imagery) into sharper, information-rich products (<4m) while preserving geospatial and spectral consistency. The solution should include pre-processing, model training with paired datasets, accuracy assessment, and validation against high-resolution references. Ideally, it should support applications such as crop monitoring, urban analysis, and disaster assessment. The final outcome should improve in-terms of interpretability and analytical utility, while clearly accounting for uncertainty and error components.
+
+==========================================================================================
+SIH26143 | ~102 teams | Disaster Management | National Technical Research Organisation (NTRO)
+TITLE: Leveraging satellite imagery to determine Oil spills at sea along with AIS data correlations to identify vessel responsible for the spill.
+---
+• Background Marine oil spills inflict great damage on marine ecosystems and several times remains un-attributable to the vessel causing such spills. Leveraging satellite imagery along with AIS data will enable detection of oil spills and vessel responsible for the same.
+ • Description The core challenge attempts to facilitate detection of oil spills and also in identifying the polluting vessel using remote sensing satellite data, such as SAR and EO imagery and AIS data. Participants are to design an intelligent automated pipeline to do the following: (a) Detect and characterise the oil spill and calculating geometric properties and age if feasible. (b) Using oceanographic and meteorological data, it is envisaged to trace the slick towards the origin point and time, predict the future flow of the slick, and (c) analyse and attribute the spill to a vessel using historic AIS data to reconstruct vessel traffic around the origin window in space and time. The irrelevant traffic is to be filtered out and potential suspect vessels are to be scored considering various aspects such as proximity, trajectory, behavioural anomalies etc.
+ • Expected Solution An automated detection and hindcasting machine learning model that identified oils slicks from satellite imagery, mapping their drift paths backward and forward. It also ranks potential culprit vessel based on spatio-temporal correlation with AIS data. A suitable visual interface is also to be developed.
+
+==========================================================================================
+SIH26145 | ~102 teams | Blockchain & Cybersecurity | National Technical Research Organisation (NTRO)
+TITLE: AI-Based Detection of Cyber Threats in Unidirectional IP Traffic
+---
+• Background Critical-infrastructure operators observe their gateway and peering links using passive mirroring or hardware data diodes that copy traffic into a monitoring enclave in one direction only. The enclave can see everything crossing the link, but it has no physical or protocol-level path back into the production network. This is deliberate as it removes an entire class of attack in which a compromised monitoring or analytics system becomes a pivot into the core network, and it preserves a clean chain of custody for forensic use. The trade-off is that any intelligence layer sitting in that enclave must work purely from what it can passively observe such as packet captures, exported flow records (NetFlow/IPFIX/sFlow), and derived metadata with no ability to send probes, complete handshakes with the traffic source, or push a mitigation command back.
+ • Description The objective is to design and build an AI/ML pipeline that ingests a one-directional stream of IP traffic from a simulated IP data and detects, classifies, and scores cyber-security threats in near real time, using only passively collected data. The pipeline must assume it can never re-contact the traffic's source or destination, cannot rely on completing any handshake itself, and cannot issue any action back across the ingest path. Its output is intelligence as labelled alerts, confidence scores, and supporting evidence displayed on visualisation dashboard. The system is designed to detect the following types of threat:
+ a. Volumetric / protocol DDoS: SYN floods, UDP reflection/amplification, and spoofed-source floods identified from flow-level rate and source-IP entropy statistics.
+ b. Botnet C2 beaconing: Periodicity and inter-arrival analysis on flows that repeat at regular intervals toward a small set of destinations.
+ c. DGA domains and DNS tunnelling: Entropy/n-gram analysis of DNS query names, plus query-length and record-type anomalies.
+ d. Malware inside encrypted sessions: Detection from TLS/QUIC metadata alone (JA3/JA3S or JA4 fingerprints, packet-size and timing sequences), without decrypting payload.
+ e. Reconnaissance and port scanning: Fan-out patterns from a single source across many destination ports or hosts.
+ f. Data exfiltration: Asymmetric flow-volume anomalies and unusual outbound-to-inbound byte ratios.
+ Expected Solution The system must be delivered as working prototype (source repository) implementing ingest, feature extraction, model inference, and alert output. Accompanying documentation of the model(s) used, features engineered, and the training/validation approach. The prototype must also include a simple dashboard of live or replayed detections with severity and confidence adhering to the following architectural constraints:
+ a. Read-only ingest: Treat the input as strictly read-only. Any design that assumes a return path, a live query to the source, or an inline block is out of scope.
+ b. No payload decryption: TLS/QUIC sessions must be analysed from metadata only, never from decrypted content.
+ c. Streaming, not batch: The pipeline must process traffic incrementally and raise alerts with bounded latency, not just produce an end-of-run report.
+ d. Defined throughput target: Solutions must state and demonstrate the traffic rate they were tested against (e.g., flows/sec or Mbps sustained).
+ e. Standardized alert schema: Alerts must be structured records for instance timestamp, flow identifier, threat class, confidence score, and supporting evidence feature.
+
+==========================================================================================
+SIH26146 | ~240 teams | Blockchain & Cybersecurity | National Technical Research Organisation (NTRO)
+TITLE: AI-Powered Monitoring & Analysis of Bitcoin Transaction Traffic
+---
+• Background Bitcoin's pseudonymous, peer-to-peer design lets criminal actors move, layer, and cash out illicit funds â€” ransomware payments, darknet-market proceeds, extortion, and laundering â€” while evading traditional financial surveillance.
+ The objective of problem statement is to design and build a complete system (offline) that ingests bulk Bitcoin transaction/network metadata (in CSV/JSON/XML), correlates network-layer (IP/port/timing) observations with blockchain-layer (wallet/TXID/amount) data, and applies AI/ML to detect anomalies, cluster entities, and generate prioritized, explainable investigative leads.
+ • Description i.Challenge Objectives- • Ingest & parse a bulk metadata dataset (timestamp, src/dst IP & port, TXID, input/output wallet addresses, amounts, fee, script type).
+ • Build an entity/transaction graph linking IPs, wallets, and transactions.
+ • Implement AI/ML detection use case (see Section 4) with a working model â€” not just rules.
+ • Generate a ranked, explainable alert list (why a wallet/transaction was flagged, with a confidence score).
+ • Present findings via a simple dashboard or link-analysis visualization.
+ ii.Suggested AI/ML Focus Areas Attach Table Here of AI/ML Focus Areas iii.Dataset: Parameters & Synthetic Generation Participants will work with a synthetic dataset modelled on real Bitcoin P2P/transaction fields (no real seized or live-intercept data will be provided). Minimum fields: timestamp, src_ip, dst_ip, src_port, dst_port, txid, input_addresses[], output_addresses[], input_amounts[], output_amounts[], geo_country/asn (integrate open source downloadable Geo IP database).
+ • Expected Solution • Workable complete offline solution for linux platform.
+ • Working prototype (code repo) with ingestion, correlation, and AI/ML model.
+ • Short technical write-up: approach, model choice, and explain ability method.
+ • Dashboard/visualization showing flagged entities and evidence for each flag.
+
+==========================================================================================
+SIH26147 | ~112 teams | Space Technology | National Technical Research Organisation (NTRO)
+TITLE: Automated model for analysis of .IQ and .wav files along with signal parameter extraction
+---
+• Background The raw data for analysis of signal collected off the air typically range from few Khz to Ghz bands. The analysis is being carried out manually to identify the signal parameters and the resultant data is then utilised for processing signals in the designated sensors. This data is often insufficient for fine grain analysis for parameter extraction such as modulation type, sampling rate, FEC, interleaving, etc. This creates a need for advanced data processing to extract the observation data.
+ • Description The terrestrial signals received from various sources includes data in HF, VHF and UHF bands. The raw data collected in the form of .wav or .IQ format to retain the characteristics of wave form. The analysis of signals is primarily dependent on the basic characteristics of data points selected during recording of these signals. Since the data point are recorded from different sensors and different locations, the parameters may vary. Therefore, the data available for analysis is often insufficient to clearly identify fine details such as sampling rate, modulation type, interleaving, FEC etc. This limitation reduces the accuracy and confidence of interpretation and data analysis that require detailed information. The data saved as .IQ and .wav have different parameters and therefore they store the raw information in different format. These files have to be processed in different ways for signal analysis to extract signal parameters. The problem can be addressed using advanced models such as GNU Radio, python, C++ to enhance the parameter extraction capability and more information rich inputs. The spectral relationship from training data containing both .IQ and .wav formats can be utilised for identifying signal parameters and carry out deeper analysis. The expected solution should be able to demodulate signals.
+ The GUI based model will have features to take .IQ or .wav file as input data and perform following tasks.
+ i.Identify signal parameters (Sampling frequency, Modulation, FEC, Interleaving). Additional features if feasible may be included.
+ ii.Demodulate signals (FSK, QAM PSK)
+ iii.Carry out de-interleaving (Block, Convolution, Diagonal, Pseudo Random).
+ iv.FEC (short-constrained convolution codes with Viterbi decoding, RS block codes, Concatenated codes, LDPC).
+ v.Bit stream correlation.
+ • Expected Solution The expected system should improve feature visibility of signals with the help of GUI, enable automated signal analysis to identify spectral features such as sampling frequency, constellation plot, water fall (time-frequency domain), demodulate signals, carry out de-interleaving and error correction. The output can then be used to carry out correlation of bit stream for identification of header and payload.
+
+==========================================================================================
+SIH26148 | ~102 teams | Blockchain & Cybersecurity | National Technical Research Organisation (NTRO)
+TITLE: Creation of scripts/functions with new programming language to commence Computer & Network forensic analysis without triggering security solutions
+---
+• Background Modern antivirus solutions restrict proprietary software from executing or creating custom scripts designed to analyze the system for deep forensic system analysis. They rely heavily on behavioral heuristics, static signature matching, common compiler outputs (like standard MSVC or GCC artifacts), typical API call sequences and kernel-level monitoring to intercept activities. However, a significant paradigm shift may occur when programmers adopt sophisticated software engineering practicesâ€”specifically continuous integration and continuous deployment (CI/CD).
+ • Description Creating 'Next-Gen' programming language framework, named as 'JOCKY' using cross-platform compiler (windows & ubuntu) which enables systematic creation of scripts for analyzing malicious activities and also provide the complete digital forensics of the computer or network. By utilizing this specific new developed programming language, the framework will not be hindered by any of the existing anti-virus in the environment. This framework should include various scripts/functions which combined with automated polymorphic engines, custom encryption, and multi-vector in-memory execution via native components or Bring your own vulnerable driver (BYOVD) techniques. Framework also able to handle multiple system analysis simultaneously using central management interface. The traffic b/w management interface and client should be routed through trusted cloud infrastructure or content delivery networks (CDNs) using domain fronting or legitimate cloud APIs.
+ • Expected Solution The scope of the problem is to create scripts/functions in the proprietary programming language (named JOCKY) which enables the user to detect the adversaries:
+ 1. Independent programming Language - Programming language or custom Language-independent intermediate representation (LLVM) frontend alters basic control-flow graphs, token generation, and binary structures, rendering signature-based detection ineffective.
+ 2. Polymorphism in scripts/function generated - Rather than manually packing a binary, the scripts/function in framework uses a continuous delivery pipeline. Every iteration automatically passes through integrated obfuscators, variable-encryption routines, and polymorphic engines. This ensures that every deployment instance possesses unique hashes, modified entry points, and altered import tables, neutralizing traditional file-reputation databases.
+ 3. Living-off-the-Land & BYOVD Execution - The scripts/functions in framework should avoid standard, noisy API calls for core operations like persistence, privilege escalation, and network routing (SOCKS5). Instead, it relies on:
+ A. In-Memory Execution: Utilizing multiple distinct file-less techniques (e.g., process hollowing, reflective DLL injection, API unhooking, direct system calls, or thread execution hijacking) to run secondary script entirely within the memory space of trusted processes.
+ B. Kernel-Level Subversion: Detection of legitimate or vulnerable third-party drivers (BYOVD) to disable EDR callbacks or manipulate kernel structures directly, blinding security agents running in user or kernel space.
+
+==========================================================================================
+SIH26149 | ~112 teams | Blockchain & Cybersecurity | National Technical Research Organisation (NTRO)
+TITLE: Design and Development of an Integrated Secure Data Erasure and Advanced File Recovery Tool for Digital Forensics and Data Sanitization
+---
+• Background With the rapid growth of digital storage technologies, organizations, government agencies, law enforcement units, enterprises, and individual users face two major challenges: securely destroying sensitive data to prevent unauthorized recovery and recovering deleted digital evidence during forensic investigations. Existing solutions generally focus on either secure data deletion or file recovery and often support limited storage technologies and file systems. This forces investigators and cybersecurity professionals to use multiple tools, increasing complexity, cost, and operational inefficiencies. Therefore, there is a need for a unified platform that integrates secure data sanitization with advanced forensic-grade file recovery and carving capabilities.
+ • Description The proposed solution aims to develop an integrated software platform consisting of three core modules: (1) Secure Drive Eraser, (2) Secure File & (3) Folder Eraser, and Advanced File Carving and Recovery. The Secure Drive Eraser Module should securely sanitize HDDs, SSDs, USB drives, memory cards, and external storage devices while providing verification mechanisms, audit logging, tamper-resistant reporting, and compliance with industry and government data destruction standards. The Secure File and Folder Eraser Module should enable selective secure deletion of files and folders, remove associated metadata and residual traces, support batch operations, verify erasure success, and provide audit reporting across multiple file systems and operating systems. The Advanced File Carving and Recovery Module should recover deleted files from formatted, damaged, or corrupted media using signature-based, structure-based, and intelligent carving techniques. It should support recovery without file system metadata, fragmented file reconstruction, automatic classification of recovered files, confidence scoring, and comprehensive forensic reporting while preserving evidential integrity.
+ • Expected Solution The expected outcome is an integrated software platform that combines secure data sanitization and forensic recovery capabilities within a single environment. The solution should provide (1) secure drive erasure with verification and reporting, (2) secure file and folder deletion with metadata cleansing, (3) advanced file carving and recovery from formatted media, support for multiple storage devices and file systems, automated classification and validation of recovered files, comprehensive audit logs and forensic reports, a user-friendly graphical interface, and compliance with forensic and data sanitization standards. Expected deliverables include an integrated software tool, (1) Secure Drive Eraser Module, (2) Secure File and Folder Eraser Module, (3) Advanced File Carving and Recovery Module, Reporting and Audit Management System, User Interface Dashboard, validation and testing documentation, user manuals, technical documentation, and performance evaluation reports. The solution should improve secure data disposal practices, reduce the risk of unauthorized data recovery, enhance forensic investigation capabilities, increase recovery rates from damaged storage media, reduce investigation time, improve compliance and auditability, and provide a unified platform for secure sanitization and forensic recovery operations.
+
+==========================================================================================
+SIH26150 | ~102 teams | Blockchain & Cybersecurity | National Technical Research Organisation (NTRO)
+TITLE: Development of a Multi-Vendor DVR/NVR Forensic Analysis Tool for Standardized Acquisition, Recovery, and Analysis of Surveillance Evidence.
+---
+• Background Digital/Network Video Recorders (DVR/NVRs) are widely used for surveillance in government agencies, law enforcement, critical infrastructure, businesses, and residential environments. Major DVR/NVR manufacturers such as Dahua Technology, CP Plus, Honeywell Security, TP-Link, Godrej, Uniview, HIKVISON, and Matrix use proprietary storage formats, file systems, metadata structures, and video encoding mechanisms. During forensic investigations, surveillance footage serves as crucial digital evidence; however, the lack of standardization across DVR/NVR vendors makes acquisition, recovery, analysis, and validation difficult. Investigators often rely on multiple vendor-specific tools, resulting in increased investigation time, inconsistent results, timestamp synchronization issues, challenges in deleted footage recovery, and difficulties in maintaining evidence integrity. Therefore, a unified vendor-agnostic DVR/NVR forensic analysis platform is required to provide standardized workflows for evidence acquisition, recovery, analysis, validation, and reporting.
+ • Description The proposed solution aims to overcome challenges such as non-standard forensic acquisition methods, proprietary file systems and video formats, difficulty in recovering deleted or damaged recordings, inconsistent timestamps, limited event correlation across cameras, challenges in maintaining chain of custody, dependence on multiple tools, lack of standardized reporting, and limited use of intelligent video analytics. The tool should support major DVR/NVR OEMs including Dahua Technology, CP Plus, Honeywell Security, HIKVISON, TP-Link, Godrej, Uniview, Matrix, and other commonly used platforms. It should automatically identify DVR models, parse proprietary file systems, create forensic images, extract videos and metadata, decode proprietary formats, recover deleted footage, normalize timestamps, generate cryptographic hashes (MD5 and SHA-256), correlate events across cameras, maintain chain-of-custody records, generate reports, and perform AI-based analytics such as face, object, and motion detection. Key modules include Device Identification, Acquisition, File System & Format Parsing, Recovery, Timeline Analysis, Reporting, and Machine Learning.
+ • Expected Solution The expected outcome is a software-based forensic platform capable of performing standardized acquisition, recovery, analysis, validation, and reporting of surveillance evidence across multiple DVR/NVR vendors. The solution should support at least five to six major DVR/NVR OEMs (Dahua Technology, CP Plus, Honeywell Security, TP-Link, Godrej, Uniview, HIKVISON and Matrix), provide a unified forensic workflow, reduce dependency on vendor-specific tools, automate evidence acquisition and analysis, improve deleted video recovery, ensure evidence integrity and admissibility, and generate comprehensive forensic reports. Deliverables include a comparative analysis of major DVR/NVR OEMs (Dahua Technology, CP Plus, Honeywell Security, TP-Link, Godrej, Uniview, and Matrix), DVR/NVR forensic Image, system architecture documentation, a functional prototype, Standard Operating Procedures (SOPs), validation reports, user manuals, and a final project report. The tool should successfully parse proprietary file systems, decode video formats, recover deleted recordings,verify evidence integrity through cryptographic hashing, generate standardized reports, reduce analysis time, and produce reliable and legally defensible forensic results.
+
+==========================================================================================
+SIH26151 | ~112 teams | Blockchain & Cybersecurity | National Technical Research Organisation (NTRO)
+TITLE: Dark web threat actor de-anonymization
+---
+• Background The dark web has become a preferred operating space for threat actors in the modern age, mainly because it lets them hide their identity behind Tor hidden services, which makes attribution of threat actors operating on darkweb the main challenge for any investigation. Such threat actors carry out a wide range of unlawful activities such as drugs and arms sale, stolen data and hacking services, money laundering, terror financing, etc. The objective of this problem statement is to build a system for the deanonymization of dark web threat actors and link them to suspect real-world entities.
+ • Description The system shall deanonymize dark web threat actors by continuously gathering their footprints from a range of sources (marketplaces, forums, deep web etc.) and linking them to the identifying information available on those sources. The system envisages three core capabilities. First, finding misconfigurations in Tor hidden servicesâ€”such as exposed server-status pages, SSL certificates tied to clearnet domains, default service banners, descriptor inconsistencies, etc and matching them with clearnet infrastructure to point to the likely origin servers. Second, mapping threat actors across multiple marketplaces into a single relationship graph of handles, PGP keys, wallets and trust links. Third, using AI-based analysis, including stylometric persona identification and behavioural profiling, to link rebranded or migrated personas to known threat actors. The system shall provide an analytical front end to query the database across a chosen timeline and shall work in an autonomous mode, drawing on available sources of good quality and reliability.
+ • Expected Solution An end-to-end system shall be developed for the collection, storage, contextualization and querying (through GUI/dashboards) of dark web threat actor intelligenceâ€”covering actor profiles, identifiers (handles, PGP keys, wallets etc.), hidden service infrastructure indicators, persona linkages, attribution confidence, category, last scan date and source. The system shall also provide the facility to export the result set in CSV, JSON and report formats.
+
+==========================================================================================
+SIH26152 | ~112 teams | Blockchain & Cybersecurity | National Technical Research Organisation (NTRO)
+TITLE: Social Media Analytics
+---
+• Background Social media platforms are complex ecosystems driven by human emotion, diverse demographics, and interconnected networks. To truly understand an online community, it is required look beneath the surface. This requires understanding how followers feel (Sentiment Analysis), who those followers are (Demographics), what topics are captivating them (Trend Tracking), and how they influence one another (Link Analysis). Combining these four vectors using AI is the key to unlocking true audience intelligence.
+ • Description Participants will be challenged to design and build an AI-driven Social Media Analytics Framework that processes raw platform data to extract deep, actionable audience insights. The system must leverage advanced Artificial Intelligence and Machine Learning techniques to simultaneously infer follower sentiment, map audience demographics, identify top trending narratives, and perform link/network analysis to uncover how information and influence flow among followers.
+ • Expected Solution AI solution must address the following five core components:
+ A. Continuous Data Collection & Timeline Management: Design a multi-platform data ingestion pipeline capable of pulling live data, posts, user interactions, and comments. The architecture must support a structured, time-stamped historical database to map out the exact chronology of conversations. The pipeline platform requirements are categorized as follows:
+ • Essentials (Must-Have): X (formerly Twitter) & Telegram.
+ • Desirable (Good-to-Have): Instagram & Facebook.
+ • Appreciable Additions: Reddit or YouTube (for extracting text-based context from video comments).
+ B. Multi-Dimensional Sentiment Inference: Use Natural Language Processing (NLP) to detect nuanced emotions (e.g., sarcasm, anxiety, excitement, supportive, against etc.) within user posts and comment threads, mapping how these sentiments fluctuate along the established data timeline.
+ C. Automated Demographic Profiling: Develop models to infer aggregate, anonymized follower demographics (such as age brackets, geographic distribution, language, and professional interests) based on public profile indicators, bio text, behavioral patterns etc.
+ D. Real-Time Trend & Topic Detection: Automatically identify, rank, and predict rising trends, viral keywords, and shifting discussions as they emerge chronologically in the dataset.
+ E. Link Analysis & Network Topology: Map the relationships among followers. Identify 'nodes of high influence' (key opinion leaders) and visualize how a trend or sentiment spreads from one user segment to another over time.
+
+==========================================================================================
+SIH26153 | ~240 teams | Blockchain & Cybersecurity | National Technical Research Organisation (NTRO)
+TITLE: AI based Network Attack Forecasting from Network Traffic Data
+---
+• Background This challenge seeks AI systems capable of learning network behaviour, anticipating attacker progression and supporting proactive cyber defence using the emerging concept of World Models. Design and develop a software prototype that learns the evolving state of a computer network from traffic telemetry and predicts the likelihood and progression of malicious activity before compromise is completed. The solution should ingest network traffic, learn temporal behaviour, forecast future attack states and provide interpretable decision support for defenders. Solutions should demonstrate applicability to enterprise environments and Critical Information Infrastructure.
+ • Represent network state using feature vectors or graphs.
+ • Learn state-transition dynamics using sequence models (LSTM, Transformer), Graph Neural Networks, latent state models or other AI techniques.
+ • Forecast future network states and estimate the probability of attacker progression.
+ • Map predicted behaviour to recognised attack stages (e.g. MITRE ATT&CK).
+ • Provide explain ability using attention mechanisms, feature attribution or equivalent techniques • Detailed Description Participants are encouraged to build world models based AI systems that move beyond static intrusion classification towards predictive cyber defence. The solution may utilise flow records, packet captures, authentication logs or other publicly available cybersecurity telemetry. It should model temporal relationships, infer evolving network state, predict future attack progression and present meaningful explanations for its predictions.
+ Traditional machine learning classifiers applied to network traffic treat each flow in isolation and map it to a binary benign/malicious label. This discards the temporal and causal structure of an infiltration: the sequence in which ports are probed, the pattern in which SYN flags precede ACK floods, the inter-arrival timing of reconnaissance packets before lateral movement begins. An infiltration is a process unfolding over time, not a single anomalous packet.
+ • World Models â€” AI architectures that learn an internal causal simulation of how environment states evolve â€” offer a fundamentally different approach. Rather than classifying traffic, a world model learns the transition dynamics P(S_t+1 | S_t): given the current observed network state (active flows, flag distributions, port activity, packet timing), what is the probability distribution over future states. This enables forward simulation: roll out K steps ahead and identify whether the current trajectory converges to an infiltration state, before the attacker completes the kill chain.
+ 1. Input Data â€” Two Levels of Traffic Feature Teams must work with both flow-level and packet-level features drawn from open-source network traffic datasets:
+ • Flow-level features (NetFlow / IPFIX format): source and destination IP/port pairs, TCP flag bitmask (SYN, ACK, FIN, RST, PSH, URG), protocol, bytes transferred per flow, packets per flow, flow duration, inter-arrival time (IAT) statistics (mean, variance, max), and bidirectional flow ratios.
+ • Packet-level features (PCAP-derived): Time-To-Live (TTL) values and their variance across a session, TCP window size, IP fragment flags, payload size distribution, port scan signatures (sequential or randomised port access patterns), and retransmission counts.
+ The combination of both levels is required because flow-level features capture aggregate behaviour (a SYN flood) while packet-level features expose timing and sequencing patterns (a slow reconnaissance scan designed to evade flow-based thresholds).
+ 2. World Model Architecture The core deliverable is a learned model of network state transition dynamics â€” not a static classifier. The model must:
+ • Represent network state as a structured feature vector or graph encoding active flows at time t.
+ • Learn P(S_t+1 | S_t) â€” the probability distribution over the next network state given the current state â€” using a sequence model such as an LSTM, Temporal Transformer, or Graph Neural Network (GNN) operating over time-windowed traffic observations.
+ • Be trained on labelled open-source datasets using supervised dynamics learning, where ground-truth state transitions are derived from the attack timeline annotations in the dataset.
+ • Generalise to unseen attack patterns â€” not merely memorize signatures from the training set.
+ 3. Infiltration Prediction and Attack Stage Mapping The world model must support forward simulation: given current observed traffic, roll out K steps and output
+ • A time-series probability score: likelihood of infiltration in the next K time windows.
+ • Predicted attack stage: mapping to MITRE ATT&CK phases â€” Reconnaissance, Initial Access, Lateral Movement, Command & Control, or Exfiltration â€” based on the predicted future state.
+ • Driving features: which specific flags, ports, or flow patterns are contributing most to the infiltration prediction (via attention weights or SHAP values).
+ The approaches are provided only as examples and are not mandatory. Teams are free to propose alternative architectures that satisfy the objectives.
+ • Expected Solution(Indicative)
+ A software-based, fully open-source solution is expected. The solution may include:
+ • A feature extraction pipeline that ingests CIC-IDS-2018 or CTU-13 CSV flow records and/or raw PCAP files (parsed using Scapy or PyShark) and outputs a timestamped, normalised feature matrix covering both flow-level and packet-level attributes described above.
+ • A trained world model (LSTM, Transformer, or GNN architecture) that demonstrably learns traffic state transition dynamics â€” not a static input-output classifier. Training scripts, model weights, and a reproducible training configuration must be included.
+ • An infiltration prediction engine that performs K-step forward simulation from a current traffic snapshot and outputs: infiltration probability score, predicted MITRE ATT&CK stage, and top contributing traffic features.
+ • An explainability output for each prediction â€” using SHAP values or model attention weights â€” identifying which flags, ports, or flow statistics are driving the prediction. Black-box outputs without interpretability are not acceptable.
+ • A working demonstration interface (Streamlit, Flask web app, or CLI) that accepts a PCAP or CSV file as input, runs the world model inference, and displays the infiltration probability timeline, flagged flows, and attack stage annotations. The interface must run fully offline without cloud API dependencies.
+ • Benchmark results comparing model performance (F1 score, precision, recall, false positive rate) against a logistic regression baseline trained on the same features, demonstrating that the world model's temporal dynamics learning provides measurable improvement.
+ • Expected Solution/Deliverables for Evaluation
+ • Source Code Link (GitHub/Drive Link)
+ • Readme with Setup Instructions
+ • Architecture Document (Max 2 Pages)
+ • Demo Video (Max 2 Minutes)
+ • Technical Presentation (Max 5 Slides) .
+
+==========================================================================================
+SIH26154 | ~112 teams | Blockchain & Cybersecurity | National Technical Research Organisation (NTRO)
+TITLE: Gen AI Platform for Automated Content Transformation
+---
+• Background Organisations frequently need to convert information available in different forms such as news articles, reports, advisories, threat intelligence, policy documents, research papers, announcements, incident reports or free-form prompts into specific communication artefacts suitable for various purposes. The process of manually analysing the source content, understanding the desired objective and creating the required output format is time-consuming, resource-intensive and often requires expertise in content creation, communication and domain knowledge.
+ There is a need for an intelligent platform that can transform user-provided content into a desired output format through a simple and configurable interface.
+ • Description The system shall act as an AI-powered content transformation engine that converts a common source of information into the specific deliverable requested by the operator, thereby reducing manual effort, improving consistency, accelerating content creation and enhancing operational efficiency.
+ The platform shall provide a dashboard through which an operator can submit source content in the form of high quality English language text, documents, articles, reports, prompts, images, videos or contextual information. In addition to providing the source content, the operator shall select one or more desired output types through configurable parameters available on the dashboard.
+ Based on the submitted content and the selected output type(s), the platform shall analyze the input, understand the context and intent, and generate the requested output artefact. The platform should support multiple output formats and allow operators to control generation parameters such as target audience, tone, language, level of detail, communication objective and content style.
+ In summary, platform shall generate output corresponding to the option(s) selected by the operator on the dashboard.
+ • Examples include
+ • If 'Video' is selected, generate a complete video package including script, storyboard, scene descriptions, narration text, subtitles and visual recommendations.
+ • If 'LinkedIn Post' is selected, generate a professional LinkedIn post suitable for publication.
+ • If 'Twitter/X Post' is selected, generate platform-optimized tweets or tweet threads.
+ • If 'Advisory' is selected, generate a structured advisory document.
+ • If 'Infographic' is selected, generate infographic content, layout recommendations and key messaging.
+ • If 'Executive Summary' is selected, generate a concise executive briefing.
+ • If 'Presentation' is selected, generate presentation slides and speaker notes.
+ • If multiple output formats are selected, generate all selected deliverables from the same source content.
+ • Expected Solution/Deliverables for Evaluation
+ • Source Code Link (GitHub/Drive Link)
+ • Readme with Setup Instructions
+ • Architecture Document (Max 2 Pages)
+ • Demo Video (Max 2 Minutes)
+ • Technical Presentation (Max 5 Slides)
+
+==========================================================================================
+SIH26155 | ~112 teams | Blockchain & Cybersecurity | National Technical Research Organisation (NTRO)
+TITLE: AI-Driven Multi-Vendor Network Security Compliance Auditor
+---
+• Background Modern enterprise networks are inherently heterogeneous, consisting of a vast array of hardware from diverse vendors. Organizations are mandated to align these devices with rigorous security frameworks, including CIS Benchmarks, NIST SP 800-53, DISA STIGs, and ISO/IEC 27001.
+ The network environment includes, but is not limited to:
+ • Firewalls & SASE: Palo Alto, Fortinet, Cisco (Firepower/Secure/Meraki), Check Point, Juniper (SRX), Sophos, SonicWall, WatchGuard, Barracuda, Zscaler, Cloud-native firewalls (AWS, Azure, GCP), Sangfor, Hillstone, A10, Forcepoint, Stormshield, Netgate (pf/TNSR), Cato Networks, and others.
+ • Routers & Switches: Cisco (Catalyst/Nexus), HPE Aruba, Juniper (EX/MX/PTX), Arista, Extreme, NVIDIA (Mellanox), Allied Telesis, Huawei, D-Link, MikroTik, Ubiquiti, Alcatel-Lucent, Ruijie, Adtran, and others.
+ • Specialized Networking: Open/Disaggregated (Dell, Nokia, 'White Box' hardware running SONiC, Cumulus), Hyperscale/AI (NVIDIA, Arista, Juniper), and Physical Infrastructure (Corning).
+ Note: The aforementioned list is illustrative; the application must be ideally designed to support any network device configuration, regardless of vendor or market segment.
+ • Description
+ • The Core Challenge:
+ In modern digital infrastructures, network devices act as the primary gatekeepers of data. However, they are also the most common point of misconfiguration, which accounts for a significant percentage of security breaches. Security frameworks like CIS, NIST, and STIGs offer specific 'hardening' protocolsâ€”such as disabling insecure protocols (Telnet/HTTP), enforcing strong cryptographic suites, configuring granular ACLs, and logging all administrative access. Currently, the industry relies on a bifurcated approach: either highly manual, checklist-based human auditing or expensive, vendor-locked enterprise management suites that lack flexibility for heterogeneous, multi-vendor environments.
+ • Operational Gap:
+ Administrators managing hybrid networks (composed of firewalls, switches, and routers from various vendors like Palo Alto, Cisco, Arista, etc.) lack a centralized 'Source of Truth' for compliance. The challenge is twofold:
+ 1.Syntactic Diversity: Each vendor uses proprietary Command Line Interface (CLI) syntax, varied hierarchical structures, and distinct firmware/OS versioning. A 'secure password' setting in a Cisco IOS switch is syntactically distinct from the same setting in a Juniper SRX firewall.
+ 2.Scalability & Adaptation: The network landscape is not static. As organizations adopt 'White Box' networking (SONiC), Cloud-native security groups (AWS/Azure), or specialized AI-driven infrastructure, traditional parsers fail because they cannot predict or interpret the configuration structures of newly acquired or proprietary hardware.
+ The requested solution is an AI-augmented, vendor-agnostic Compliance Engine. Rather than relying on a hard-coded library of commandsâ€”which becomes obsolete as vendors release firmware updatesâ€”the system will employ Ai based approaches ( for example (Pattern Recognition and Natural Language Processing (NLP)) to interpret configuration files.
+ When a configuration file is ingested, the AI-based engine will:
+ • Normalization: Extract the configuration and map it into a standardized, vendor-neutral schema (e.g., a 'Security Baseline Model').
+ • Deviation Analysis: Compare this normalized model against the chosen framework (e.g., checking if the parsed 'ssh_version' is '2' as required by CIS).
+ • Dynamic Adaptation (The 'Training' Loop): When the system encounters an unrecognized configuration structure, it will trigger an Interactive Training Interface. In this GUI, the administrator will be presented with the 'raw' unrecognized command lines. Using a user-friendly, low-code interface, the administrator will map these commands to specific security categories (e.g., 'This command sets the timeout limit'). The AI engine will then update its internal heuristics, effectively 'learning' to parse this new vendorâ€™s logic without requiring backend code redeployment.
+ The proposed solution should be a user-friendly, robust software platform featuring:
+ 1. Unified Ingestion Engine: A dashboard for uploading single or bulk configuration files from any network device.
+ 2. AI-Powered Training Module: A dedicated, intuitive GUI where administrators can 'train' the system to parse unseen vendor formats by mapping specific command outputs to compliance parameters.
+ 3. Multi-Framework Compliance Engine: A logic engine that evaluates configurations against user-selected benchmarks (CIS, NIST, STIGs, ISO).
+ 4. Actionable Intelligence & PDF Reporting: A comprehensive, single PDF report for each device, covering:
+ o Device Identification: Including serial numbers and hardware details.
+ o Compliance Findings: Clear 'Pass/Fail' results with risk severity assessments.
+ o Remediation Paths: Device-specific, step-by-step CLI command sequences to resolve non-compliance and harden the device.
+ 5.Vendor-Agnostic Scalability: A modular architecture designed to support new vendors, standards, and OS versions without requiring manual code modifications for every update.
+ • Suggested Development Workflow The development can be visualized in the following stages:
+ 1. Normalization: Converting proprietary CLI outputs into a structured JSON/Schema model.
+ 2. Compliance Engine: Using Python libraries (e.g., Netmiko or NAPALM) for data collection and custom logic for mapping.
+ 3. AI/ML Integration: Using Natural Language Processing (NLP) or pattern matching to identify keywords in configurations that the system has not been pre-trained on.
+ 4. Reporting: Generating dynamic PDFs (e.g., using ReportLab or FPDF in Python) that are customized based on the device's specific model and software version.
+ • Expected Solution/Deliverables for Evaluation
+ • Source Code Link (GitHub/Drive Link)
+ • Readme with Setup Instructions
+ • Architecture Document (Max 2 Pages)
+ • Demo Video (Max 2 Minutes)
+ • Technical Presentation (Max 5 Slides)
+
+==========================================================================================
+SIH26156 | ~112 teams | Blockchain & Cybersecurity | National Technical Research Organisation (NTRO)
+TITLE: Universal Log Pre-processing Framework
+---
+• Background Modern enterprises generate massive volumes of logs from a wide range of sources, including network devices, servers, operating systems, applications, databases, cloud services, containers, endpoint security tools, identity and access management systems, IoT devices, and other hardware and software platforms. These logs are produced in diverse formats such as Syslog, JSON, XML, CSV, CEF, LEEF, proprietary vendor formats, and application-specific schemas.
+ The diversity of log structures creates significant challenges in centralized monitoring, security operations, compliance reporting, incident investigation, and threat analytics. Security teams often spend substantial effort developing source-specific parsers and normalization rules before the data can be effectively utilized by SIEM, data lake, or machine learning platforms.
+ As organizations adopt hybrid, multi-cloud, and AI-driven environments, the need for a universal and extensible log standard that can accommodate both current and future data sources have become increasingly critical.
+ • Detailed Description Design and develop a Universal Log Pre-processing Framework (ULPF) capable of ingesting, parsing, normalizing, and standardizing logs and events generated by any hardware or software system.
+ The framework should support diverse event sources while preserving the original event data for forensic and compliance purposes. It should transform heterogeneous logs into a unified schema that enables consistent analytics, correlation, visualization, threat hunting, anomaly detection, and machine learning applications.
+ The framework must be scalable, extensible, vendor-agnostic, and suitable for deployment in Big Data environments handling billions of events per day.
+ • Expected Solutions This solution should cover universal event schema and processing framework that enables:
+ a) Preserve complete raw event data without information loss.
+ b) Extract and parse source-specific attributes.
+ c) Normalize fields into a common event taxonomy.
+ d) Maintain traceability between normalized and original events.
+ e) Plug-and-play on boarding of new log sources.
+ f) Unified visibility across enterprise environments.
+ g) Efficient SIEM and Data Lake integration.
+ h) AI/ML-ready security and operational analytics.
+ i) Reduced parser development effort.
+ j) The solution shall be deployable in an air-gapped network.
+ k) Solution may be packaged in a container for making it platform independent.
+ • Current Scope Build a framework that converts any perimeter network device-generated log or eventâ€”regardless of source, format, vendor, or technology into a standardized, lossless, analytics-ready representation for next-generation SIEM and cybersecurity platforms.
+ • Expected Solution/Deliverables for Evaluation
+ • Source Code Link (GitHub/Drive Link)
+ • Readme with Setup Instructions
+ • Architecture Document (Max 2 Pages)
+ • Demo Video (Max 2 Minutes)
+ • Technical Presentation (Max 5 Slides)
+
+==========================================================================================
+SIH26157 | ~102 teams | Blockchain & Cybersecurity | National Technical Research Organisation (NTRO)
+TITLE: Supervisory Analytics Tool for SOC Assessment (SAT-SA)
+---
+Background:
+ The National Critical Information Infrastructure Protection Centre (NCIIPC) assesses the cyber resilience of Critical Sector Entities (CSEs).
+ As part of these assessments, NCIIPC performs manual reviews of samples of security alerts and case-management records generated by Security Operations Centres (SOCs). These reviews have consistently produced valuable supervisory findings that were not evident through policies, audits, self-assessments, management reports, KPI dashboards, or compliance documentation.
+ The purpose of these reviews is not to assess individual alerts. Rather, alert and case-management data are used as operational evidence to assess whether a CSE possesses effective capabilities relating to:
+ (i). Threat Detection (ii). Investigation (iii).Escalation (iv). Incident Response (v).Security Operations (vi).Governance and Oversight (vii).Operational Discipline (viii).Cyber Resilience While effective, manual review is resource-intensive and difficult to scale across a growing number of CSEs and increasing volumes of security data.
+ • Description:
+ NCIIPC seeks a deployable Supervisory Analytics Tool for SOC Assessment (SAT-SA) that assists supervisors in analysing SOC alert and case-management data at scale.The tool should help supervisors:
+ (i). Identify entities requiring supervisory attention.
+ (ii).Prioritise alert samples and investigations for manual review.
+ (iii).Detect operational weaknesses and cyber resilience concerns.
+ (iv).Improve the efficiency, consistency and scalability of supervisory assessments.
+ The tool is intended to support human examiners and supervisory decision-making. It is not intended to replace supervisory judgement.
+ 1. Out of Scope The proposed solution is not intended to:
+ (i). Function or replace as a Security Operations Centre (SOC) of CSEs.
+ (ii).Perform real-time monitoring.
+ (iii).Act as a SIEM platform.
+ (iv).Act as a centralized SOC for multiple entities.
+ (v).Continuously collect logs or telemetry from CSEs.
+ (vi).Serve as a national cyber monitoring platform.
+ The solution should be viewed as a supervisory analytics capability, not an operational security capability.
+ 2. Data Environment Participants may assume access to periodic submissions including:
+ (i). Alert metadata (ii).Case management records (iii).Investigation workflow data (iv).Escalation records (v). Alert disposition and closure information (vi). Asset and system inventory information (where available)
+ Solutions should minimise dependence on raw logs, packet captures, customer information, or other sensitive operational data unless clearly justified.
+ 3. Core Supervisory Problem Manual reviews often uncover weaknesses that are not visible through conventional reporting mechanisms.These weaknesses generally fall into two categories:
+ A. Execution Gaps Situations where documented controls, governance arrangements, policies, procedures, metrics or reported capabilities suggest effective operation, but operational evidence indicates otherwise.
+ • Examples:
+ (i).Alerts acknowledged but not meaningfully investigated.
+ (ii).Cases closed unusually quickly.
+ (iii).Critical alerts closed without escalation.
+ (iv).Repetitive or template-driven investigations.
+ (v).Controls deployed but not effectively monitored.
+ (vi).Operational behaviour designed to satisfy metrics without reducing risk.
+ B. Negative Space Situations where expected evidence is absent.
+ Examples:
+ (i).Missing telemetry from critical systems.
+ (ii).Absence of expected alert categories.
+ (iii).Missing investigations or escalation records.
+ (iv).Unexpectedly low activity levels.
+ (v).Monitoring blind spots.
+ (vi).Absence of evidence that would normally be expected within comparable environments.
+ The tool should help supervisors identify both known and previously unknown indicators of these conditions.
+ 4. Functional Requirements Data Ingestion: The tool shall:
+ 1. Ingest structured data from multiple CSEs.
+ 2. Support common formats such as CSV, JSON, database exports and APIs where available.
+ 3. Support analysis of large datasets spanning multiple entities and time periods.
+ Supervisory Analytics: The tool shall:
+ 4. Identify indicators of detection, investigation and escalation weaknesses.
+ 5. Detect potential execution gaps.
+ 6. Detect potential negative space.
+ 7. Identify anomalies, outliers and suspicious operational patterns.
+ 8. Perform peer comparison and benchmarking across entities.
+ 9. Generate entity-level supervisory risk indicators.
+ 10. Prioritise entities, controls, processes and alert samples for manual review.
+ Explainability: The tool shall:
+ 11. Provide clear rationale for findings.
+ 12. Present supporting evidence.
+ 13. Support traceability and auditability of results.
+ 14. Allow supervisors to understand why an entity or activity was flagged.
+ • Reporting: The tool shall:
+ 15. Generate supervisory dashboards and reports.
+ 16. Support trend analysis across entities and time periods.
+ 17. Enable drill-down from supervisory findings to underlying evidence.
+ • Illustrative Supervisory Use Cases The following examples are illustrative and not exhaustive.
+ The tool may assist in identifying:
+ (i). High-severity alerts closed unusually quickly.
+ (ii). Repeated alerts on the same asset without evidence of root-cause remediation.
+ (iii). Critical alerts closed without appropriate escalation.
+ (iv). Critical systems generating little or no security telemetry.
+ (v). Significant deviations from peer entities.
+ (vi).Missing monitoring coverage for critical environments.
+ (vii).Repetitive investigation patterns suggesting superficial review.
+ (viii).Operational behaviours that satisfy performance metrics without effectively managing cyber risk.
+ (ix).Investigation or escalation workloads inconsistent with expected activity levels.
+ Participants are encouraged to identify additional supervisory signals beyond these examples.
+ 5.Deployment Requirements The solution shall operate within an NCIIPC-controlled environment.
+ The solution must:
+ (i).Operate in a fully offline (air-gapped) network.
+ (ii).Require no Internet connectivity.
+ (iii).Have no dependency on cloud services.
+ (iv).Have no dependency on SaaS platforms.
+ (v).Have no dependency on externally hosted AI models or APIs.
+ (vi).Support local deployment and local data processing.
+ Where AI or machine learning is proposed, participants shall specify:
+ (i).Model architecture.
+ (ii).Hardware requirements.
+ (iii).Offline training and inference approach.
+ (iv).Model update mechanism.
+ (v).Explainability controls.
+ (vi).Auditability controls.
+ 6. Deliverables Participants should provide:
+ (i). Solution architecture.
+ (ii). Functional design.
+ (iii).Analytics methodology.
+ (iv).Data requirements.
+ (v).Tool or Prototype (vi).Infrastructure requirements.
+ (vii).Validation methodology.
+ (viii).Estimated deployment and operational requirements.
+ 7. Performance Criteria Criterion Weight. Ability to Support Supervisory Assessment, Detection of Execution Gaps, Detection of Negative Space, Explainability and Auditability, Scalability and Performance, Innovation and Additional Supervisory Insights 8. Validation Requirement Participants shall explain how the proposed solution will be validated against findings derived from expert manual review.
+ Solutions should demonstrate their ability to identify supervisory signals, operational weaknesses and areas requiring attention with effectiveness comparable to or better than current manual sampling approaches.
+ 9. Success Criterion A successful solution will enable NCIIPC to efficiently analyse large volumes of SOC alert and case-management data from multiple CSEs, identify entities and operational areas requiring supervisory attention, prioritise manual review effort, and preserve the quality of supervisory assurance currently obtained through expert human examination.
+ • Expected Solution/Deliverables for Evaluation
+ • Source Code Link (GitHub/Drive Link)
+ • Readme with Setup Instructions
+ • Architecture Document (Max 2 Pages)
+ • Demo Video (Max 2 Minutes)
+ • Technical Presentation (Max 5 Slides)
+
+==========================================================================================
+SIH26158 | ~112 teams | Robotics and Drones | National Technical Research Organisation (NTRO)
+TITLE: Single-Pass Drone Video to Accurate 3D Model Generation System
+---
+• Background:
+ Generation of accurate 3D models of buildings, infrastructure, terrain, and objects typically requires multiple drone passes, extensive image overlap, specialized flight planning, and significant post-processing time. In operational scenarios such as disaster response, surveillance, infrastructure inspection, military reconnaissance, and rapid mapping, there is often only a single opportunity to capture data over the target area. A solution capable of generating an accurate and textured 3D model from a single drone pass video would significantly reduce mission time, operator effort, data acquisition requirements, and processing complexity while enabling near real-time situational awareness.
+ • Description:
+ Design and develop an AI-enabled system capable of generating a georeferenced and metrically accurate 3D model of a scene using only a single-pass drone video stream captured from a moving UAV. The system should process video frames captured during one flight path and reconstruct:
+ (i) 3D terrain and structures (ii) Building facades and rooftops (iii) Roads and infrastructure (iv) Vegetation and obstacles (v) Textured 3D meshes or point clouds
+ • Expected Solution/Deliverables:
+ The generated model should be suitable for visualization, measurement, and analysis purposes.
+ • Key Challenges (i) Limited viewing angles due to single flight path.
+ (ii) Motion blur and video compression artifacts.
+ (iii) Variable illumination and shadows.
+ (iv) Dynamic objects (vehicles,humans, animals).
+ (v) GPS inaccuracies and sensor noise.
+ (vi) Real-time or near-real-time processing requirements.
+ (vii) Reconstruction of occluded surfaces.
+ (viii) Maintaining metric accuracy without extensive Ground Control Points (GCPs).
+ • Input Data :
+ • Mandatory (i) Drone video (1080p/4K)
+ (ii) GPS coordinates (iii) Flight metadata
+ • Optional (i) IMU data (ii) Barometric altitude (iii) Camera intrinsic parameters (iv) RTK/PPK corrections Add 'Desired Output' and 'Evaluation Criteria' table here
+ • Potential Applications :
+ (i) Border and strategic area mapping (ii) Disaster damage assessment (iii) Urban planning and smart cities (iv) Infrastructure inspection (v) Construction progress monitoring (vi) Archaeological documentation (vii) Digital twin generation (viii) Military reconnaissance and mission planning
+
+==========================================================================================
+SIH26159 | ~112 teams | Blockchain & Cybersecurity | National Technical Research Organisation (NTRO)
+TITLE: SecureMailScope: AI-Assisted Cryptographic Security Posture Assessment for Secure Email Communications
+---
+• Background Electronic mail remains one of the most critical communication services for governments, enterprises, financial institutions, and academic organizations. Despite the widespread adoption of Transport Layer Security (TLS), many SMTP, IMAP, and POP3 deployments continue to suffer from cryptographic misconfigurations such as obsolete TLS versions, weak cipher suites, insecure STARTTLS implementations, expired or improperly configured certificates, and non-compliance with modern security standards. These weaknesses expose email infrastructures to downgrade attacks, man-in-the-middle attacks, passive interception, and other cryptographic threats.
+ Although existing network analysis tools provide extensive packet-level visibility, they primarily focus on protocol decoding and traffic inspection. They do not automatically evaluate the overall cryptographic security posture of email communications or provide intelligent risk assessment and prioritization for security analysts.
+ • Description Design and develop an AI-assisted passive network forensic framework capable of analyzing captured network traffic (PCAP files) containing SMTP, IMAP, and POP3 communications to automatically assess the cryptographic security posture of enterprise email infrastructures.
+ The proposed solution shall reconstruct complete email communication sessions, identify encryption transitions, analyze TLS negotiations, validate digital certificates, detect cryptographic weaknesses, and leverage Artificial Intelligence/Machine Learning techniques to classify security risks, detect anomalous TLS behavior, and generate actionable security recommendations.
+ The framework should assist Security Operations Centers (SOC), Digital Forensics teams, Incident Response teams, and enterprise administrators in rapidly identifying cryptographic vulnerabilities, prioritizing remediation efforts, and ensuring compliance with modern cryptographic best practices.
+ • Objectives- The proposed system should be capable of:
+ • Passive analysis of encrypted SMTP, IMAP, and POP3 traffic from PCAP files.
+ • Automatic identification of application-layer email protocols.
+ • Detection of STARTTLS negotiation and encrypted session upgrades.
+ • Reconstruction of complete TCP communication streams.
+ • Parsing and reconstruction of TLS handshakes.
+ • Extraction and validation of X.509 digital certificates.
+ • Identification of negotiated TLS versions, cipher suites, and key exchange mechanisms.
+ • Detection of deprecated protocols, weak cipher suites, insecure cryptographic algorithms, and certificate-related vulnerabilities.
+ • Extraction of cryptographic features for intelligent analysis.
+ • Application of AI/ML techniques for:
+ • Cryptographic risk classification.
+ • Detection of anomalous TLS behavior.
+ • Security posture scoring.
+ • Threat prioritization.
+ • Recommendation of mitigation measures.
+ • Generation of comprehensive forensic reports and security dashboards.
+ Expected Solution/Deliverables:
+ The solution should provide the following outputs:
+ • Automatic identification of SMTP, IMAP, and POP3 protocols.
+ • STARTTLS negotiation detection and validation.
+ • Complete TCP stream reconstruction.
+ • TLS handshake reconstruction.
+ • Detection of negotiated TLS versions.
+ • Identification of negotiated cipher suites.
+ • Identification of key exchange mechanisms.
+ • Extraction of X.509 certificates.
+ • Certificate chain validation.
+ • Certificate expiration analysis.
+ • Public key algorithm and key length analysis.
+ • Digital signature algorithm identification.
+ • Detection of weak cryptographic algorithms and deprecated TLS versions.
+ • Identification of insecure protocol configurations.
+ • Forward Secrecy assessment.
+ • AI-based cryptographic risk scoring.
+ • AI-assisted anomaly detection for suspicious TLS sessions.
+ • Prioritized security findings.
+ • Comprehensive cryptographic security posture assessment.
+ • Exportable forensic reports in JSON, PDF, and HTML formats.
+ • Interactive visualization dashboard for security monitoring and analysis.
+
+==========================================================================================
+SIH26160 | ~102 teams | Blockchain & Cybersecurity | National Technical Research Organisation (NTRO)
+TITLE: AI-Powered IPsec VPN Protocol Analyzer and Security Assessment Framework
+---
+• Background Virtual Private Networks (VPNs) are fundamental to secure communication over untrusted networks. Among the available VPN technologies, IPsec is widely adopted across enterprise, government, military, and cloud infrastructures because of its ability to provide confidentiality, integrity and authentication.
+ However, the security of an IPsec deployment depends on multiple factors, including the chosen cryptographic algorithms, authentication mechanisms, key exchange protocols, and operational mode (Tunnel or Transport). Misconfigurations, outdated cipher suites, improper key management, or protocol implementation flaws can significantly weaken the overall security posture.
+ Traditional protocol analysis tools provide packet-level visibility but often require expert interpretation. There is a growing need for intelligent systems capable of automatically analyzing IPsec deployments, identifying protocol characteristics, assessing security risks, and generating actionable recommendations.
+ • Description: Design and develop an AI-driven protocol analysis platform capable of automatically analysing IPsec VPN deployments established under different security configurations. The platform should inspect captured traffic or live network streams, identify protocol characteristics, infer VPN operating modes, evaluate cryptographic configurations and generate an automated security assessment report.
+ The solution should assist analysts in understanding the security posture of IPsec deployments without requiring manual packet inspection. Participants are expected to develop an intelligent framework capable of performing the following tasks.
+ a) VPN Testbed Generation: Develop a laboratory environment capable of establishing IPsec VPNs using multiple configurations. The framework should support variations such as:
+ • Tunnel Mode
+ • Transport Mode
+ • AES-128
+ • AES-256
+ • AES-GCM
+ • AES-CBC + HMAC
+ • Different DH Groups
+ • Perfect Forward Secrecy enabled/disabled
+ • IPv4 and IPv6 communication
+ • Different types of traffic â€“ VoIP, Whatsapp, E-mail, Web-browsing, ICMP, Video streaming etc.
+ b) Traffic Capture: Acquire network traces using tools such as Wireshark, TCP-dump, Custom packet capture utilities. Captured dataset should include
+ • IKE negotiation
+ • ESP packets
+ • AH packets (optional)
+ • Normal communication c) AI-Based Protocol Identification: Develop an AI engine capable of automatically identifying
+ • IPsec protocol
+ • IKE version
+ • Tunnel Mode
+ • Transport Mode
+ • Encryption algorithm
+ • Authentication algorithm
+ • Key exchange method
+ • Security Association characteristics
+ • Predict Type of traffic inside ESP-IPsec d) Security Assessment: The framework should automatically evaluate
+ • Cryptographic strength
+ • Configuration compliance
+ • Security Association parameters
+ • Key lifetime
+ • Replay protection
+ • Forward Secrecy configuration
+ • Cipher suite strength
+ • Metadata exposure e) The output should include a comprehensive security score, traffic analysis and metadata inference. Automatically generate
+ • Executive Report & Technical Report
+ • Risk Score
+ • Threat Matrix
+ • AI Confidence Score
+ • Expected Solution/Deliverables:
+ • Working software prototype
+ • AI classification engine
+ • Interactive dashboard
+ • Security assessment report
+ • Demonstration video
+ • Technical documentation
+ • Dataset used for training/testing
+
+==========================================================================================
+SIH26161 | ~112 teams | Disaster Management | National Technical Research Organisation (NTRO)
+TITLE: Dam Break Inundation Modelling Using Hydrodynamic Modelling of any River
+---
+• Background In India, due to natural disaster various natural dam / lake formations were observed which can be a major reason of flash flood in the lower catchment, for example, natural lake formed over the Rishi Ganga river of Uttarakhand in Feb 2021, Wapriyang river in Nov 2021, Phuktal river near Sumdo, J&K in Mar 15, Kosi river in 2008 etc. Devastating flood happened in the Kashmir valley, Assam in 2014 and many other places over a period of time. Therefore, simulation modelling for flash flood and scenario generation is important from Humanitarian Assistance and Disaster Relief (HADR) point of view. Another important aspect is water release issues from the Dam of major rivers. In the crisis situation, if the dam brakes, how much water will flow into the river and what are the area it will inundated / impacted need to be estimated. In order to carry out this work simulation modelling needs to be done for the same. In other way if any dam break situation happened then what will be the impacted area. Development of a modelling framework is required which will carry out simulation modelling for the same.
+ • Description The above problem statement envisages that a software tool need to be developed which should automatically carry out the simulation modelling for Dam break analysis and identify the inundated area due to flash flood in the lower catchment. The modelling framework should be developed using hydrological data, DEM and satellite imagery of any river. The software/ tools should be capable of carrying out the simulation modelling of water flow in case of dam break or water release through â€˜Smooth Particle Hydrodynamicsâ€™ and â€˜Delf3Dâ€™ model and compare the scenario.
+ • Expected Solution/Deliverables The proposed study aims to illustrate the current problems regarding framework generation of Humanitarian Assistance and Disaster Relief using simulation modelling related to flood management as follows:
+ i. Creation of generalized modelling framework to predict / simulate dam break/ river blockage analysis providing the necessary inputs on the basis of sudden water surge as well as loss and damage analysis using â€˜Smooth Particle Hydrodynamics model and Delf3D modelâ€™.
+ ii. Building a customized tool/ framework so that it is possible to generate a flood inundation simulation scenario using different input datasets.
+ iii. Developing a Dashboard for providing modelling input and output visualization framework (GUI). The program should support the large volume of data. Output should be converted to .shp or .Kml file.
+ iv. Additionally, developing a framework for near real time flood analysis through Google Earth Engine with the help of open source data.
+ v. Simulation needs to be done by taking the any river and Dam data (open source) of India during the final demonstration of the software.
+
+==========================================================================================
+SIH26162 | ~102 teams | Disaster Management | National Technical Research Organisation (NTRO)
+TITLE: AI-Based Detection and Classification of Industrial Fires and Persistent Thermal Sources Using NASA FIRMS, OSM & Satellite Data
+---
+• Background Industrial facilities generate thermal signatures that can be observed from space, but current satellite-based monitoring systems like NASA FIRMS cannot distinguish between different types of thermal anomalies. To address this, there is a challenge to develop an AI-enabled geospatial system that integrates thermal data, land-cover information, industrial databases, and satellite imagery to automatically identify, classify, and monitor industrial fires and persistent thermal sources.
+ • Description Industrial facilities such as oil refineries, petrochemical complexes, thermal power plants, steel industries, mining areas, and LNG terminals generate thermal signatures that can be observed from space. In addition, accidental industrial fires, gas leaks, explosions, and abnormal thermal events pose significant risks to critical infrastructure, public safety, and the environment.
+ Current satellite-based fire monitoring systems such as NASA FIRMS provide thermal anomaly detections but do not distinguish between industrial fires, gas flares, agricultural burning, mining activity, and wildfires.
+ The challenge is to develop an AI-enabled geospatial system that can automatically identify, classify, and monitor industrial fires and persistent thermal sources by integrating thermal anomaly data, land-cover information, industrial infrastructure databases, and satellite imagery.
+ • Expected Solution/Deliverables:
+ i. Classification and segregation of Industrial fires from forest fires and other natural fires.
+ ii. GIS based solution for data storage, visualization of the output as an overlay over maps
+
+==========================================================================================
+SIH26163 | ~112 teams | Smart Automation | National Technical Research Organisation (NTRO)
+TITLE: Security Assessment of the World Monitor application
+---
+• Background The world Monitor application is a Web/ Mobile platform that provides users with real-time monitoring, analytics, and reporting features. The application handles user authentication, data visualization, API communication, and role-based access controls.
+ As a security analyst, the task is to evaluate the application's security posture and identify vulnerabilities that could compromise the confidentiality, integrity, or availability of the system.
+ • Description Conduct an authorized security assessment of the World Monitor application to:
+ 1. Identify security vulnerabilities in the application.
+ 2. Assess the potential impact of each vulnerability.
+ 3. Demonstrate proof-of-concept exploitation in a controlled environment.
+ 4. Recommend remediation measures to mitigate the identified risks.
+ • Scope The assessment should focus on:
+ • Authentication and session management
+ • Authorization and access control
+ • Input validation and data handling
+ • API security
+ • Client-side security controls
+ • Secure communication mechanisms
+ • Data storage and privacy protections
+ • Success Criteria The assessment is considered successful if:
+ • At least one valid vulnerability is identified and documented.
+ • Evidence supports the existence of the vulnerability.
+ • Risk and impact are clearly explained.
+ • Practical mitigation strategies are provided
+ • Expected Solution/Deliverables:
+ For each vulnerability discovered, provide:
+ • Vulnerability title
+ • Description
+ • Affected component
+ • Severity rating (e.g., CVSS)
+ • Steps to reproduce
+ • Proof of concept demonstrating the issue in a safe testing environment
+ • Business impact assessment
+ • Remediation recommendations constraints
+ • Testing must be performed only on authorized systems.
+ • No actions should affect production users or data.
+ • Exploitation should be limited to proof-of-concept validation.
+ • Compliance with applicable laws, policies, and ethical hacking guidelines is required.
+
+==========================================================================================
+SIH26164 | ~112 teams | Blockchain & Cybersecurity | National Technical Research Organisation (NTRO)
+TITLE: Enterprise Cryptographic Discovery & Analysis Tool (ECDAT)
+---
+• Background Transitioning to Post Quantum Cryptography based solutions requires preparedness, risk assessment and financial and operational investment. Towards this, discovery and inventory of Cryptographic Artefacts is the critical first step, that will enable the transition.
+ • Description i. Identify and catalogue all cryptographic artefacts (algorithms, keys, certificates, protocols, libraries, hardware modules, cloud services) across internal and external facing applications, products and infrastructure.
+ ii. The tool should perform a comprehensive quantum risk assessment and identify systems prone to potential quantum attacks, and highlight risks to sensitive data.
+ iii. Classify all the artefacts by type, lifetime and business criticality. Apply structured frameworks such as Moscaâ€™s algorithm (compare data lifetime plus migration time against expected arrival of cryptographic relevant quantum computer) to identify and categorize risks.
+ iv. Recommend suitable alternatives (PQC/ Hybrid algorithms) for applications based on risk profile, latency, cost, etc.
+ • Expected Solution/Deliverables:
+ A Comprehensive CBOM analytics tool that can scan Source code repositories, binaries, libraries and container images, for assessing risks (due to quantum computers), classifying artefacts and suggesting alternatives: - Produce a report displaying all cryptographic assets including versions/ modes in standardised formats Interactive GUI platform to visualise the scan, risks and results
+
+==========================================================================================
+SIH26182 | ~140 teams | Blockchain & Cybersecurity | Ministry of Home Affairs
+TITLE: Automated Attribution of Unknown Cryptocurrency Wallets to Nearest Virtual Asset Service Providers (VASPs) through Blockchain Intelligence APIs
+---
+• Background The rapid adoption of Virtual Digital Assets (VDAs) and decentralized blockchain ecosystems has significantly increased the complexity of cybercrime investigations globally. Law Enforcement Agencies (LEAs) frequently encounter cryptocurrency wallet addresses linked to cyber frauds, ransomware, investment scams, darknet activities, and laundering of crime proceeds.
+ Under the existing investigation workflow, LEAs raise lawful information disclosure requests through the SAHYOG Portal to Virtual Asset Service Providers (VASPs) such as crypto exchanges, custodial wallet providers, and trading platforms. However, in many cases, the suspect wallet identified during investigations belongs to an unhosted wallet or a wallet for which the associated VASP is unknown. This creates major delays in attribution, freezing of assets, and identification of the beneficial owner.
+ Blockchain transactions generally pass through multiple intermediary wallets before reaching centralized exchanges. Identifying the 'nearest direct deposit accepting exchange' manually through blockchain analysis is time-consuming and requires specialized expertise.
+ • Description The proposed system envisages development of an Automated Blockchain Intelligence & VASP Attribution Engine integrated with the SAHYOG Portal through APIs.
+ The system should:
+ • Automatically analyze suspect cryptocurrency wallet addresses reported during investigations on the Sahyog Platform
+ • Automatically trace blockchain transaction paths to identify:
+ o nearest centralized exchange, o custodial wallet service, o or VASP receiving direct deposits from the suspect wallet.
+ • Map blockchain of deposit addresses and transaction flows across multiple blockchain networks such as:
+ o Bitcoin, o Ethereum, o Tron, o BNB Chain, o Solana, o Polygon o and other major chains.
+ • Support identification of:
+ o exchange clusters, o hot wallets, o deposit wallets, o mixers/tumblers, o DeFi bridges, o and cross-chain swap services.
+ • Integrate Sahyog with blockchain intelligence APIs and graph analytics engines.
+ • Provide automated tagging and confidence scoring for suspected VASPs.
+ • Generate investigation-ready reports for LEAs.
+ • Assist investigators in automatically routing lawful disclosure or freezing requests to the correct VASP through the SAHYOG Portal.
+ The system may additionally support:
+ • visualization of fund movement,
+ • cross-chain transaction mapping,
+ • risk scoring,
+ • identification of laundering typologies,
+ • and alerting for high-risk wallets linked to ransomware, darknet, terrorism financing, or fraud ecosystems.
+ • Expected Solution A software-based blockchain intelligence platform integrated with the SAHYOG ecosystem capable of:
+ • Automated identification of nearest VASP/exchange linked to unknown wallets.
+ • API-driven blockchain tracing and attribution support.
+ • Multi-chain transaction analysis and visualization.
+ • Real-time generation of investigative intelligence.
+ • Risk classification of wallets and transaction flows.
+ • Dashboard for LEAs with case-based analytics and reporting.
+ • Scalable architecture capable of handling large-volume blockchain transaction analysis.
+ The solution should aim to:
+ • reduce investigation time,
+ • improve asset freezing efficiency,
+ • enhance attribution capabilities,
+ • and strengthen cross-border cybercrime investigations involving VDAs
+
+==========================================================================================
+SIH26183 | ~140 teams | Blockchain & Cybersecurity | Ministry of Home Affairs
+TITLE: Real-Time Identification of Fraud-Linked Cryptocurrency Exchanges from Victim-Reported Suspect Wallet Addresses through Automated Blockchain Analytics
+---
+• Background Cyber fraud victims increasingly report suspect cryptocurrency wallet addresses used by fraudsters for collection of funds in cases involving:
+ • investment scams,
+ • task-based frauds,
+ • sextortion,
+ • ransomware,
+ • phishing,
+ • darknet transactions,
+ • and organized cyber-enabled financial crimes.
+ During investigations, the reported wallet addresses are often:
+ • non-custodial wallets,
+ • temporary burner wallets,
+ • or intermediary wallets used for layering and laundering.
+ The inability to quickly identify the cryptocurrency exchange or VASP associated with these wallets delays:
+ • freezing of assets,
+ • preservation of evidence,
+ • tracing of fund flows,
+ • and victim fund recovery.
+ Manual blockchain tracing requires significant technical expertise and time, particularly in cases involving:
+ • multi-chain transfers,
+ • DeFi protocols,
+ • mixers/tumblers,
+ • bridges,
+ • and privacy-enhancing mechanisms.
+ • Description The proposed solution envisages a Real-Time Crypto Fraud Attribution System capable of automatically analyzing victim-reported wallet addresses and identifying the nearest exchange or VASP receiving direct deposits.
+ The system should:
+ • ingest wallet addresses reported through cybercrime complaint systems,
+ • automatically perform blockchain tracing,
+ • identify associated exchanges or VASPs,
+ • detect fund movement patterns,
+ • and generate actionable intelligence for investigators.
+ Key features may include:
+ • blockchain transaction graph analysis,
+ • clustering of exchange wallets,
+ • detection of intermediary laundering wallets,
+ • identification of cross-chain fund movement,
+ • integration with SAHYOG and NCRP platforms,
+ • automated alert generation,
+ • and risk categorization of wallets.
+ The system should support multiple blockchain ecosystems and provide:
+ • real-time tracing capability,
+ • automated investigative recommendations,
+ • and analytics dashboards for law enforcement agencies
+ • Expected Solution A software platform capable of:
+ • real-time blockchain intelligence generation,
+ • automated VASP identification,
+ • tracing of suspect wallets,
+ • cross-chain transaction analytics,
+ • fund-flow visualization,
+ • integration with LEA systems,
+ • and generation of standardized investigation reports.
+ The system should:
+ • reduce response time in cyber fraud investigations,
+ • improve freezing of proceeds of crime,
+ • enhance coordination with VASPs,
+ • and strengthen digital evidence collection capabilities.
+ The platform should further support:
+ • API integrations,
+ • scalable blockchain indexing,
+ • AI/ML-assisted risk detection,
+ • and automated pattern recognition for fraud typologies.
+
+==========================================================================================
+SIH26184 | ~140 teams | Blockchain & Cybersecurity | Ministry of Home Affairs
+TITLE: Development of a Predictive Analytics Framework for Cybercrime Complaints to Forecast Likely Cash Withdrawal Locations in Advance, Enabling Generation of Actionable Intelligence for Timely and Proactive Cybercrime Intervention.
+---
+• Background The National Cybercrime Reporting Portal is the centralized Portal, which is serving the whole country. Currently, the Portal facilitates citizens in filing complaints, LEAs act on complaints, Banking/Financial Institutions for their actions along with reports/graphs being pulled on daily basis. Presently, the Portal is receiving approximately 8000 complaints on daily basis. The number of complaints has increased manifold during the past months, and this will continue to rise in future. To address the issue of increasing cybercrimes, the proactive approach shall be adopted.
+ • Description This framework focuses on the mitigation of cybercrimes by adopting a proactive approach. The framework's output will enable the prediction of likely cash withdrawal locations, which, in turn, will allow law enforcement agencies (LEAs)
+ at the state and local levels, coordinated by I4C, to implement proactive interventions. These interventions could include deploying special teams or alerting local banks and ATMs in high-risk areas. The intelligence generated would also help banks and financial institutions (FIs) through the Citizen Financial Cyber Fraud Reporting and Management System, enabling faster fund blocking and increasing the chances of recovery. By supporting real-time actionable intelligence sharing across jurisdictions, law enforcement agencies and Banks/FIs will be able to respond faster and more effectively to cyber threats. This approach goes beyond merely reacting to complaints and creates a powerful, data-driven defense against financial cyber frauds, strengthening India's overall cybersecurity posture.
+ Enhancing coordination between law enforcement and financial entities will ensure better detection and prevention of financial crimes, creating a more unified and efficient approach to combating cybercrime.
+ • Key Deliverables Component:- Description a. Predictive Analytics Engine :-AI/ML-based system to analyse historical cybercrime and financial data to predict potential withdrawal hotspots. Features include pattern detection, geospatial risk modelling, and real-time alerts.
+ b. Risk Heatmap Dashboard:-GIS-enabled dashboard visualizing real-time and potential risk zones with drill-down filters by time, location, and crime category etc.
+ c. Law Enforcement Interface:-Secure interface for investigators to access alerts, intelligence reports, and evidence documentation.
+ d. Alert & Notification System:-Real-time notifications to law enforcements, banks, and I4C officers via SMS,email, API, or dashboard triggers.
+
+==========================================================================================
+SIH26186 | ~140 teams | MedTech / BioTech / HealthTech | Ministry of Home Affairs
+TITLE: AI-Based Predictive Personnel Stress and Welfare Monitoring System for Uniformed Forces
+---
+• Background Personnel serving in Central Armed Police Forces (CAPFs), Armed Forces, and other uniformed services operate under physically demanding, psychologically stressful, and often hazardous conditions.Extended deployments, operational pressures, separation from families,irregular working hours, and exposure to traumatic incidents can significantly impact mental well-being.Currently, stress identification largely depends on manual observation and self-reporting, which may delay timely intervention. There is a need for a proactive, technology-driven solution that can identify early indicators of stress, burnout, and psychological distress while maintaining privacy and organizational trust.
+ • Description The proposed solution aims to develop an AI-powered Personnel Stress and Welfare Monitoring System capable of identifying potential indicators of stress, burnout, emotional fatigue, and welfare concerns through analysis of organizational and voluntarily provided wellness data.The system should:
+ • Analyze HR-related indicators such as leave patterns,deployment history, duty schedules, transfer frequency, training commitments, and workload trends.
+ • Support optional self-reporting and wellness assessments through a secure mobile application.
+ • Incorporate voluntary biometric and wellness data, where authorized and legally permissible.
+ • Detect behavioral patterns associated with elevated stress risk.
+ • Generate risk assessments and welfare recommendations for authorized welfare officers and commanders.
+ • Enable proactive counseling, welfare interventions, and workload balancing measures.
+ The system must be designed with strong privacy safeguards and focus on welfare support rather than disciplinary actions.
+ • Expected Solution Develop an AI-driven predictive analytics platform comprising:
+ • Personnel Wellness Monitoring Dashboard.
+ • Mobile-based Wellness and Self-Assessment Application.
+ • Predictive Behavioral Analytics Engine.
+ • Stress and Burnout Risk Prediction Models.
+ • Welfare Intervention Recommendation System.
+ • Role-based Access Control and Privacy Management Framework.
+ • Automated Alerts for authorized welfare personnel.
+ • Data anonymization and secure storage mechanisms.
+ The solution should identify trends and risk factors while ensuring that individual dignity, confidentiality, and data protection requirements are maintained.
+ • Expected Benefits 1. Early identification of personnel requiring welfare support.
+ 2. Reduction in stress-related incidents and operational fatigue.
+ 3. Improved mental well-being and workforce resilience.
+ 4. Enhanced readiness and operational effectiveness.
+ 5. Better workload distribution and personnel management.
+ 6. Improved retention and job satisfaction.
+ 7. Data-driven welfare planning and resource allocation.
+ 8. Reduction in incidents arising from prolonged occupational stress.
+ • Preliminary Scope 1. Development of predictive behavioral analytics algorithms.
+ 2. Mobile-based wellness self-reporting platform.
+ 3. AI-driven stress and burnout risk assessment engine.
+ 4. Commander and Welfare Officer dashboard.
+ 5. Automated intervention recommendation system.
+ 6. Secure integration with HRMS and personnel management systems.
+ 7. Privacy-preserving analytics and role-based access controls.
+ • Key Technical Challenges 1. Ensuring privacy and confidentiality of sensitive personnel data.
+ 2. Preventing stigmatization of personnel identified as potentially at risk.
+ 3. Minimizing false positives and false negatives in risk prediction.
+ 4. Ensuring ethical and transparent AI decision-making.
+ 5. Securing highly sensitive psychological and welfare-related information against cyber threats.
+ 6. Building trust among personnel regarding system usage and data protection.
+ • Strategic Importance
+ • Enhances force readiness and personnel welfare.
+ • Supports evidence-based welfare management.
+ • Strengthens organizational resilience and operational effectiveness.
+ • Promotes preventive mental health care rather than reactive interventions.
+ • Creates an indigenous capability tailored to the unique operational and cultural environment of Indian CAPFs and Armed Forces.
+ • Potential Market 1. Central Armed Police Forces (CAPFs).
+ 2. Indian Armed Forces.
+ 3. State Police Organizations.
+ 4. Disaster Response and Emergency Services.
+ 5. Government Organizations with high-stress workforces.
+ 6. Corporate Human Resource and Employee Wellness Platforms.
+ 7. International security and workforce welfare markets.
+ • Expected Impact The proposed AI-enabled Personnel Stress and Welfare Monitoring System will help transform welfare management from a reactive process to a proactive and preventive framework. By enabling early identification of stress indicators and facilitating timely interventions,the solution can improve personnel well-being, enhance operational effectiveness, and strengthen the long-term resilience of uniformed services while maintaining the highest standards of privacy, ethics, and data security.
+
+==========================================================================================
+SIH26187 | ~127 teams | Blockchain & Cybersecurity | Ministry of Home Affairs
+TITLE: AI-Based Intelligent Video Analytics Platform for Border Surveillance using existing CCTV Infrastructure.
+---
+• Background Border security forces deploy CCTV cameras at Border Out Posts(BOPs), check posts, border roads, and other strategic locations for surveillance and monitoring. However, conventional CCTV systems primarily provide video recording and live monitoring capabilities,requiring continuous human observation. Advanced surveillance functionalities such as Facial Recognition Systems (FRS), Automatic Number Plate Recognition (ANPR), intrusion detection, and object tracking often require specialized hardware and proprietary solutions,making large-scale deployment costly and difficult, particularly in remote border areas.
+ • Description The proposed solution aims to develop an AI-driven software platform capable of transforming existing CCTV infrastructure into an intelligent surveillance network without requiring dedicated FRS, ANPR, or smart-camera hardware. The platform shall ingest live video streams from standard IP-based CCTV cameras and perform real-time video analytics using Artificial Intelligence and Computer Vision techniques.
+ The solution should provide capabilities such as:
+ • Human detection and tracking
+ • Vehicle detection and classification
+ • Face detection
+ • Automatic Number Plate Recognition (ANPR)
+ • Virtual fence intrusion detection
+ • Suspicious activity detection
+ • Night-time movement detection
+ • Real-time alert generation and event logging
+ • Expected Solution The proposed system should leverage Artificial Intelligence, Machine Learning, Computer Vision, and Video Analytics to create a software-defined surveillance platform capable of extracting actionable intelligence from existing CCTV infrastructure.
+ The solution should:
+ • Eliminate dependence on expensive dedicated surveillance hardware.
+ • Enable intelligent monitoring through AI-powered video analytics.
+ • Provide real-time alerts for security incidents and border intrusions.
+ • Support facial recognition, vehicle identification, and behavioral analytics through software.
+ • Improve situational awareness and response time for border security forces.
+ • Support integration with existing command and control systems.
+ • The final solution should be cost-effective, scalable, and suitable for deployment across remote border locations and strategic installations.
+ • Possible Project Name IBVAP â€“ Intelligent Border Video Analytics Platform
+
+==========================================================================================
+SIH26188 | ~140 teams | Blockchain & Cybersecurity | Ministry of Home Affairs
+TITLE: Al-Based Fake Identity & Document Screening System
+---
+• Background Common challenges faced at border checkpoints:
+ • Fake passports and visas
+ • Altered photographs
+ • Modified dates of birth
+ • Tampered visa stamps
+ • Identity impersonation
+ • Multiple identities used by the same person Expired or blacklisted travel documents
+ • High passenger volume causing delays Current verification methods rely heavily on human inspection and basic database lookups.
+ • Detailed Description Border checkpoints process thousands of identity documents every day,including passports, visas, national identity cards, permits, and travel authorizations. Manual verification is time-consuming, prone to human error, and often unable to detect sophisticated forgeries, tampering, or identity fraud.Develop an Al-powered document screening platform that automatically analyzes identity and travel documents, detects signs of tampering or forgery, validates information against rules and databases,and generates a risk score to assist border security personnel in making faster and more accurate decisions.
+ • Expected Solution
+ • Module 1: OCR Extraction
+ • Module 2: Document Validation
+ • Module 3: Tampering Detection
+ • Module 4: Face Detection Module 1: OCR Extraction Objective: Automatically extract all relevant information from identity documents.
+ Inputs:
+ • Passport image
+ • Visa image
+ • National ID image
+ • Driving license
+ • Permit documents Extracted Fields:
+ Passport
+ • Name
+ • Passport Number
+ • Nationality
+ • Date of birth
+ • Date of expiry
+ • Gender Visa
+ • Visa Number
+ • Visa Type
+ • Entry Validation
+ • Stay Duration Module 2: Document Validation Objective: Verify whether the extracted information follows official document standards.
+ Module 3: Tampering Detection (Core AI Innovation)
+ Objective: Detect digitally or physically altered documents.
+ Use Cases:
+ • Photo Replacement
+ • Text Manipulation
+ • Stamp Forgery Detection
+ • Image Metadata Analysis Module 4: Face Verification Objective: Ensure document owner matches the presented individual.
+ • Expected Impact
+ • Reduce document verification time from several minutes to a few seconds.
+ • Improve detection of forged and tampered documents.
+ • Standardize screening decisions across checkpoints.
+ • Enable data-driven risk assessment instead of purely manual inspection.
+ • Create a digital trail for investigations and intelligence analysis.
+ Possible Project Name Al-Based Fake Identity & Document Screening System.
+
+==========================================================================================
+SIH26189 | ~140 teams | Blockchain & Cybersecurity | Ministry of Home Affairs
+TITLE: AI-Powered Criminal Network Analysis System
+---
+• Background Modern criminal activities are increasingly organized and interconnected. Criminals often operate through networks involving associates, intermediaries, financial channels, communication links,locations, and events. Law enforcement agencies collect large volumes of data from sources such as:
+ • FIRs and police reports
+ • Call Detail Records (CDRs)
+ • Financial transaction records
+ • Surveillance reports
+ • Social media intelligence
+ • Criminal history databases
+ • Intelligence agency reports Despite having access to this information, investigators frequently face challenges in identifying hidden relationships among suspects because the data is fragmented, unstructured, and distributed across multiple systems. Manual analysis can be slow, labor-intensive, and prone to missing critical connections.With advances in Artificial Intelligence (AI), Machine Learning (ML),Natural Language Processing (NLP), and Graph Analytics, it is now possible to automatically discover relationships, detect patterns, and generate insights that can assist investigators in understanding criminal networks more effectively.
+ • Description The objective is to develop an AI-powered system that can analyze large volumes of criminal and intelligence-related data to uncover hidden networks and relationships among individuals, organizations, locations,and events.
+ The system should:
+ • Collect and process data from multiple sources.
+ • Extract important entities such as people, locations, vehicles, phone numbers, and organizations.
+ • Build relationship maps showing how different entities are connected.
+ • Identify key individuals who play influential roles within criminal networks.
+ • Detect suspicious patterns and unusual activities.
+ • Assist investigators by providing visual and analytical insights.
+ • Expected Solution Develop an AI-powered system that automatically analyzes structured and unstructured crime-related data to uncover criminal networks,identify key influencers, detect suspicious patterns, and provide actionable intelligence for investigators.
+
+==========================================================================================
+SIH26190 | ~140 teams | Blockchain & Cybersecurity | Ministry of Home Affairs
+TITLE: Secure Digital Document Management System for Legal and Investigation Documents
+---
+• Background Law enforcement agencies, courts, legal departments, and investigative organizations handle vast amounts of sensitive documents throughout the lifecycle of a case. These documents may include:
+ • FIRs and police reports
+ • Investigation records
+ • Witness statements
+ • Charge sheets
+ • Court filings
+ • Evidence records
+ • Forensic reports
+ • Legal notices and judgments Many organizations still rely on paper-based systems or fragmented digital storage solutions. This often leads to challenges such as:
+ • Difficulty in locating documents quickly
+ • Unauthorized access to confidential information
+ • Document tampering risks
+ • Lack of version control
+ • Inefficient collaboration between departments
+ • Delays in legal and investigative processes
+ • Poor auditability and compliance tracking As the volume of legal and investigation-related data continues to grow,there is an increasing need for a secure, centralized, and intelligent document management system that ensures data integrity, accessibility,confidentiality, and efficient case management.Modern technologies such as Cloud Computing, Artificial Intelligence (AI), Blockchain, Digital Signatures, and Secure Access Control can significantly improve the management and security of legal and investigative documents.
+ • Description The objective is to develop a Secure Digital Document Management System (DMS) that enables law enforcement agencies, legal institutions, and investigative departments to securely store, organize, manage,retrieve, and share sensitive legal and investigation documents.
+ The system should:
+ • Digitize and centralize document storage.
+ • Ensure secure access and confidentiality.
+ • Prevent unauthorized modifications.
+ • Maintain a complete audit trail of document activities.
+ • Enable efficient document search and retrieval.
+ • Support collaboration among authorized stakeholders.
+ • Ensure compliance with legal and regulatory requirements.
+ The challenge is to create a secure, scalable, and intelligent platform that streamlines document handling while preserving legal validity and evidentiary integrity.
+ • Expected Solution Develop a system to monitor and manage police assets throughout their lifecycle.
+
+==========================================================================================
+SIH26191 | ~140 teams | Disaster Management | Ministry of Home Affairs
+TITLE: Intelligent Identification of Hazard-Based Red Zones, Carrying Capacity Assessment, and Immediate Relocation Needs for Vulnerable Habitations
+---
+• Background Indiaâ€™s disaster-prone regions face recurring hazards such as landslides,floods, coastal erosion, and cloudbursts. Vulnerable habitations often remain in unsafe zones, leading to repeated loss of lives and property.Current relocation efforts are largely reactive, initiated after disasters strike, rather than proactively planned.
+ • Description The initiative seeks to develop an intelligent, GIS-enabled decision support platform. This platform will dynamically identify and update multi-hazard Red Zones (areas unsuitable for permanent habitation),assess the carrying capacity of safer alternative sites, and prioritize vulnerable habitations for relocation. The system will integrate hazard intensity, population vulnerability, and disaster history to guide evidence-based decisions.
+ • Expected Solution A robust, AI-driven GIS platform that Maps and updates hazard-based Red Zones in real time, assesses suitability and carrying capacity of safer relocation sites, prioritizes vulnerable habitations for immediate,short-term, and medium-term relocation and provides actionable insights to State Disaster Management Authorities for proactive planning.
+
+==========================================================================================
+SIH26192 | ~300 teams | Disaster Management | Ministry of Home Affairs
+TITLE: Flash Flood Prediction System for Hilly Regions using Multi-Source Data Theme
+---
+• Background Hilly states in India are highly vulnerable to landslides and flash floods,which often occur with very short warning times. These sudden events result in significant loss of lives and property, and current early warning mechanisms are inadequate for hyper-local prediction and timely evacuation.
+ • Description The proposed initiative aims to develop a predictive system that integrates multiple data sources - rainfall data, soil moisture sensors,slope stability models, historical landslide inventories, and real-time IoT inputs. By combining these datasets, the system will generate hyper-local forecasts at the village or ward level, providing sufficient lead time for evacuation and risk mitigation.
+ • Expected Solution A comprehensive flash flood prediction system that Integrates rainfall,soil moisture, slope stability, and historical disaster data, utilizes IoT sensors for real-time monitoring, issues hyper-local early warnings at village/ward level, and provides actionable lead time for evacuation and disaster preparedness.
+
+==========================================================================================
+SIH26227 | ~102 teams | Space Technology | Ministry of defence (MoD)
+TITLE: Semantic Retrieval and Multi-Temporal Change Analysis of Satellite lmagery.
+---
+Description 
+2.1. Background. 
+Earth-observation archives are expanding rapidly and increasingly contain multi-temporal, multi-spectral and multi-sensor imagery. Conventional catalogues are effective for searching by metadata such as coordinates, acquisition date, platform and product type, but analysts may still need to know where and when to look before they can examine the imagery itself. Recent advances in multimodal and remote-sensing foundation models have improved semantic representation of Earth-observation data, creating the possibility of searching imagery by meaning as well as metadata. Translating those advances into a reliable operational system remains challenging. particularly when the system must work on-premises, ingest new acquisitions incrementally, preserve geospatial provenance, and suppress false change caused by season, atmosphere, viewing geometry, registration error or sensor differences. 
+2.2. Detailed Description. 
+Teams are required to build a system that makes a satellite-imagery archive queryable by semantic content and by change over time, while retaining conventional spatial, temporal and sensor filters. The solution should support analyst discovery rather than require the analyst to identify every location of interest in advance. Six core capabilities are required. 
+2.2.1. Semantic and Multimodal Retrieval. Support free-text search over imagery tiles using natural-language queries, together with image-to-image search for visually and semantically similar locations. Results should be rank ordered and may be refined using area-of-interest, date-range, sensor or other metadata filters. Example queries include "newly built structures near a river" and "large vehicle concentrations on open ground". 
+2.2.2. Multi-Temporal Change Analysis. For a specified area and time window, identify meaningful changes such as appearance, disappearance, expansion or contraction of features; classify supported change types such as construction, clearance, water-extent variation or road development; and estimate the earliest available observation at which the change is supported by usable imagery. 
+2.2.3. False-Alarm Suppression and Quality Handling. Seasonal variation, illumination and view-angle differences, cloud, haze, snow, shadows, radiometric inconsistency and imperfect co-registration must be treated as confounding factors rather than automatically reported as change. The system should use quality masks, normalization, confidence estimates or equivalent mechanisms and should favour analytically useful precision over indiscriminate change recall. 
+2.2.4. Discovery and Clustering. Support unsupervised or embedding-based grouping of similar sites across a wider area so that an analyst who identifies one location of interest can discover other locations with comparable visual or semantic characteristics without manually constructing a new query for each site.
+2.2.5. Analyst Workflow and Provenance. Provide a ranked review queue with before-and-after evidence, location, acquisition time, sensor or source information, confidence and relevant processing history. Analysts should be able to confirm or reject candidates, preserve those decisions in the audit trail, and use feedback for subsequent reranking or refinement where the chosen approach supports it. Exported results must retain source-scene and processing provenance.
+2.2.6. Scale, Incremental Ingestion and Sovereignty. Support efficient vector or equivalent indexing, incremental addition of newly acquired imagery without a complete index rebuild, and complete on-premises operation without cloud services or external APIs during evaluation. Georeferencing and acquisition metadata must be preserved, and the solution should ingest organiser-defined common geospatial formats such as GeoTIFF or Cloud Optimized GeoTIFF (COG).
+2.2.7. Constraints. The complete demonstration must run with network access. disabled after all approved models, libraries and datasets have been staged. locally. Pretrained public models may be used provided that their origin and licence are declared and the required weights are packaged for offline use. The evaluation will use publicly available or organiser-generated imagery only; no classified, operational or service-generated imagery will be included.
+2.3 Expected Solution. 
+A working system will be demonstrated over an organiser-defined area of interest and time span using public imagery. Retrieval will be evaluated against held-out semantic queries and relevance judgements, while change analysis will be evaluated against a held-out set of labelled change and no-change cases that participating teams have not seen. Teams must submit source code, an architecture note, the index-build and incremental-ingestion procedure, model and dataset provenance, and a reproducible evaluation report stating the indexed area, number of scenes or tiles, build time, storage footprint, query latency and hardware used.
+ .
+
+==========================================================================================
+SIH26228 | ~112 teams | Blockchain & Cybersecurity | Ministry of defence (MoD)
+TITLE: Trustworthy Computer Vision Integrity Assurance for Data, Models and Inference Outputs in Multi-Contributor Pipelines
+---
+2. Description. 
+2.1. Background. Operational computer vision pipelines may combine training data from multiple contributors, pretrained or vendor-supplied models, and inference outputs consumed by downstream systems. This creates distinct integrity and assurance risks across the data, model and inference lifecycle. Data may contain deliberately or inadvertently mislabelled samples, duplicated content, out-of-distribution material or trigger-based backdoors. A model may be substituted, modified or contain hidden behaviour that is not apparent during routine validation. Inference records may also be replayed, replaced or altered after generation unless they are cryptographically linked to the exact input, model and processing chain that produced them. Existing controls often address only individual parts of this lifecycle. The challenge is therefore to create a unified, evidence-based assurance layer that can assess these risks without assuming that every contributing source is trusted. of Fos 
+2.2. Detailed Description.
+Teams are required to build an extensible computer-vision assurance framework that can evaluate a contributed dataset, a trained model and associated inference records, and produce an evidence-based assessment of integrity and risk. The solution should not be hard-coded to a single model architecture or dataset. Five core capabilities are required. 
+ 2.2.1. Training-Data Integrity. Identify suspicious or anomalous samples associated with trigger injection, label flipping, systematic mislabelling, near-duplicate flooding and out-of-distribution insertion. Where contributor, batch or source metadata is available, the system should aggregate sample-level evidence into a source-level risk assessment rather than flagging samples in isolation.
+ 2.2.2. Model Integrity. Assess whether a supplied model exhibits anomalous, substituted or backdoor-like behaviour using methods appropriate to the level of access available. Approaches may include behavioural fingerprinting, trigger search or reconstruction, parameter or activation statistics, and comparison against a defined reference battery. The system must state the access assumptions, confidence and limitations of its assessment. 
+ 2.2.3. Inference Provenance and Output Integrity. Create a verifiable cryptographic binding among the input image, model identifier or weight digest, preprocessing and inference configuration, and resulting output. The design should make post-hoc alteration, substitution or replay of protected inference records detectable through hashes, signatures and appropriate sequence, timestamp or nonce controls. 
+ 2.2.4. Distribution-Shift and Anomaly Assessment. Detect material deviation from a declared reference distribution, including changes caused by terrain, season, sensor, illumination or acquisition conditions. The system should characterise the observed shift, provide a calibrated risk or confidence score, and distinguish probable operational drift from suspicious manipulation where the available evidence supports such a distinction.
+ 2.2.5. Analyst-Facing Assurance and Governance. Every flag must include a human-readable reason, supporting evidence, confidence or severity, the affected asset, and a recommended disposition such as accept, review or quarantine. The solution must maintain a tamper-evident audit trail and explicitly declare attack classes or conditions that it does not support.
+ 2.2.6. Constraints, the complete evaluation workflow must operate offline and in an air-gapped environment with no dependency on cloud services or external APIs. The solution should ingest common computer-vision dataset formats, including COCO and YOLO, and support the organiser-defined reference model formats, including ONNX and PyTorch/TorchScript. Baseline integrity assessment must not require retraining of the contributed model, although optional remediation may use retraining. Methods that require white-box access must fall back gracefully or clearly report that the relevant assessment is unavailable when only black-box access is provided.
+2.3 Expected Solution. 
+Teams are expected to develop a model-agnostic assurance system for assessing the integrity of training data, trained computer-vision models and inference outputs. The solution shall use publicly available or team-generated datasets and models, with teams developing reproducible methods to introduce representative poisoning, backdoor, substitution and tampering scenarios for testing. The system should identify suspicious data or contributor behaviour, assess model integrity, detect tampering of inference records, provide supporting evidence for each finding, and generate a clear assurance report stating confidence, limitations and recommended action. Each team must submit the source code, architecture and setup notes, the assurance-report schema, a reproducible audit log, and a clear coverage statement identifying supported attack classes, assumptions and known limitations.
+
+==========================================================================================
+SIH26231 | ~140 teams | MedTech / BioTech / HealthTech | Ministry of Home Affairs
+TITLE: Digital Companion for Field Drug Testing
+---
+Background:
+Field drug-testing kits currently in use rely on visual interpretation of a colour-change reaction. This makes results subjective, difficult to standardise across officers, and leaves no verifiable record that a test was actually conducted at a given place and time. As a result, field test outcomes cannot presently be relied upon as documentary evidence.
+Description:
+Participants are to build a mobile application that works alongside existing colorimetric field-test kits (no new hardware).
+The application should:
+ Capture an image of the test result using the device camera, using a reference colour card in-frame for lighting calibration.
+ Automatically classify the result against a defined set of outcome categories (e.g., positive, negative, inconclusive).
+ Generate a tamper-evident digital record of the test, capturing timestamp, GPS location, and an operator identifier, together with a cryptographic hash of the captured image.
+ Maintain a simple, searchable log of tests conducted.
+Expected Deliverables:
+A working mobile/web application prototype demonstrating image capture, automated result classification, and generation of a signed digital record.
+Note to Participants:
+The output of this application is a presumptive field-test result and a supporting digital record; it does not replace laboratory confirmatory testing.
+

@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SIH26145 — Unidirectional Threat Detection</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --ink:#0e1622; --paper:#f5f6f8; --card:#ffffff;
+    --muted:#5b6b7c; --faint:#8896a6; --line:#dee3ea; --line-2:#eceff3;
+    --accent:#b5641a; --accent-2:#d17a24; --accent-soft:#f7ecda; --accent-line:#e6c79b;
+    --good:#1c8a54; --good-soft:#e0f2e8; --bad:#c23b34; --bad-soft:#f8e4e2;
+    --warn:#b4741a; --warn-soft:#f6ead4; --ink-warm:#20160c;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+    --cond:"IBM Plex Sans Condensed","IBM Plex Sans",system-ui,sans-serif;
+    --sans:"IBM Plex Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  @page{ size:13.333in 7.5in; margin:0; }
+  html,body{background:#556;-webkit-print-color-adjust:exact;print-color-adjust:exact;font-family:var(--sans);color:var(--ink);}
+  .slide{position:relative;width:1280px;height:720px;background:var(--paper);overflow:hidden;page-break-after:always;display:flex;flex-direction:column;}
+  .slide:last-child{page-break-after:auto}
+
+  .topbar{display:flex;justify-content:space-between;align-items:center;padding:26px 56px 0;flex-shrink:0}
+  .eyebrow{font-family:var(--mono);font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+  .eyebrow .n{color:var(--faint)}
+  .brandtag{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--faint)}
+  .brandtag b{color:var(--ink);font-weight:600}
+  .rule{height:3px;margin:14px 56px 0;background:linear-gradient(90deg,var(--accent),var(--accent-2) 40%,var(--line) 40%);flex-shrink:0}
+  .footer{display:flex;justify-content:space-between;align-items:center;padding:0 56px 22px;flex-shrink:0;font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;color:var(--faint)}
+  .footer .pg b{color:var(--accent);font-weight:600}
+  .body{flex:1;padding:22px 56px 6px;min-height:0;display:flex;flex-direction:column}
+  .stage{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:16px}
+  .stage .cols{flex:0 1 auto}
+
+  h1.stitle{font-family:var(--cond);font-weight:700;font-size:33px;line-height:1.02;letter-spacing:-.01em;margin-bottom:2px}
+  .lede{font-size:17px;color:var(--muted);line-height:1.45;max-width:72ch}
+  .lede b{color:var(--ink);font-weight:600}
+
+  /* cover */
+  .cover{background:radial-gradient(120% 90% at 100% 0%, #2c2114 0%, #1c1710 45%, #141009 100%);color:#f3ece2;justify-content:space-between;padding:0}
+  .cover-top{display:flex;justify-content:space-between;align-items:flex-start;padding:52px 64px 0}
+  .cover-badge{font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#e6a856;border:1px solid #5b4527;border-radius:6px;padding:8px 13px}
+  .cover-org{text-align:right;font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;color:#c4a985;line-height:1.7}
+  .cover-org b{color:#f3ece2;font-weight:600}
+  .cover-mid{padding:0 64px}
+  .cover-kicker{font-family:var(--mono);font-size:15px;letter-spacing:.1em;text-transform:uppercase;color:#d99542;margin-bottom:18px}
+  h1.cover-title{font-family:var(--cond);font-weight:700;font-size:64px;line-height:.99;letter-spacing:-.015em;max-width:20ch}
+  h1.cover-title .hl{color:#eba94e}
+  .cover-thesis{margin-top:22px;font-size:20px;line-height:1.5;color:#d8c7b3;max-width:62ch}
+  .cover-thesis b{color:#f3ece2;font-weight:600}
+  .cover-bot{display:flex;justify-content:space-between;align-items:flex-end;padding:22px 0 52px;border-top:1px solid #3a2c1a;margin:0 64px}
+  .cover-meta{display:flex;gap:44px}
+  .cmeta .k{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#977a52;margin-bottom:5px}
+  .cmeta .v{font-size:16px;color:#f3ece2;font-weight:500}
+  .cover-team{text-align:right}
+  .cover-team .k{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#977a52;margin-bottom:5px}
+  .cover-team .v{font-size:16px;color:#f3ece2;font-weight:600}
+  .ph{color:#7fd6d2 !important;font-weight:600}
+  .demo-qr{position:absolute;right:64px;top:252px;width:232px;background:#fff;border-radius:18px;padding:20px 20px 16px;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+  .demo-qr .dq-top{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:14px}
+  .demo-qr .dq-img{width:176px;height:176px;display:block;margin:0 auto}
+  .demo-qr .dq-scan{font-family:var(--sans);font-size:14px;font-weight:600;color:#0e1622;margin-top:14px}
+  .demo-qr .dq-url{font-family:var(--mono);font-size:11px;color:#8fa0a6;margin-top:4px;word-break:break-all}
+
+  .cols{display:flex;gap:22px}
+  .col{flex:1;display:flex;flex-direction:column;gap:12px}
+  .kb{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+  .card.tinted{background:var(--accent-soft);border-color:var(--accent-line)}
+  .card h3{font-family:var(--cond);font-weight:700;font-size:19px;margin-bottom:8px;line-height:1.1}
+  .card p{font-size:15px;color:var(--muted);line-height:1.45}
+  .card p b,.card li b{color:var(--ink);font-weight:600}
+  ul.ticks{list-style:none;display:flex;flex-direction:column;gap:9px}
+  ul.ticks li{position:relative;padding-left:26px;font-size:15.5px;line-height:1.4;color:var(--ink)}
+  ul.ticks li::before{content:"";position:absolute;left:0;top:7px;width:12px;height:12px;border-radius:3px;background:var(--accent)}
+  ul.ticks li .s{color:var(--muted)}
+  .pill{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:12px;font-weight:500;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:20px;padding:6px 12px}
+  .pill .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  .pillrow{display:flex;flex-wrap:wrap;gap:8px}
+  .lead-note{background:var(--ink-warm);color:#eaddca;border-radius:14px;padding:16px 20px;font-size:15.5px;line-height:1.5}
+  .lead-note b{color:#eba94e;font-weight:600}
+
+  .flow2{display:flex;align-items:stretch;gap:0}
+  .flow2 .step{flex:1;padding:2px 18px}
+  .flow2 .step:first-child{padding-left:0}
+  .flow2 .step:last-child{padding-right:0}
+  .flow2 .step:not(:last-child){border-right:1px solid var(--line)}
+  .flow2 .step .lab{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:7px}
+  .flow2 .step .txt{font-size:15px;line-height:1.4;color:var(--ink)}
+  .flow2 .step .txt b{font-weight:600}
+  .flow2 .step.win .lab{color:var(--accent)}
+
+  .diagram{flex:1;display:flex;align-items:center;justify-content:center;min-height:0}
+  svg{width:100%;height:100%}
+
+  .metrics{display:flex;gap:16px}
+  .metric{flex:1;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .metric .big{font-family:var(--cond);font-weight:700;font-size:34px;line-height:1.02;color:var(--accent);letter-spacing:-.01em}
+  .metric .big small{font-size:15px;color:var(--muted);font-weight:600}
+  .metric .lab{font-size:13.5px;color:var(--muted);margin-top:7px;line-height:1.3}
+  .metric.dark{background:var(--ink-warm)}
+  .metric.dark .big{color:#eba94e}
+  .metric.dark .lab{color:#c8b598}
+
+  .beneficiaries{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .bchip{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:14px}
+  .bchip b{display:block;font-family:var(--cond);font-weight:700;font-size:15px;color:var(--ink);margin-bottom:1px}
+  .bchip span{color:var(--muted);font-size:12.5px}
+  .callout{border-left:3px solid var(--accent);padding-left:16px;font-size:15px;line-height:1.5;color:var(--muted)}
+  .callout b{color:var(--ink);font-weight:600}
+
+  .reftable{display:flex;flex-direction:column}
+  .refrow{display:grid;grid-template-columns:180px 1fr;gap:16px;padding:11px 0;border-bottom:1px solid var(--line-2)}
+  .refrow .rk{font-family:var(--mono);font-size:12.5px;font-weight:600;letter-spacing:.04em;color:var(--accent);text-transform:uppercase}
+  .refrow .rv{font-size:14.5px;color:var(--ink);line-height:1.4}
+  .refrow .rv b{font-weight:600}
+  .refrow .rv .s{color:var(--muted)}
+  .mono{font-family:var(--mono)}
+</style>
+</head>
+<body>
+
+<!-- ============ SLIDE 1 · TITLE ============ -->
+<section class="slide cover">
+  <div class="cover-top">
+    <div class="cover-badge">Smart India Hackathon 2026</div>
+    <div class="cover-org">
+      Problem Statement <b>SIH26145</b><br>
+      <b>NTRO</b> · National Technical Research Organisation<br>
+      Theme <b>Blockchain &amp; Cybersecurity</b> · Category <b>Software</b>
+    </div>
+  </div>
+  <div class="demo-qr">
+    <div class="dq-top">&#9654; 2-min live demo</div>
+    <img class="dq-img" src="qr-demo.svg" alt="Scan for the demo video">
+    <div class="dq-scan">Scan to watch it run</div>
+    <div class="dq-url">youtu.be/your-demo-id</div>
+  </div>
+  <div class="cover-mid">
+    <div class="cover-kicker">Watch everything. Touch nothing.</div>
+    <h1 class="cover-title">Threat intelligence from traffic you can <span class="hl">only watch</span>.</h1>
+    <p class="cover-thesis">Critical networks are monitored through <b>one-way taps</b>: you see every packet but can never reply, probe, or block. We turn that read-only stream into <b>live, explained alerts</b>, and we flag malware hiding <b>inside encrypted sessions</b> from its fingerprint alone, no decryption.</p>
+  </div>
+  <div class="cover-bot">
+    <div class="cover-meta">
+      <div class="cmeta"><div class="k">Idea title</div><div class="v">Passive Streaming Threat Detector</div></div>
+      <div class="cmeta"><div class="k">Edition</div><div class="v">Software · Offline / Air-gapped</div></div>
+    </div>
+    <div class="cover-team">
+      <div class="k">Team</div>
+      <div class="v"><span class="ph">[Team Name]</span> · <span class="ph">[Team ID]</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 2 · PROPOSED SOLUTION ============ -->
+<section class="slide">
+  <div class="topbar"><div class="eyebrow"><span class="n">02 ·</span> Proposed Solution</div><div class="brandtag">SIH 2026 · <b>SIH26145</b></div></div>
+  <div class="rule"></div>
+  <div class="body">
+    <h1 class="stitle">Six threats, six passive signals, one live verdict</h1>
+    <div class="stage">
+    <div class="flow2">
+      <div class="step"><div class="lab">The real setting</div><div class="txt">Power grids and defence links are watched through a <b>data diode</b>: traffic is copied one way so the monitor can never become a way in.</div></div>
+      <div class="step"><div class="lab">Why it's hard</div><div class="txt">No probing, no handshakes, <b>no decryption, no blocking</b>. Most tools assume two-way access. Passive-only, streaming, multi-threat detection is rare.</div></div>
+      <div class="step win"><div class="lab">Our answer</div><div class="txt">A <b>streaming pipeline</b> where each threat gets its own detector, and <b>every alert carries the evidence</b> that fired it.</div></div>
+    </div>
+    <div class="cols" style="margin-top:2px">
+      <div class="col" style="flex:1.15">
+        <div class="kb">What it detects, from metadata alone</div>
+        <ul class="ticks">
+          <li><b>Floods, beacons, scans, tunnels, exfiltration</b> — each read from a different statistical fingerprint, not a payload.</li>
+          <li>Alerts stream in with <b>bounded latency</b> and a standard schema: time, flow, threat class, confidence, evidence.</li>
+          <li>Runs entirely <b>offline</b> on a read-only feed. Nothing is ever sent back across the tap.</li>
+        </ul>
+      </div>
+      <div class="col" style="flex:1">
+        <div class="card tinted">
+          <div class="kb" style="color:var(--accent)">Innovation · what no one else builds</div>
+          <h3 style="margin-top:6px">Malware caught inside encrypted traffic</h3>
+          <p>Everyone inspects payloads. We can't, and don't need to. Using <b>JA3 / JA4 TLS fingerprints</b> plus packet-size and timing patterns, we flag malware <b>inside encrypted TLS/QUIC sessions without decrypting a byte</b> — the hardest ask in the brief, and the one most teams skip.</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <div class="footer"><span><span class="ph mono">[Team Name]</span></span><span class="pg">Page <b>2</b> / 6</span></div>
+</section>
+
+<!-- ============ SLIDE 3 · TECHNICAL APPROACH ============ -->
+<section class="slide">
+  <div class="topbar"><div class="eyebrow"><span class="n">03 ·</span> Technical Approach</div><div class="brandtag">SIH 2026 · <b>SIH26145</b></div></div>
+  <div class="rule"></div>
+  <div class="body">
+    <h1 class="stitle">A streaming pipeline built for a one-way world</h1>
+    <p class="lede" style="margin-bottom:2px">Read-only in, evidence-backed alerts out. Each detector reads the signal that its threat cannot hide.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 1160 372" role="img" aria-label="Detection pipeline diagram">
+        <defs><marker id="a2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#b5641a"/></marker></defs>
+        <rect x="8" y="8" width="1144" height="356" rx="16" fill="none" stroke="#e6c79b" stroke-width="2" stroke-dasharray="3 7"/>
+        <text x="26" y="30" font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="1.3" fill="#b5641a" font-weight="600">READ-ONLY INGEST · NO RETURN PATH · NO DECRYPTION · STREAMING</text>
+
+        <!-- input -->
+        <rect x="28" y="150" width="150" height="96" rx="11" fill="#ffffff" stroke="#dee3ea"/>
+        <text x="103" y="184" text-anchor="middle" font-family="IBM Plex Sans Condensed, sans-serif" font-weight="700" font-size="15.5" fill="#0e1622">One-way traffic</text>
+        <text x="103" y="206" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="#5b6b7c">PCAP · NetFlow</text>
+        <text x="103" y="222" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="#5b6b7c">IPFIX · sFlow</text>
+
+        <!-- features -->
+        <rect x="204" y="150" width="168" height="96" rx="11" fill="#ffffff" stroke="#dee3ea"/>
+        <text x="288" y="180" text-anchor="middle" font-family="IBM Plex Sans Condensed, sans-serif" font-weight="700" font-size="15.5" fill="#0e1622">Feature extraction</text>
+        <text x="288" y="202" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="12.5" fill="#5b6b7c">flow-level +</text>
+        <text x="288" y="219" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="12.5" fill="#5b6b7c">packet-level, per window</text>
+
+        <!-- detector bank -->
+        <rect x="398" y="44" width="384" height="308" rx="12" fill="#fbf6ee" stroke="#e6c79b"/>
+        <text x="416" y="70" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1.2" fill="#b5641a" font-weight="600">DETECTOR BANK — EACH THREAT, ITS OWN SIGNAL</text>
+        <!-- rows -->
+        <g font-family="IBM Plex Sans, sans-serif">
+          <rect x="416" y="84" width="348" height="36" rx="7" fill="#ffffff" stroke="#eaddca"/>
+          <text x="430" y="107" font-size="14" font-weight="600" fill="#0e1622">DDoS / floods</text>
+          <text x="750" y="107" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="11.5" fill="#5b6b7c">source-IP entropy</text>
+
+          <rect x="416" y="126" width="348" height="36" rx="7" fill="#ffffff" stroke="#eaddca"/>
+          <text x="430" y="149" font-size="14" font-weight="600" fill="#0e1622">C2 beaconing</text>
+          <text x="750" y="149" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="11.5" fill="#5b6b7c">periodic timing</text>
+
+          <rect x="416" y="168" width="348" height="36" rx="7" fill="#ffffff" stroke="#eaddca"/>
+          <text x="430" y="191" font-size="14" font-weight="600" fill="#0e1622">DGA / DNS tunnelling</text>
+          <text x="750" y="191" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="11.5" fill="#5b6b7c">n-gram entropy</text>
+
+          <rect x="416" y="210" width="348" height="36" rx="7" fill="#fde7d3" stroke="#d17a24"/>
+          <text x="430" y="233" font-size="14" font-weight="700" fill="#8a4d12">Encrypted malware</text>
+          <text x="750" y="233" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="11.5" font-weight="600" fill="#a5601a">JA3 / JA4 + timing</text>
+
+          <rect x="416" y="252" width="348" height="36" rx="7" fill="#ffffff" stroke="#eaddca"/>
+          <text x="430" y="275" font-size="14" font-weight="600" fill="#0e1622">Recon / port scan</text>
+          <text x="750" y="275" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="11.5" fill="#5b6b7c">fan-out pattern</text>
+
+          <rect x="416" y="294" width="348" height="36" rx="7" fill="#ffffff" stroke="#eaddca"/>
+          <text x="430" y="317" font-size="14" font-weight="600" fill="#0e1622">Data exfiltration</text>
+          <text x="750" y="317" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="11.5" fill="#5b6b7c">byte-ratio anomaly</text>
+        </g>
+
+        <!-- fusion -->
+        <rect x="808" y="150" width="150" height="96" rx="11" fill="#20160c"/>
+        <text x="883" y="182" text-anchor="middle" font-family="IBM Plex Sans Condensed, sans-serif" font-weight="700" font-size="15.5" fill="#f3ece2">Alert fusion</text>
+        <text x="883" y="204" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="#eba94e">schema + evidence</text>
+        <text x="883" y="220" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="#eba94e">+ confidence</text>
+
+        <!-- dashboard -->
+        <rect x="984" y="150" width="150" height="96" rx="11" fill="#e0f2e8" stroke="#1c8a54"/>
+        <text x="1059" y="184" text-anchor="middle" font-family="IBM Plex Sans Condensed, sans-serif" font-weight="700" font-size="15.5" fill="#14603a">Live dashboard</text>
+        <text x="1059" y="206" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#1c6b45">alerts as they</text>
+        <text x="1059" y="222" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#1c6b45">happen</text>
+
+        <!-- arrows -->
+        <path d="M178 198 L 202 198" fill="none" stroke="#b5641a" stroke-width="2" marker-end="url(#a2)"/>
+        <path d="M372 198 L 396 198" fill="none" stroke="#b5641a" stroke-width="2" marker-end="url(#a2)"/>
+        <path d="M782 198 L 806 198" fill="none" stroke="#b5641a" stroke-width="2" marker-end="url(#a2)"/>
+        <path d="M958 198 L 982 198" fill="none" stroke="#b5641a" stroke-width="2" marker-end="url(#a2)"/>
+      </svg>
+    </div>
+    <div class="pillrow" style="margin-top:2px">
+      <span class="pill"><span class="dot"></span>Scapy · PyShark</span>
+      <span class="pill"><span class="dot"></span>Python · scikit-learn</span>
+      <span class="pill"><span class="dot"></span>IsolationForest / GBM</span>
+      <span class="pill"><span class="dot"></span>JA3 / JA4</span>
+      <span class="pill"><span class="dot"></span>Streaming dashboard</span>
+      <span class="pill"><span class="dot"></span>CIC-IDS · CTU-13</span>
+    </div>
+  </div>
+  <div class="footer"><span><span class="ph mono">[Team Name]</span></span><span class="pg">Page <b>3</b> / 6</span></div>
+</section>
+
+<!-- ============ SLIDE 4 · FEASIBILITY & VIABILITY ============ -->
+<section class="slide">
+  <div class="topbar"><div class="eyebrow"><span class="n">04 ·</span> Feasibility &amp; Viability</div><div class="brandtag">SIH 2026 · <b>SIH26145</b></div></div>
+  <div class="rule"></div>
+  <div class="body">
+    <h1 class="stitle">The data is public, the models are light, the demo is honest</h1>
+    <div class="stage">
+    <div class="cols" style="margin-top:12px">
+      <div class="col" style="flex:1.05">
+        <div class="kb">Why it is feasible</div>
+        <ul class="ticks">
+          <li><b>Labelled data already exists.</b> CIC-IDS-2017/2018 and CTU-13 ship attack timelines, so every detector has ground truth to train and prove against.</li>
+          <li><b>No GPU needed.</b> Per-threat models are lightweight (entropy stats, tree ensembles), fast enough to run streaming on a laptop.</li>
+          <li><b>Streaming is standard.</b> Windowed processing with per-flow state, then replay a capture at a controlled rate to show it live.</li>
+        </ul>
+        <div class="lead-note" style="margin-top:6px">Grand-finale MVP: <b>a live dashboard replaying real traffic, 4 detectors including the encrypted-malware one, a stated throughput, and F1 measured against a simple baseline.</b></div>
+      </div>
+      <div class="col" style="flex:1">
+        <div class="kb">Risks, and how we beat them</div>
+        <div class="card"><h3>"Is it really live?"</h3><p>We replay a real capture at a set rate and show <b>bounded per-alert latency</b> and sustained flows/sec, not an end-of-run summary.</p></div>
+        <div class="card"><h3>Encrypted-malware accuracy</h3><p>We pair a <b>known-bad JA3/JA4 list</b> with a trained metadata classifier and <b>report honest precision/recall</b>. We claim detection support, never certainty.</p></div>
+        <div class="card"><h3>False positives on a monitor that can't block</h3><p>Alerts are <b>ranked by confidence with evidence attached</b>, so analysts triage the top of the list. We measure FP rate against a baseline.</p></div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <div class="footer"><span><span class="ph mono">[Team Name]</span></span><span class="pg">Page <b>4</b> / 6</span></div>
+</section>
+
+<!-- ============ SLIDE 5 · IMPACT & BENEFITS ============ -->
+<section class="slide">
+  <div class="topbar"><div class="eyebrow"><span class="n">05 ·</span> Impact &amp; Benefits</div><div class="brandtag">SIH 2026 · <b>SIH26145</b></div></div>
+  <div class="rule"></div>
+  <div class="body">
+    <h1 class="stitle">It sees the attack forming, without ever becoming part of the attack surface</h1>
+    <div class="stage">
+    <div class="metrics" style="margin-top:12px">
+      <div class="metric dark"><div class="big">Before<small> compromise</small></div><div class="lab">Flags recon and beaconing as they unfold, not in a post-mortem after the breach.</div></div>
+      <div class="metric"><div class="big">Zero<small> added exposure</small></div><div class="lab">Read-only by design. The detector can never be pivoted into the protected network.</div></div>
+      <div class="metric"><div class="big">Encrypted<small> ✓ visible</small></div><div class="lab">Sees threats inside TLS/QUIC from metadata, so privacy and chain-of-custody stay intact.</div></div>
+    </div>
+    <div class="cols">
+      <div class="col" style="flex:1.1">
+        <div class="kb">Why this matters</div>
+        <ul class="ticks">
+          <li><b>Critical infrastructure is watched passively for a reason.</b> This makes that safe, one-way vantage genuinely intelligent instead of just a recorder.</li>
+          <li><b>Encrypted traffic is now the norm.</b> Detecting threats without decryption keeps monitoring lawful, private and evidentially clean.</li>
+          <li><b>Explainable alerts fight fatigue.</b> Every alert names the feature that fired, so analysts act on signal instead of drowning in noise.</li>
+        </ul>
+      </div>
+      <div class="col" style="flex:1">
+        <div class="kb">Who it serves</div>
+        <div class="beneficiaries">
+          <div class="bchip"><b>NCIIPC &amp; CERT-In</b><span>National critical-infra monitoring</span></div>
+          <div class="bchip"><b>Power / telecom / banking</b><span>One-way tap deployments</span></div>
+          <div class="bchip"><b>Defence enclaves</b><span>Air-gapped monitoring networks</span></div>
+          <div class="bchip"><b>SOC teams</b><span>Evidence-backed, triage-ready alerts</span></div>
+        </div>
+        <div class="callout" style="margin-top:12px"><b>National angle:</b> indigenous, air-gapped threat intelligence for India's critical networks, protecting them <b>without adding a single new way in</b>.</div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <div class="footer"><span><span class="ph mono">[Team Name]</span></span><span class="pg">Page <b>5</b> / 6</span></div>
+</section>
+
+<!-- ============ SLIDE 6 · RESEARCH & REFERENCES ============ -->
+<section class="slide">
+  <div class="topbar"><div class="eyebrow"><span class="n">06 ·</span> Research &amp; References</div><div class="brandtag">SIH 2026 · <b>SIH26145</b></div></div>
+  <div class="rule"></div>
+  <div class="body">
+    <h1 class="stitle">Data, techniques and evidence behind the build</h1>
+    <div class="stage">
+    <div class="cols" style="margin-top:10px">
+      <div class="col" style="flex:1.15">
+        <div class="reftable">
+          <div class="refrow"><div class="rk">Datasets</div><div class="rv"><b>CIC-IDS-2017 / 2018</b> (Canadian Institute for Cybersecurity) · <b>CTU-13</b> botnet dataset <span class="s">— labelled attacks with timelines.</span></div></div>
+          <div class="refrow"><div class="rk">Encrypted-traffic</div><div class="rv"><b>JA3 / JA4</b> TLS client fingerprinting (Salesforce / FoxIO) <span class="s">— detection without decryption.</span></div></div>
+          <div class="refrow"><div class="rk">Threat mapping</div><div class="rv"><b>MITRE ATT&amp;CK</b> stages · <b>NetFlow / IPFIX / sFlow</b> flow records</div></div>
+          <div class="refrow"><div class="rk">Tooling</div><div class="rv"><b>Scapy</b>, <b>PyShark</b>, <b>scikit-learn</b> <span class="s">— parsing, features, lightweight models.</span></div></div>
+          <div class="refrow"><div class="rk">Concept</div><div class="rv"><b>Data diode / unidirectional gateway</b> <span class="s">— the read-only monitoring model we design for.</span></div></div>
+          <div class="refrow"><div class="rk">Problem</div><div class="rv"><b>SIH26145</b> · National Technical Research Organisation (NTRO)</div></div>
+        </div>
+      </div>
+      <div class="col" style="flex:.85">
+        <div class="card tinted">
+          <div class="kb" style="color:var(--accent)">On honest evaluation</div>
+          <p style="margin-top:8px;font-size:14.5px;line-height:1.5">We benchmark every detector's <b>precision, recall and false-positive rate</b> against a simple baseline on the same public data, and state the <b>throughput</b> we sustained. Numbers shown at the finale come from our own runs, not the brief.</p>
+        </div>
+        <div class="callout"><b>Note on data:</b> no live intercept or sensitive traffic is required. All training and demo use open, published datasets.</div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <div class="footer"><span><span class="ph mono">[Team Name]</span> · SIH 2026</span><span class="pg">Page <b>6</b> / 6</span></div>
+</section>
+
+</body>
+</html>

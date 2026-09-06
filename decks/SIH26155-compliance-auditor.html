@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SIH26155 — Compliance Auditor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --ink:#0e1622; --ink-2:#31405260; --paper:#f4f7f9; --card:#ffffff;
+    --muted:#5b6b7c; --faint:#8896a6; --line:#dde5ec; --line-2:#eaf0f4;
+    --accent:#0b6b74; --accent-2:#0e8a90; --accent-soft:#e0f0f0; --accent-line:#a9d5d6;
+    --good:#1c8a54; --good-soft:#e0f2e8; --bad:#c23b34; --bad-soft:#f8e4e2;
+    --warn:#b4741a; --warn-soft:#f6ead4; --ink-navy:#0c2230;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+    --cond:"IBM Plex Sans Condensed","IBM Plex Sans",system-ui,sans-serif;
+    --sans:"IBM Plex Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  @page{ size:13.333in 7.5in; margin:0; }
+  html,body{background:#556; -webkit-print-color-adjust:exact; print-color-adjust:exact; font-family:var(--sans); color:var(--ink);}
+  .slide{
+    position:relative; width:1280px; height:720px; background:var(--paper);
+    overflow:hidden; page-break-after:always; display:flex; flex-direction:column;
+  }
+  .slide:last-child{page-break-after:auto}
+
+  /* chrome */
+  .topbar{display:flex;justify-content:space-between;align-items:center;padding:26px 56px 0;flex-shrink:0}
+  .eyebrow{font-family:var(--mono);font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+  .eyebrow .n{color:var(--faint)}
+  .brandtag{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--faint)}
+  .brandtag b{color:var(--ink);font-weight:600}
+  .rule{height:3px;margin:14px 56px 0;background:linear-gradient(90deg,var(--accent),var(--accent-2) 40%,var(--line) 40%);flex-shrink:0}
+  .footer{display:flex;justify-content:space-between;align-items:center;padding:0 56px 22px;flex-shrink:0;font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;color:var(--faint)}
+  .footer .pg b{color:var(--accent);font-weight:600}
+  .body{flex:1;padding:22px 56px 6px;min-height:0;display:flex;flex-direction:column}
+  .stage{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:16px}
+  .stage .cols{flex:0 1 auto}
+
+  h1.stitle{font-family:var(--cond);font-weight:700;font-size:33px;line-height:1.02;letter-spacing:-.01em;margin-bottom:2px}
+  .lede{font-size:17px;color:var(--muted);line-height:1.45;max-width:70ch}
+  .lede b{color:var(--ink);font-weight:600}
+  .accent{color:var(--accent)}
+
+  /* ---------- TITLE SLIDE ---------- */
+  .cover{background:
+      radial-gradient(120% 90% at 100% 0%, #103240 0%, #0c2230 45%, #0a1a25 100%);
+      color:#eaf3f4;justify-content:space-between;padding:0}
+  .cover-top{display:flex;justify-content:space-between;align-items:flex-start;padding:52px 64px 0}
+  .cover-badge{font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#7fd6d2;border:1px solid #2b5560;border-radius:6px;padding:8px 13px}
+  .cover-org{text-align:right;font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;color:#9fc0c4;line-height:1.7}
+  .cover-org b{color:#eaf3f4;font-weight:600}
+  .cover-mid{padding:0 64px}
+  .cover-kicker{font-family:var(--mono);font-size:15px;letter-spacing:.1em;text-transform:uppercase;color:#5fbfbb;margin-bottom:18px}
+  h1.cover-title{font-family:var(--cond);font-weight:700;font-size:66px;line-height:.99;letter-spacing:-.015em;max-width:19ch}
+  h1.cover-title .hl{color:#54c9c2}
+  .cover-thesis{margin-top:22px;font-size:20px;line-height:1.5;color:#c4dadb;max-width:60ch}
+  .cover-thesis b{color:#eaf3f4;font-weight:600}
+  .cover-bot{display:flex;justify-content:space-between;align-items:flex-end;padding:22px 0 52px;border-top:1px solid #1e414c;margin:0 64px}
+  .cover-meta{display:flex;gap:44px}
+  .cmeta .k{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#6a949a;margin-bottom:5px}
+  .cmeta .v{font-size:16px;color:#eaf3f4;font-weight:500}
+  .cover-team{text-align:right}
+  .cover-team .k{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#6a949a;margin-bottom:5px}
+  .cover-team .v{font-size:16px;color:#eaf3f4;font-weight:600}
+  .ph{color:#f0b96a !important;font-weight:600}
+  .demo-qr{position:absolute;right:64px;top:252px;width:232px;background:#fff;border-radius:18px;padding:20px 20px 16px;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.42)}
+  .demo-qr .dq-top{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:14px}
+  .demo-qr .dq-img{width:176px;height:176px;display:block;margin:0 auto}
+  .demo-qr .dq-scan{font-family:var(--sans);font-size:14px;font-weight:600;color:#0e1622;margin-top:14px}
+  .demo-qr .dq-url{font-family:var(--mono);font-size:11px;color:#8fa0a6;margin-top:4px;word-break:break-all}
+
+  /* ---------- generic content bits ---------- */
+  .cols{display:flex;gap:22px;flex:1;min-height:0}
+  .col{flex:1;display:flex;flex-direction:column;gap:12px}
+
+  .kb{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+  .card.tinted{background:var(--accent-soft);border-color:var(--accent-line)}
+  .card h3{font-family:var(--cond);font-weight:700;font-size:19px;margin-bottom:8px;line-height:1.1}
+  .card p{font-size:15px;color:var(--muted);line-height:1.45}
+  .card p b, .card li b{color:var(--ink);font-weight:600}
+
+  ul.ticks{list-style:none;display:flex;flex-direction:column;gap:9px}
+  ul.ticks li{position:relative;padding-left:26px;font-size:15.5px;line-height:1.4;color:var(--ink)}
+  ul.ticks li::before{content:"";position:absolute;left:0;top:7px;width:12px;height:12px;border-radius:3px;background:var(--accent);}
+  ul.ticks li.x::before{background:var(--bad)}
+  ul.ticks li .s{color:var(--muted);font-weight:400}
+
+  .pill{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:12px;font-weight:500;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:20px;padding:6px 12px}
+  .pill .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  .pillrow{display:flex;flex-wrap:wrap;gap:8px}
+
+  .lead-note{background:var(--ink-navy);color:#dcebec;border-radius:14px;padding:16px 20px;font-size:15.5px;line-height:1.5}
+  .lead-note b{color:#7fd6d2;font-weight:600}
+
+  /* problem->solution flow on slide 2 */
+  .flow2{display:flex;align-items:stretch;gap:0;margin-top:4px}
+  .flow2 .step{flex:1;padding:2px 18px}
+  .flow2 .step:first-child{padding-left:0}
+  .flow2 .step:last-child{padding-right:0}
+  .flow2 .step:not(:last-child){border-right:1px solid var(--line)}
+  .flow2 .step .lab{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:7px}
+  .flow2 .step .txt{font-size:15px;line-height:1.4;color:var(--ink)}
+  .flow2 .step .txt b{font-weight:600}
+  .flow2 .step.win .lab{color:var(--accent)}
+
+  /* diagram */
+  .diagram{flex:1;display:flex;align-items:center;justify-content:center;min-height:0}
+  svg{width:100%;height:100%}
+  .dstack{display:flex;flex-direction:column;gap:12px}
+
+  /* impact metrics */
+  .metrics{display:flex;gap:16px;margin-bottom:14px}
+  .metric{flex:1;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .metric .big{font-family:var(--cond);font-weight:700;font-size:38px;line-height:1;color:var(--accent);letter-spacing:-.01em}
+  .metric .big small{font-size:16px;color:var(--muted);font-weight:600}
+  .metric .lab{font-size:13.5px;color:var(--muted);margin-top:7px;line-height:1.3}
+  .metric.dark{background:var(--ink-navy)}
+  .metric.dark .big{color:#54c9c2}
+  .metric.dark .lab{color:#a7c2c4}
+
+  .beneficiaries{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .bchip{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:14px}
+  .bchip b{display:block;font-family:var(--cond);font-weight:700;font-size:15px;color:var(--ink);margin-bottom:1px}
+  .bchip span{color:var(--muted);font-size:12.5px}
+
+  /* references */
+  .reftable{display:flex;flex-direction:column;gap:0}
+  .refrow{display:grid;grid-template-columns:190px 1fr;gap:16px;padding:11px 0;border-bottom:1px solid var(--line-2)}
+  .refrow .rk{font-family:var(--mono);font-size:12.5px;font-weight:600;letter-spacing:.04em;color:var(--accent);text-transform:uppercase}
+  .refrow .rv{font-size:14.5px;color:var(--ink);line-height:1.4}
+  .refrow .rv b{font-weight:600}
+  .refrow .rv .s{color:var(--muted)}
+
+  .callout{border-left:3px solid var(--accent);padding-left:16px;font-size:15px;line-height:1.5;color:var(--muted)}
+  .callout b{color:var(--ink);font-weight:600}
+  .code{font-family:var(--mono);font-size:13px;background:var(--ink-navy);color:#cfe6e6;border-radius:8px;padding:3px 8px;display:inline-block}
+  .mono{font-family:var(--mono)}
+</style>
+</head>
+<body>
+
+<!-- ============ SLIDE 1 · TITLE ============ -->
+<section class="slide cover">
+  <div class="cover-top">
+    <div class="cover-badge">Smart India Hackathon 2026</div>
+    <div class="cover-org">
+      Problem Statement <b>SIH26155</b><br>
+      <b>NTRO</b> · National Technical Research Organisation<br>
+      Theme <b>Blockchain &amp; Cybersecurity</b> · Category <b>Software</b>
+    </div>
+  </div>
+  <div class="demo-qr">
+    <div class="dq-top">&#9654; 2-min live demo</div>
+    <img class="dq-img" src="qr-demo.svg" alt="Scan for the demo video">
+    <div class="dq-scan">Scan to watch it run</div>
+    <div class="dq-url">youtu.be/your-demo-id</div>
+  </div>
+  <div class="cover-mid">
+    <div class="cover-kicker">One wrong line is the whole breach</div>
+    <h1 class="cover-title">The auditor that <span class="hl">learns any vendor</span>, offline.</h1>
+    <p class="cover-thesis">A network device's security lives or dies on its config. We read <b>any vendor's</b> config, judge it against <b>CIS, NIST and STIG</b>, and hand back the exact fixes. When it meets a device it has never seen, it <b>learns it on the spot</b>, air-gapped, no code change.</p>
+  </div>
+  <div class="cover-bot">
+    <div class="cover-meta">
+      <div class="cmeta"><div class="k">Idea title</div><div class="v">Multi-Vendor Compliance Auditor</div></div>
+      <div class="cmeta"><div class="k">Edition</div><div class="v">Software · Offline / Air-gapped</div></div>
+    </div>
+    <div class="cover-team">
+      <div class="k">Team</div>
+      <div class="v"><span class="ph">[Team Name]</span> · <span class="ph">[Team ID]</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 2 · PROPOSED SOLUTION ============ -->
+<section class="slide">
+  <div class="topbar"><div class="eyebrow"><span class="n">02 ·</span> Proposed Solution</div><div class="brandtag">SIH 2026 · <b>SIH26155</b></div></div>
+  <div class="rule"></div>
+  <div class="body">
+    <h1 class="stitle">Turn any device config into a pass/fail with the fix attached</h1>
+    <div class="stage">
+    <div class="flow2">
+      <div class="step"><div class="lab">The real problem</div><div class="txt">Attackers rarely need a zero-day. <b>Telnet left on, a weak cipher, an open mgmt port</b> — a single mis-set line is the way in.</div></div>
+      <div class="step"><div class="lab">Why it stays broken</div><div class="txt">Auditing means an expert reading configs by hand, or a tool <b>locked to one vendor</b> that breaks the day a new device arrives.</div></div>
+      <div class="step win"><div class="lab">Our answer</div><div class="txt">One <b>vendor-agnostic, offline</b> auditor. Upload a config, get a compliance verdict with <b>copy-paste remediation</b>.</div></div>
+    </div>
+
+    <div class="cols" style="margin-top:16px">
+      <div class="col" style="flex:1.15">
+        <div class="kb">How it works, in one breath</div>
+        <ul class="ticks">
+          <li>Reads a config from <b>any</b> firewall, router or switch and normalises it to <b>one common security model</b>.</li>
+          <li>Checks that model against <b>CIS Benchmarks, NIST 800-53 and DISA STIGs</b> the user selects.</li>
+          <li>Returns a per-device report: <b>pass / fail, severity, and the exact CLI commands</b> to harden it.</li>
+        </ul>
+      </div>
+      <div class="col" style="flex:1">
+        <div class="card tinted">
+          <div class="kb accent">Innovation · what no one else builds</div>
+          <h3 style="margin-top:6px">It learns a vendor it has never seen</h3>
+          <p>Hard-coded parsers break on every new firmware. Ours falls back to a <b>local, offline language model</b>; when it is unsure, a <b>Teach-a-Vendor screen</b> shows the raw lines, an admin tags two of them, and the mapping is saved for good. <b>No re-coding, no cloud, no waiting on a patch.</b></p>
+        </div>
+      </div>
+    </div>
+  </div>
+    </div>
+  <div class="footer"><span><span class="ph mono">[Team Name]</span></span><span class="pg">Page <b>2</b> / 6</span></div>
+</section>
+
+<!-- ============ SLIDE 3 · TECHNICAL APPROACH ============ -->
+<section class="slide">
+  <div class="topbar"><div class="eyebrow"><span class="n">03 ·</span> Technical Approach</div><div class="brandtag">SIH 2026 · <b>SIH26155</b></div></div>
+  <div class="rule"></div>
+  <div class="body">
+    <h1 class="stitle">A hybrid pipeline that stays fast, accurate and air-gapped</h1>
+    <p class="lede" style="margin-bottom:6px">Deterministic parsers do the routine work; the local model only handles the unknown. Everything runs inside the network with <b>no external calls</b>.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 1160 340" role="img" aria-label="Architecture diagram">
+        <defs>
+          <marker id="ah" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#0b6b74"/></marker>
+          <marker id="ahb" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#b4741a"/></marker>
+        </defs>
+        <!-- air-gap boundary -->
+        <rect x="8" y="8" width="1144" height="324" rx="16" fill="none" stroke="#a9d5d6" stroke-width="2" stroke-dasharray="3 7"/>
+        <text x="26" y="30" font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="1.5" fill="#0b6b74" font-weight="600">AIR-GAPPED DEPLOYMENT — NO INTERNET</text>
+
+        <!-- input -->
+        <rect x="30" y="118" width="150" height="104" rx="11" fill="#ffffff" stroke="#dde5ec"/>
+        <text x="105" y="150" text-anchor="middle" font-family="IBM Plex Sans Condensed, sans-serif" font-weight="700" font-size="16" fill="#0e1622">Config files</text>
+        <text x="105" y="172" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="#5b6b7c">Cisco · Juniper</text>
+        <text x="105" y="188" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="#5b6b7c">Palo Alto · Arista</text>
+        <text x="105" y="204" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="#8896a6">…any vendor</text>
+
+        <!-- parse split -->
+        <rect x="238" y="70" width="196" height="86" rx="11" fill="#ffffff" stroke="#dde5ec"/>
+        <text x="336" y="100" text-anchor="middle" font-family="IBM Plex Sans Condensed, sans-serif" font-weight="700" font-size="15" fill="#0e1622">Deterministic parser</text>
+        <text x="336" y="120" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="12.5" fill="#5b6b7c">Known vendors — fast,</text>
+        <text x="336" y="137" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="12.5" fill="#5b6b7c">exact (NAPALM / confparse)</text>
+
+        <rect x="238" y="184" width="196" height="86" rx="11" fill="#eef8f8" stroke="#a9d5d6"/>
+        <text x="336" y="214" text-anchor="middle" font-family="IBM Plex Sans Condensed, sans-serif" font-weight="700" font-size="15" fill="#0b6b74">Local LLM fallback</text>
+        <text x="336" y="234" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="12.5" fill="#3c6a6d">Unknown lines only —</text>
+        <text x="336" y="251" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="12.5" fill="#3c6a6d">offline, via Ollama</text>
+
+        <!-- schema -->
+        <rect x="492" y="118" width="168" height="104" rx="11" fill="#0c2230"/>
+        <text x="576" y="152" text-anchor="middle" font-family="IBM Plex Sans Condensed, sans-serif" font-weight="700" font-size="16" fill="#eaf3f4">Canonical</text>
+        <text x="576" y="173" text-anchor="middle" font-family="IBM Plex Sans Condensed, sans-serif" font-weight="700" font-size="16" fill="#eaf3f4">Security Model</text>
+        <text x="576" y="196" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="#7fd6d2">vendor-neutral schema</text>
+
+        <!-- engine -->
+        <rect x="718" y="118" width="168" height="104" rx="11" fill="#ffffff" stroke="#dde5ec"/>
+        <text x="802" y="150" text-anchor="middle" font-family="IBM Plex Sans Condensed, sans-serif" font-weight="700" font-size="16" fill="#0e1622">Compliance</text>
+        <text x="802" y="170" text-anchor="middle" font-family="IBM Plex Sans Condensed, sans-serif" font-weight="700" font-size="16" fill="#0e1622">engine</text>
+        <text x="802" y="194" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="#5b6b7c">CIS · NIST · STIG rules</text>
+
+        <!-- report -->
+        <rect x="944" y="118" width="180" height="104" rx="11" fill="#e0f2e8" stroke="#1c8a54"/>
+        <text x="1034" y="150" text-anchor="middle" font-family="IBM Plex Sans Condensed, sans-serif" font-weight="700" font-size="16" fill="#14603a">Report + fixes</text>
+        <text x="1034" y="172" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="12.5" fill="#1c6b45">pass / fail · severity</text>
+        <text x="1034" y="189" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="12.5" fill="#1c6b45">CLI remediation · PDF</text>
+
+        <!-- arrows -->
+        <path d="M182 158 C 205 130, 214 113, 236 113" fill="none" stroke="#0b6b74" stroke-width="2" marker-end="url(#ah)"/>
+        <path d="M182 182 C 205 210, 214 227, 236 227" fill="none" stroke="#0b6b74" stroke-width="2" marker-end="url(#ah)"/>
+        <path d="M434 113 C 462 118, 470 150, 490 158" fill="none" stroke="#0b6b74" stroke-width="2" marker-end="url(#ah)"/>
+        <path d="M434 227 C 462 222, 470 190, 490 182" fill="none" stroke="#0b6b74" stroke-width="2" marker-end="url(#ah)"/>
+        <path d="M660 170 L 714 170" fill="none" stroke="#0b6b74" stroke-width="2" marker-end="url(#ah)"/>
+        <path d="M886 170 L 940 170" fill="none" stroke="#0b6b74" stroke-width="2" marker-end="url(#ah)"/>
+
+        <!-- teach loop -->
+        <rect x="392" y="292" width="336" height="34" rx="9" fill="#f6ead4" stroke="#e3c48b"/>
+        <text x="407" y="314" font-family="IBM Plex Sans, sans-serif" font-size="12.5" fill="#7a4f12"><tspan font-weight="700">Teach-a-Vendor loop</tspan> · admin tags unknown lines</text>
+        <path d="M392 309 C 300 309, 336 276, 336 272" fill="none" stroke="#b4741a" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#ahb)"/>
+        <path d="M576 292 L 576 226" fill="none" stroke="#b4741a" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#ahb)"/>
+      </svg>
+    </div>
+    <div class="pillrow" style="margin-top:2px">
+      <span class="pill"><span class="dot"></span>React dashboard</span>
+      <span class="pill"><span class="dot"></span>Python · FastAPI</span>
+      <span class="pill"><span class="dot"></span>Ollama · local model</span>
+      <span class="pill"><span class="dot"></span>NAPALM · ciscoconfparse</span>
+      <span class="pill"><span class="dot"></span>YAML rule packs</span>
+      <span class="pill"><span class="dot"></span>ReportLab PDF · SQLite</span>
+    </div>
+  </div>
+  <div class="footer"><span><span class="ph mono">[Team Name]</span></span><span class="pg">Page <b>3</b> / 6</span></div>
+</section>
+
+<!-- ============ SLIDE 4 · FEASIBILITY & VIABILITY ============ -->
+<section class="slide">
+  <div class="topbar"><div class="eyebrow"><span class="n">04 ·</span> Feasibility &amp; Viability</div><div class="brandtag">SIH 2026 · <b>SIH26155</b></div></div>
+  <div class="rule"></div>
+  <div class="body">
+    <h1 class="stitle">Buildable now, because the hard 20% is the only part the model touches</h1>
+    <div class="stage">
+    <div class="cols" style="margin-top:12px">
+      <div class="col" style="flex:1.05">
+        <div class="kb">Why it is feasible</div>
+        <ul class="ticks">
+          <li><b>80% is a solved problem.</b> Mature libraries already parse mainstream vendors, so the model only handles the unfamiliar long tail.</li>
+          <li><b>Rules are data, not code.</b> CIS/NIST/STIG checks live in editable YAML, so coverage grows without touching the engine.</li>
+          <li><b>Runs on a laptop.</b> A 7B local model is enough for line-level parsing; no GPU cluster, no cloud bill.</li>
+        </ul>
+        <div class="lead-note" style="margin-top:6px">Grand-finale MVP: <b>2 known vendors + 20 high-value CIS checks + one vendor taught live on stage.</b> Small enough to finish, sharp enough to win the room.</div>
+      </div>
+      <div class="col" style="flex:1">
+        <div class="kb">Risks, and how we beat them</div>
+        <div class="card"><h3>Model mis-reads a config line</h3><p>Deterministic parser runs <b>first</b>; the model is validated against the schema, and low-confidence output is quarantined into the <b>Teach screen</b> rather than trusted blindly.</p></div>
+        <div class="card"><h3>"AI that invents a fix" is dangerous</h3><p>Remediation is drawn from <b>vendor-verified command templates</b>, not free-form generation. Every fix is traceable to a benchmark rule.</p></div>
+        <div class="card"><h3>Scope creep across 30 vendors</h3><p>The whole point is that we <b>don't</b> pre-build them. New vendors are taught, so breadth is a feature, not a backlog.</p></div>
+      </div>
+    </div>
+  </div>
+    </div>
+  <div class="footer"><span><span class="ph mono">[Team Name]</span></span><span class="pg">Page <b>4</b> / 6</span></div>
+</section>
+
+<!-- ============ SLIDE 5 · IMPACT & BENEFITS ============ -->
+<section class="slide">
+  <div class="topbar"><div class="eyebrow"><span class="n">05 ·</span> Impact &amp; Benefits</div><div class="brandtag">SIH 2026 · <b>SIH26155</b></div></div>
+  <div class="rule"></div>
+  <div class="body">
+    <h1 class="stitle">It closes the gap between "a device is misconfigured" and "the breach happened"</h1>
+    <div class="stage">
+    <div class="metrics" style="margin-top:12px">
+      <div class="metric dark"><div class="big">Weeks&rarr;<small> minutes</small></div><div class="lab">A mixed-vendor audit that took an analyst days of manual reading becomes a same-session report.</div></div>
+      <div class="metric"><div class="big">₹0<small> / device licence</small></div><div class="lab">Replaces per-seat, vendor-locked suites with one tool that runs on commodity hardware.</div></div>
+      <div class="metric"><div class="big">100%<small> on-prem</small></div><div class="lab">Sensitive configs never leave the network. Nothing to intercept, nothing to leak.</div></div>
+    </div>
+
+    <div class="cols">
+      <div class="col" style="flex:1.1">
+        <div class="kb">Why this matters</div>
+        <ul class="ticks">
+          <li><b>Misconfiguration is a leading breach cause</b>, not exotic zero-days. This attacks the problem where it actually lives.<span class="s"> (industry analyses, incl. Gartner — see references)</span></li>
+          <li><b>It scales supervision.</b> One small team can now continuously audit thousands of devices instead of sampling a handful.</li>
+          <li><b>It never goes stale.</b> A new vendor or firmware is taught in minutes, so coverage keeps pace with the real network.</li>
+        </ul>
+      </div>
+      <div class="col" style="flex:1">
+        <div class="kb">Who it serves</div>
+        <div class="beneficiaries">
+          <div class="bchip"><b>Critical infrastructure</b><span>Power, telecom, banking, defence under NCIIPC</span></div>
+          <div class="bchip"><b>Govt &amp; PSU networks</b><span>Mixed-vendor estates, offline mandates</span></div>
+          <div class="bchip"><b>Security auditors</b><span>Faster, repeatable, evidence-backed reviews</span></div>
+          <div class="bchip"><b>Enterprises</b><span>SME to large, no licence lock-in</span></div>
+        </div>
+        <div class="callout" style="margin-top:12px"><b>National angle:</b> an indigenous, air-gapped hardening tool for India's critical networks — self-reliant security that fits an <b>Atmanirbhar / Viksit Bharat</b> posture.</div>
+      </div>
+    </div>
+  </div>
+    </div>
+  <div class="footer"><span><span class="ph mono">[Team Name]</span></span><span class="pg">Page <b>5</b> / 6</span></div>
+</section>
+
+<!-- ============ SLIDE 6 · RESEARCH & REFERENCES ============ -->
+<section class="slide">
+  <div class="topbar"><div class="eyebrow"><span class="n">06 ·</span> Research &amp; References</div><div class="brandtag">SIH 2026 · <b>SIH26155</b></div></div>
+  <div class="rule"></div>
+  <div class="body">
+    <h1 class="stitle">Standards, tools and evidence behind the build</h1>
+    <div class="stage">
+    <div class="cols" style="margin-top:10px">
+      <div class="col" style="flex:1.15">
+        <div class="reftable">
+          <div class="refrow"><div class="rk">Benchmarks</div><div class="rv"><b>CIS Benchmarks</b> (cisecurity.org) · <b>NIST SP 800-53</b> · <b>DISA STIGs</b> · <b>ISO/IEC 27001</b> <span class="s">— the rule sources our engine checks against.</span></div></div>
+          <div class="refrow"><div class="rk">Config tooling</div><div class="rv"><b>NAPALM</b>, <b>ciscoconfparse</b>, <b>Netmiko</b> <span class="s">— structured parsing for known vendors.</span></div></div>
+          <div class="refrow"><div class="rk">Local model</div><div class="rv"><b>Ollama</b> running an open 7B model (e.g. Qwen2.5 / Llama-3.1) <span class="s">— offline line-level normalisation.</span></div></div>
+          <div class="refrow"><div class="rk">Reporting</div><div class="rv"><b>ReportLab</b> / WeasyPrint <span class="s">— per-device PDF evidence + remediation.</span></div></div>
+          <div class="refrow"><div class="rk">Problem</div><div class="rv"><b>SIH26155</b> · National Technical Research Organisation (NTRO)</div></div>
+        </div>
+      </div>
+      <div class="col" style="flex:.85">
+        <div class="card tinted">
+          <div class="kb accent">Evidence for the problem</div>
+          <p style="margin-top:8px;font-size:14.5px;line-height:1.5"><b>Gartner</b> has repeatedly attributed the large majority of firewall and cloud breaches to <b>misconfiguration rather than product flaws</b>. Verify the exact current figure and citation before final submission.</p>
+        </div>
+        <div class="callout"><b>Note on data:</b> no sensitive configs are needed to build or demo. We use public vendor config samples and the published benchmark documents.</div>
+      </div>
+    </div>
+  </div>
+    </div>
+  <div class="footer"><span><span class="ph mono">[Team Name]</span> · SIH 2026</span><span class="pg">Page <b>6</b> / 6</span></div>
+</section>
+
+</body>
+</html>

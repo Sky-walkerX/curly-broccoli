@@ -1,0 +1,636 @@
+<title>SIH 2026 War Room</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Sans+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --bg:#e9edf3; --surface:#ffffff; --surface-2:#f4f7fb; --surface-3:#eef2f8;
+    --ink:#161c26; --ink-soft:#586376; --ink-faint:#8a94a4;
+    --line:#d7deea; --line-soft:#e6ebf3;
+    --accent:#a75d0a; --accent-bright:#c47212; --accent-soft:#f5e7d2; --accent-line:#e6c793;
+    --good:#2e8b57; --good-soft:#dcefe3;
+    --warn:#a9791f; --warn-soft:#f3e8cf;
+    --bad:#bd4339; --bad-soft:#f4dcd8;
+    --shadow:0 1px 2px rgba(20,30,48,.06),0 8px 24px rgba(20,30,48,.06);
+    --shadow-lg:0 2px 6px rgba(20,30,48,.08),0 20px 50px rgba(20,30,48,.10);
+    --grid-line:rgba(20,40,70,.05);
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    --cond:"IBM Plex Sans Condensed","IBM Plex Sans",system-ui,sans-serif;
+    --sans:"IBM Plex Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#0c1119; --surface:#131b27; --surface-2:#182230; --surface-3:#1e293a;
+      --ink:#e9eef6; --ink-soft:#9aa6b8; --ink-faint:#66738a;
+      --line:#26313f; --line-soft:#1d2735;
+      --accent:#f0a83c; --accent-bright:#ffbe5c; --accent-soft:#2b2213; --accent-line:#4a3a1c;
+      --good:#48b87a; --good-soft:#16281f;
+      --warn:#e0a63a; --warn-soft:#2a2210;
+      --bad:#e56b60; --bad-soft:#2c1613;
+      --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+      --shadow-lg:0 2px 6px rgba(0,0,0,.5),0 24px 60px rgba(0,0,0,.5);
+      --grid-line:rgba(120,160,220,.06);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0c1119; --surface:#131b27; --surface-2:#182230; --surface-3:#1e293a;
+    --ink:#e9eef6; --ink-soft:#9aa6b8; --ink-faint:#66738a;
+    --line:#26313f; --line-soft:#1d2735;
+    --accent:#f0a83c; --accent-bright:#ffbe5c; --accent-soft:#2b2213; --accent-line:#4a3a1c;
+    --good:#48b87a; --good-soft:#16281f;
+    --warn:#e0a63a; --warn-soft:#2a2210;
+    --bad:#e56b60; --bad-soft:#2c1613;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+    --shadow-lg:0 2px 6px rgba(0,0,0,.5),0 24px 60px rgba(0,0,0,.5);
+    --grid-line:rgba(120,160,220,.06);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:var(--sans);font-size:16px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  h1,h2,h3{text-wrap:balance;margin:0}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  .eyebrow{
+    font-family:var(--mono);font-size:11.5px;font-weight:500;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;overflow:hidden;
+    border-bottom:1px solid var(--line);
+    background:
+      linear-gradient(180deg,transparent,var(--bg)),
+      linear-gradient(var(--grid-line) 1px,transparent 1px),
+      linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);
+    background-size:100% 100%,34px 34px,34px 34px;
+    background-position:0 0,0 0,0 0;
+  }
+  .hero-inner{padding:52px 0 40px}
+  .classline{
+    display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+    margin-bottom:26px;
+  }
+  .stamp{
+    font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--accent);
+    border:1px solid var(--accent-line);background:var(--accent-soft);
+    padding:5px 10px;border-radius:4px;
+  }
+  .classline .thin{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);letter-spacing:.04em}
+  h1.title{
+    font-family:var(--cond);font-weight:700;
+    font-size:clamp(38px,7vw,74px);line-height:.98;letter-spacing:-.01em;
+    margin:0 0 18px;
+  }
+  h1.title .amp{color:var(--accent)}
+  .dek{font-size:clamp(17px,2.4vw,21px);color:var(--ink-soft);max-width:60ch;line-height:1.5}
+  .dek b{color:var(--ink);font-weight:600}
+
+  /* funnel */
+  .funnel{
+    margin-top:36px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+  }
+  .fstep{
+    background:var(--surface);border:1px solid var(--line);border-radius:12px;
+    padding:16px 16px 15px;position:relative;box-shadow:var(--shadow);
+  }
+  .fstep .fnum{font-family:var(--cond);font-weight:700;font-size:34px;line-height:1;color:var(--ink);letter-spacing:-.01em}
+  .fstep .fnum.accent{color:var(--accent)}
+  .fstep .flab{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin-top:8px}
+  .fstep .fsub{font-size:12.5px;color:var(--ink-soft);margin-top:5px;line-height:1.35}
+  .fstep .arrow{position:absolute;right:-11px;top:50%;transform:translateY(-50%);z-index:2;color:var(--ink-faint);font-size:13px}
+  @media (max-width:720px){
+    .funnel{grid-template-columns:repeat(2,1fr)}
+    .fstep .arrow{display:none}
+  }
+
+  /* ---------- SECTION ---------- */
+  section{padding:46px 0}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:22px;flex-wrap:wrap}
+  .sec-head .num{font-family:var(--mono);font-size:12px;color:var(--accent);font-weight:600;letter-spacing:.1em}
+  h2{font-family:var(--cond);font-weight:700;font-size:clamp(24px,3.6vw,33px);letter-spacing:-.005em;line-height:1.05}
+  .sec-lede{color:var(--ink-soft);max-width:66ch;margin:-6px 0 0;font-size:15.5px}
+
+  /* insight cards */
+  .cols{display:grid;gap:16px}
+  .cols.c3{grid-template-columns:repeat(3,1fr)}
+  .cols.c2{grid-template-columns:repeat(2,1fr)}
+  @media (max-width:800px){.cols.c3,.cols.c2{grid-template-columns:1fr}}
+  .card{
+    background:var(--surface);border:1px solid var(--line);border-radius:14px;
+    padding:20px 20px 18px;box-shadow:var(--shadow);
+  }
+  .card h3{font-family:var(--cond);font-weight:700;font-size:18px;margin-bottom:8px;line-height:1.15}
+  .card p{margin:0;font-size:14.5px;color:var(--ink-soft)}
+  .card .big{font-family:var(--cond);font-weight:700;font-size:40px;color:var(--accent);line-height:1;letter-spacing:-.01em;margin-bottom:2px}
+  .card .big .unit{font-size:16px;color:var(--ink-soft);font-weight:600}
+
+  /* ---------- RANK TABLE ---------- */
+  .legend{display:flex;gap:18px;flex-wrap:wrap;margin:0 0 16px;font-size:12.5px;color:var(--ink-soft)}
+  .legend b{color:var(--ink);font-weight:600}
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);background:var(--surface)}
+  table.rank{border-collapse:collapse;width:100%;min-width:720px;font-size:14px}
+  table.rank thead th{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:600;text-align:left;
+    padding:13px 14px;border-bottom:1px solid var(--line);background:var(--surface-2);
+    position:sticky;top:0;
+  }
+  table.rank thead th.rt{text-align:center}
+  table.rank tbody td{padding:13px 14px;border-bottom:1px solid var(--line-soft);vertical-align:middle}
+  table.rank tbody tr:last-child td{border-bottom:none}
+  table.rank tbody tr:hover{background:var(--surface-2)}
+  .rk{font-family:var(--cond);font-weight:700;font-size:20px;color:var(--ink-faint);width:26px;text-align:center}
+  tr.top .rk{color:var(--accent)}
+  .psid{font-family:var(--mono);font-size:12.5px;font-weight:500;color:var(--ink);white-space:nowrap}
+  .pstitle{font-weight:500;color:var(--ink);line-height:1.3;max-width:38ch}
+  .pstheme{font-family:var(--mono);font-size:10.5px;color:var(--ink-faint);letter-spacing:.03em;margin-top:3px;text-transform:uppercase}
+  .orgchip{
+    display:inline-block;font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.02em;
+    padding:3px 8px;border-radius:20px;border:1px solid var(--line);color:var(--ink-soft);white-space:nowrap;
+    background:var(--surface-3);
+  }
+  .orgchip.ntro{color:var(--accent);border-color:var(--accent-line);background:var(--accent-soft)}
+  td.rt{text-align:center}
+  .odds{
+    display:inline-block;font-family:var(--mono);font-weight:600;font-size:11px;letter-spacing:.04em;
+    padding:4px 9px;border-radius:6px;white-space:nowrap;
+  }
+  .odds.g{color:var(--good);background:var(--good-soft)}
+  .odds.a{color:var(--warn);background:var(--warn-soft)}
+  .odds.r{color:var(--bad);background:var(--bad-soft)}
+  .teams{font-family:var(--mono);font-size:13px;color:var(--ink);font-variant-numeric:tabular-nums}
+  .teams .of{color:var(--ink-faint);font-size:11px}
+  .bar{height:6px;border-radius:4px;background:var(--surface-3);overflow:hidden;width:52px;margin:0 auto}
+  .bar > i{display:block;height:100%;border-radius:4px;background:var(--accent)}
+
+  /* ---------- DOSSIER CARDS ---------- */
+  .dossier{display:grid;gap:18px}
+  .dcard{
+    background:var(--surface);border:1px solid var(--line);border-radius:16px;
+    box-shadow:var(--shadow);overflow:hidden;
+  }
+  .dcard.pick{border-color:var(--accent-line);box-shadow:var(--shadow-lg)}
+  .dhead{display:flex;gap:16px;align-items:flex-start;padding:20px 22px 16px;border-bottom:1px solid var(--line-soft);position:relative}
+  .dhead .drank{
+    font-family:var(--cond);font-weight:700;font-size:22px;line-height:1;
+    color:var(--surface);background:var(--ink);border-radius:9px;
+    min-width:38px;height:38px;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .dcard.pick .drank{background:var(--accent);color:#1a1204}
+  .dhtext{flex:1;min-width:0}
+  .dhtext .did{font-family:var(--mono);font-size:12px;color:var(--ink-soft);margin-bottom:3px;display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+  .dhtext h3{font-family:var(--cond);font-weight:700;font-size:20px;line-height:1.12;letter-spacing:-.005em}
+  .pickflag{
+    font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--accent);border:1px solid var(--accent-line);background:var(--accent-soft);
+    padding:3px 8px;border-radius:20px;
+  }
+  .dbody{padding:6px 22px 20px}
+  .drow{display:grid;grid-template-columns:132px 1fr;gap:14px;padding:12px 0;border-bottom:1px solid var(--line-soft)}
+  .drow:last-child{border-bottom:none}
+  .drow .k{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);padding-top:2px}
+  .drow .v{font-size:14.5px;color:var(--ink);line-height:1.5}
+  .drow .v b{color:var(--ink);font-weight:600}
+  .metrics{display:flex;gap:20px;flex-wrap:wrap;padding:14px 22px;background:var(--surface-2);border-top:1px solid var(--line-soft)}
+  .metric{display:flex;flex-direction:column;gap:3px}
+  .metric .ml{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint)}
+  .metric .mv{font-family:var(--cond);font-weight:700;font-size:17px;color:var(--ink)}
+  .metric .mv small{font-size:11px;color:var(--ink-faint);font-weight:500}
+  @media (max-width:620px){.drow{grid-template-columns:1fr;gap:3px}}
+
+  /* template slide strip */
+  .slides{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:6px}
+  @media (max-width:820px){.slides{grid-template-columns:repeat(2,1fr)}}
+  .slide{
+    background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:13px 12px;
+    box-shadow:var(--shadow);position:relative;min-height:118px;
+  }
+  .slide .sn{font-family:var(--mono);font-size:10px;color:var(--accent);font-weight:600;letter-spacing:.08em}
+  .slide h4{font-family:var(--cond);font-weight:700;font-size:14.5px;margin:6px 0 5px;line-height:1.1}
+  .slide p{margin:0;font-size:11.5px;color:var(--ink-soft);line-height:1.35}
+
+  /* weighting bars */
+  .weights{display:flex;flex-direction:column;gap:9px;margin-top:4px}
+  .wrow{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px}
+  .wrow .wl{font-size:13.5px;color:var(--ink)}
+  .wrow .wtrack{grid-column:1/2;grid-row:2;height:8px;border-radius:5px;background:var(--surface-3);overflow:hidden}
+  .wrow .wtrack > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-bright));border-radius:5px}
+  .wrow .wv{font-family:var(--mono);font-size:12.5px;font-weight:600;color:var(--ink-soft);grid-column:2;grid-row:1/3;align-self:center}
+
+  /* playbook steps */
+  .steps{display:grid;gap:12px;counter-reset:step}
+  .step{
+    display:grid;grid-template-columns:40px 1fr;gap:16px;align-items:start;
+    background:var(--surface);border:1px solid var(--line);border-radius:13px;padding:16px 18px;box-shadow:var(--shadow);
+  }
+  .step .sc{
+    counter-increment:step;font-family:var(--cond);font-weight:700;font-size:17px;
+    width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;
+    background:var(--accent-soft);color:var(--accent);border:1px solid var(--accent-line);
+  }
+  .step .sc::before{content:counter(step)}
+  .step h4{font-family:var(--cond);font-weight:700;font-size:16.5px;margin-bottom:3px}
+  .step p{margin:0;font-size:14px;color:var(--ink-soft)}
+
+  /* traps */
+  .traps{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  @media (max-width:700px){.traps{grid-template-columns:1fr}}
+  .trap{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+  .trap .x{color:var(--bad);font-family:var(--mono);font-weight:700;flex-shrink:0;margin-top:1px}
+  .trap b{font-weight:600}
+  .trap span{font-size:13.5px;color:var(--ink-soft)}
+
+  /* recommendation banner */
+  .verdict{
+    background:var(--surface);border:1px solid var(--accent-line);border-radius:18px;
+    box-shadow:var(--shadow-lg);overflow:hidden;
+  }
+  .verdict-top{padding:22px 24px 18px;background:linear-gradient(180deg,var(--accent-soft),transparent)}
+  .verdict-top .eyebrow{color:var(--accent)}
+  .verdict-top h2{margin-top:8px}
+  .vpicks{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line)}
+  @media (max-width:700px){.vpicks{grid-template-columns:1fr}}
+  .vpick{background:var(--surface);padding:20px 24px}
+  .vpick .role{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:600}
+  .vpick .vid{font-family:var(--mono);font-size:13px;color:var(--ink-soft);margin:8px 0 4px}
+  .vpick h3{font-family:var(--cond);font-weight:700;font-size:19px;line-height:1.15;margin-bottom:8px}
+  .vpick p{margin:0;font-size:14px;color:var(--ink-soft)}
+
+  /* footer */
+  footer{border-top:1px solid var(--line);padding:28px 0 44px;color:var(--ink-faint);font-size:12.5px}
+  footer .fr{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+  footer code{font-family:var(--mono);color:var(--ink-soft)}
+
+  .toggle{
+    position:fixed;top:14px;right:14px;z-index:30;
+    font-family:var(--mono);font-size:11px;letter-spacing:.05em;
+    background:var(--surface);color:var(--ink-soft);border:1px solid var(--line);
+    border-radius:20px;padding:7px 13px;cursor:pointer;box-shadow:var(--shadow);
+  }
+  .toggle:hover{color:var(--accent);border-color:var(--accent-line)}
+  @media print{.toggle{display:none}}
+
+  .note-inline{font-size:13px;color:var(--ink-faint);font-style:italic}
+</style>
+
+<button class="toggle" id="themeToggle" aria-label="Toggle colour theme">◐ theme</button>
+
+<header class="hero">
+  <div class="wrap hero-inner">
+    <div class="classline">
+      <span class="stamp">Field Intelligence</span>
+      <span class="thin">Smart India Hackathon 2026 · Software Edition</span>
+      <span class="thin">· Idea deadline 30 Sep 2026</span>
+    </div>
+    <h1 class="title">Pick the fight<br>before you pick the <span class="amp">code.</span></h1>
+    <p class="dek">SIH isn't one contest. It's <b>176 tiny ones</b>, one per software problem statement. The organisation that owns a PS shortlists just <b>4 to 5 teams</b>, and almost every PS crowns a winner. So the single biggest lever on your odds isn't how well you build. It's <b>which problem statement you stand in line for.</b></p>
+
+    <div class="funnel">
+      <div class="fstep">
+        <div class="fnum">500</div>
+        <div class="flab">Teams / PS cap</div>
+        <div class="fsub">Ideas per PS are capped, then the PS freezes. But real crowds ran 56–500.</div>
+        <div class="arrow">▶</div>
+      </div>
+      <div class="fstep">
+        <div class="fnum accent">4–5</div>
+        <div class="flab">Shortlisted / PS</div>
+        <div class="fsub">Only a handful per PS reach the December grand finale.</div>
+        <div class="arrow">▶</div>
+      </div>
+      <div class="fstep">
+        <div class="fnum accent">1–2</div>
+        <div class="flab">Winners / PS</div>
+        <div class="fsub">₹1,50,000 each. Judged only against the others on your PS.</div>
+        <div class="arrow">▶</div>
+      </div>
+      <div class="fstep">
+        <div class="fnum">96%</div>
+        <div class="flab">PS that crown a winner</div>
+        <div class="fsub">245 of 254 PS produced a winner in 2024. A quiet PS is almost a held seat.</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- THE EDGE -->
+<section class="wrap">
+  <div class="sec-head">
+    <span class="num">01</span>
+    <h2>The one number that moves your odds</h2>
+  </div>
+  <p class="sec-lede">In 2024, submissions per software PS ranged from <b>56 to 500</b>. Same prize, same finale, same 4–5 shortlist slots. A team on a 56-crowd PS had roughly <b>9× the odds</b> of a team on a 500-crowd PS. This is the whole game, and it is decided before you write a line of code.</p>
+  <div class="cols c3" style="margin-top:24px">
+    <div class="card">
+      <div class="big">9×</div>
+      <h3>Swing in raw odds</h3>
+      <p>Between the least and most crowded software PS. Crowd is the lever almost no one plays deliberately.</p>
+    </div>
+    <div class="card">
+      <div class="big">~102<span class="unit"> teams</span></div>
+      <h3>Defence &amp; intel PS</h3>
+      <p>NTRO, DRDO, ISRO, MoES draw about a third of the crowd of a consumer app. The jargon scares casual teams off.</p>
+    </div>
+    <div class="card">
+      <div class="big">500<span class="unit"> teams</span></div>
+      <h3>The obvious pile</h3>
+      <p>Student Innovation and consumer themes (health, tourism, farmer apps) hit the cap every year. Everyone's first instinct.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FIELD SNAPSHOT -->
+<section style="background:var(--surface-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="num">02</span>
+      <h2>The 2026 field, read for your team</h2>
+    </div>
+    <p class="sec-lede">Your team's edge is <b>AI/ML, full-stack, and cybersecurity</b>, with no specialist domain mentor. That rules out most of the geospatial and signals work and points hard at one place. This year's field is unusually deep-tech, which works in your favour.</p>
+    <div class="cols c2" style="margin-top:24px">
+      <div class="card">
+        <h3 style="color:var(--accent)">Where the crowd is thin and you are strong</h3>
+        <p style="margin-bottom:12px"><b style="color:var(--ink)">NTRO — 22 software PS.</b> Almost entirely cybersecurity, digital forensics, and network-AI. Low crowd, exactly your stack, public datasets. This is your bullseye.</p>
+        <p><b style="color:var(--ink)">MHA cyber cell &amp; AICTE — ~17 PS.</b> Crypto-fraud tracing, phishing forensics, voice-clone detection. Higher impact stories, slightly bigger crowds than NTRO.</p>
+      </div>
+      <div class="card">
+        <h3>Where the crowd piles up</h3>
+        <p style="margin-bottom:12px"><b style="color:var(--ink)">Ministry of Earth Sciences — 27 PS, ISRO — 10 PS.</b> Satellite imagery, weather, ocean. Biggest single blocks, but they need remote-sensing depth you don't have a mentor for. Skip.</p>
+        <p><b style="color:var(--ink)">Student Innovation — 17 open PS.</b> The maximum-crowd trap. Avoid unless you have a genuinely singular idea.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RANKED SHORTLIST -->
+<section class="wrap">
+  <div class="sec-head">
+    <span class="num">03</span>
+    <h2>Your ranked shortlist</h2>
+  </div>
+  <p class="sec-lede">Every software PS scored on a win-probability model: <b>competition crowd</b> (the biggest weight, calibrated against real 2024 submission counts), <b>skill fit</b> to your team, and hand-read <b>demo strength</b> and <b>buildability</b> for the internal-hackathon window. Top 12 shown.</p>
+  <div class="legend" style="margin-top:18px">
+    <span><b>Odds</b> = crowd tier (green best)</span>
+    <span><b>~Teams</b> = forecast competitors on that PS</span>
+    <span><b>Demo</b> / <b>Build</b> = projector wow &amp; buildability, /10</span>
+  </div>
+  <div class="tablewrap">
+    <table class="rank">
+      <thead>
+        <tr>
+          <th class="rt">#</th>
+          <th>Problem statement</th>
+          <th>Owner</th>
+          <th class="rt">Odds</th>
+          <th class="rt">~Teams</th>
+          <th class="rt">Demo</th>
+          <th class="rt">Build</th>
+        </tr>
+      </thead>
+      <tbody id="rankBody"></tbody>
+    </table>
+  </div>
+  <p class="note-inline" style="margin-top:12px">Crowd forecasts are modelled from 2024 actuals, not live counts. Watch the live "ideas submitted" number next to each PS on sih.gov.in before you lock in, and move if your pick fills up.</p>
+</section>
+
+<!-- DOSSIERS -->
+<section style="background:var(--surface-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="num">04</span>
+      <h2>Top 6, in detail</h2>
+    </div>
+    <p class="sec-lede">The picks worth actually reading the full brief for. Each one is buildable by your team, demos well on a projector, and sits in a thin crowd.</p>
+    <div class="dossier" id="dossier" style="margin-top:24px"></div>
+  </div>
+</section>
+
+<!-- TRAPS -->
+<section class="wrap">
+  <div class="sec-head">
+    <span class="num">05</span>
+    <h2>Traps to walk past</h2>
+  </div>
+  <p class="sec-lede">High scores on a naive read, but wrong for a first-time team with your skills and no domain mentor. The model likes some of these; the judgment call is to leave them.</p>
+  <div class="traps" style="margin-top:22px">
+    <div class="trap"><span class="x">✕</span><span><b>Satellite / weather / ocean PS</b> (MoES, ISRO). Remote-sensing depth you can't fake in expert Q&amp;A.</span></div>
+    <div class="trap"><span class="x">✕</span><span><b>SIH26148 — AV-evasion language "JOCKY".</b> Months of research, offensive tooling, no clean demo.</span></div>
+    <div class="trap"><span class="x">✕</span><span><b>SIH26141 — Quantum digital signatures.</b> Explicitly bans AI/ML and needs real quantum mechanics. Your edge is disallowed.</span></div>
+    <div class="trap"><span class="x">✕</span><span><b>SIH26150 — DVR/NVR forensics.</b> Needs proprietary Dahua/Hikvision formats you can't get without the hardware.</span></div>
+    <div class="trap"><span class="x">✕</span><span><b>.IQ / RF signal demodulation, dam-break hydrodynamics, aero-engine digital twins.</b> Domain walls, no mentor.</span></div>
+    <div class="trap"><span class="x">✕</span><span><b>Student Innovation &amp; consumer apps.</b> 300–500 crowd. Great idea, near-zero odds of a shortlist slot.</span></div>
+  </div>
+</section>
+
+<!-- TEMPLATE + EVALUATION -->
+<section style="background:var(--surface-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="num">06</span>
+      <h2>The deck they actually score</h2>
+    </div>
+    <p class="sec-lede">The official 2026 template is byte-for-byte the same structure as 2025. It is rigid on purpose: <b>6 slides maximum including the title</b>, fixed headings you fill but cannot rename, and you <b>upload a PDF</b>. No PPT, Word, or other format is accepted. Download it from sih.gov.in › Idea PPT.</p>
+    <div class="slides" style="margin-top:20px">
+      <div class="slide"><div class="sn">01</div><h4>Title</h4><p>PS ID, title, theme, category, team ID &amp; name. Get every field right.</p></div>
+      <div class="slide"><div class="sn">02</div><h4>Proposed Solution</h4><p>The idea, how it solves the problem, and what makes it novel.</p></div>
+      <div class="slide"><div class="sn">03</div><h4>Technical Approach</h4><p>Stack + methodology. This is where an architecture diagram earns marks.</p></div>
+      <div class="slide"><div class="sn">04</div><h4>Feasibility</h4><p>Feasibility, the real risks, and how you beat them. Shows maturity.</p></div>
+      <div class="slide"><div class="sn">05</div><h4>Impact &amp; Benefits</h4><p>Who it helps and the social / economic gain. Put a number here.</p></div>
+      <div class="slide"><div class="sn">06</div><h4>Research &amp; References</h4><p>Citations and links. Proves you understood the problem's roots.</p></div>
+    </div>
+
+    <div class="cols c2" style="margin-top:22px">
+      <div class="card">
+        <span class="eyebrow">What evaluators weight</span>
+        <div class="weights" style="margin-top:14px">
+          <div class="wrow"><span class="wl">Innovation &amp; uniqueness</span><span class="wv">25%</span><span class="wtrack"><i style="width:100%"></i></span></div>
+          <div class="wrow"><span class="wl">Problem understanding &amp; clarity</span><span class="wv">20%</span><span class="wtrack"><i style="width:80%"></i></span></div>
+          <div class="wrow"><span class="wl">Technical feasibility</span><span class="wv">20%</span><span class="wtrack"><i style="width:80%"></i></span></div>
+          <div class="wrow"><span class="wl">Impact &amp; scalability</span><span class="wv">20%</span><span class="wtrack"><i style="width:80%"></i></span></div>
+          <div class="wrow"><span class="wl">Presentation quality</span><span class="wv">15%</span><span class="wtrack"><i style="width:60%"></i></span></div>
+        </div>
+        <p class="note-inline" style="margin-top:14px">Community-reported split. The official guideline lists: novelty, complexity, clarity, feasibility, practicability, sustainability, scale of impact, UX, and future scope.</p>
+      </div>
+      <div class="card">
+        <span class="eyebrow">What past winners repeat</span>
+        <ul style="margin:14px 0 0;padding-left:18px;color:var(--ink-soft);font-size:14.5px;line-height:1.7">
+          <li><b style="color:var(--ink)">Show a working prototype,</b> not a concept. Every winner had one at the finale.</li>
+          <li><b style="color:var(--ink)">Read the full PS and defend the root cause.</b> The classic elimination is "you didn't understand the problem."</li>
+          <li><b style="color:var(--ink)">No essays on slides.</b> Points, diagrams, infographics. Bold the keywords.</li>
+          <li><b style="color:var(--ink)">One number they remember</b> — accuracy, time saved, cost cut.</li>
+          <li><b style="color:var(--ink)">Follow the template exactly.</b> Off-format or incomplete decks get cut at screening.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLAYBOOK -->
+<section class="wrap">
+  <div class="sec-head">
+    <span class="num">07</span>
+    <h2>The playbook</h2>
+  </div>
+  <div class="steps" style="margin-top:20px">
+    <div class="step"><div class="sc"></div><div><h4>Submit to two problem statements, not one.</h4><p>The rules let one team enter up to 2 PS. That's two independent shortlist lotteries for the same build effort. Use both.</p></div></div>
+    <div class="step"><div class="sc"></div><div><h4>Pair a demo-magnet with a low-crowd technical pick.</h4><p>One PS where the live demo lands hard in the room, one where the crowd is thinnest. Below, that's SIH26155 and SIH26145 — and their tooling overlaps, so you prep once.</p></div></div>
+    <div class="step"><div class="sc"></div><div><h4>Watch the live counter and be ready to jump.</h4><p>Each PS shows ideas-submitted live and freezes at 500. If your pick heats up, a near-identical NTRO cyber PS is one row away. Don't marry a PS before you submit.</p></div></div>
+    <div class="step"><div class="sc"></div><div><h4>Build the one screen the judge sees.</h4><p>Pick the single "magic moment" per PS (upload a file → instant verdict) and make that flow real and beautiful. Fake the rest until the finale.</p></div></div>
+    <div class="step"><div class="sc"></div><div><h4>Over-prepare the Q&A on the problem, not the tech.</h4><p>Deep-tech judges probe whether you understand their world. Learn the domain enough to defend the root cause. That's where first-timers lose the room.</p></div></div>
+  </div>
+</section>
+
+<!-- VERDICT -->
+<section class="wrap" style="padding-top:8px">
+  <div class="verdict">
+    <div class="verdict-top">
+      <span class="eyebrow">Recommended pairing</span>
+      <h2>Two problem statements, one prep, thin crowds</h2>
+      <p style="color:var(--ink-soft);margin:10px 0 0;max-width:64ch;font-size:15px">Both are NTRO cybersecurity, both sit around ~100–112 forecast competitors, both are squarely your stack, and both run on public or self-generated data. Their network-security tooling overlaps, so building for one advances the other.</p>
+    </div>
+    <div class="vpicks">
+      <div class="vpick">
+        <span class="role">Primary · demo-magnet</span>
+        <div class="vid">SIH26155 · NTRO · ~112 teams</div>
+        <h3>Multi-Vendor Network Security Compliance Auditor</h3>
+        <p>Drop in a Cisco or Juniper config, get an instant CIS/NIST pass-fail with a one-click remediation PDF, plus a GUI that learns unseen vendor formats. The clearest projector demo in the whole field, and configs to test on are everywhere.</p>
+      </div>
+      <div class="vpick">
+        <span class="role">Secondary · lowest crowd</span>
+        <div class="vid">SIH26145 · NTRO · ~102 teams</div>
+        <h3>AI Threat Detection in Unidirectional IP Traffic</h3>
+        <p>A "data diode" framing scares off casual teams and keeps the crowd among the thinnest in the field. Underneath it's passive NetFlow/PCAP anomaly detection you can nail with public IDS datasets and a live streaming dashboard.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="wrap">
+  <div class="fr">
+    <span>Built from the official SIH portal, the 2026 SPOC guidelines, and the 2024–25 grand-finale result tables. Crowd model calibrated on 2024 actuals.</span>
+    <code>176 SW PS · 233 total · v1</code>
+  </div>
+</footer>
+
+<script>
+  // ---------- theme toggle ----------
+  (function(){
+    var btn=document.getElementById('themeToggle');
+    var root=document.documentElement;
+    btn.addEventListener('click',function(){
+      var cur=root.getAttribute('data-theme');
+      var sysDark=window.matchMedia('(prefers-color-scheme:dark)').matches;
+      var next;
+      if(cur==='dark') next='light';
+      else if(cur==='light') next='dark';
+      else next=sysDark?'light':'dark';
+      root.setAttribute('data-theme',next);
+      try{localStorage.setItem('sih-theme',next);}catch(e){}
+    });
+    try{var s=localStorage.getItem('sih-theme');if(s)root.setAttribute('data-theme',s);}catch(e){}
+  })();
+
+  // ---------- data ----------
+  var PS=[
+    {r:1, id:"SIH26145", org:"NTRO", ntro:true, theme:"Cyber / Network AI", title:"AI Threat Detection in Unidirectional IP Traffic", teams:102, demo:8, build:9, odds:"g",
+      build_what:"An AI/ML pipeline that ingests one-way NetFlow/PCAP and flags DDoS, C2 beaconing, DNS tunnelling, scans and exfiltration in near real time, with confidence scores on a live dashboard.",
+      magic:"A replayed traffic stream lighting up threats on a streaming dashboard, each alert with its evidence, no payload decryption needed.",
+      qa:"Know why a passive, read-only 'data diode' enclave changes the ML problem, and cite the public IDS datasets you trained on.",
+      why:"Lowest crowd in your fit range. The intimidating framing is exactly what keeps casual teams away, while the core is classic anomaly detection you can execute."},
+    {r:2, id:"SIH26159", org:"NTRO", ntro:true, theme:"Cyber / Forensics", title:"SecureMailScope — Email Crypto Posture Assessment", teams:112, demo:8, build:9, odds:"g",
+      build_what:"A passive tool that reads email PCAPs (SMTP/IMAP/POP3), reconstructs TLS handshakes, validates certificates, and scores cryptographic weakness with AI-assisted risk ranking.",
+      magic:"Load a capture, watch it rebuild every TLS session and rank the weak ones red with a one-line 'why', exportable as a forensic report.",
+      qa:"Be fluent on STARTTLS downgrade, weak cipher suites and cert-chain validation. This is narrow, so depth is very defensible.",
+      why:"Tight, well-scoped, pure cyber-plus-ML. Niche enough to stay low-crowd, concrete enough to finish and demo cleanly."},
+    {r:3, id:"SIH26183", org:"MHA", ntro:false, theme:"Cyber / Blockchain", title:"Crypto-Fraud Exchange Attribution from Victim Wallets", teams:140, demo:9, build:8, odds:"a",
+      build_what:"Ingest a victim-reported wallet, trace transaction paths across chains, and name the nearest exchange/VASP receiving deposits, with confidence scoring and an investigator report.",
+      magic:"Paste a scam wallet address, watch the fund flow animate across a graph, and land on 'funds cashed out at exchange X'.",
+      qa:"Understand deposit-address clustering, mixers and cross-chain bridges. Have an answer for privacy coins.",
+      why:"A powerful 'recover the victim's money' story and a striking graph visual. Crypto pulls a slightly larger crowd, so lean on the demo."},
+    {r:4, id:"SIH26155", org:"NTRO", ntro:true, theme:"Cyber / Compliance", title:"Multi-Vendor Network Security Compliance Auditor", teams:112, demo:10, build:9, odds:"g",
+      build_what:"Upload any router/firewall config, normalise it to a vendor-neutral model with NLP, check it against CIS/NIST/STIG, and emit a per-device pass-fail plus step-by-step remediation PDF. A GUI teaches it new vendors.",
+      magic:"Drop in a messy Cisco config and, seconds later, a clean red/green compliance report with copy-paste fix commands.",
+      qa:"Know a handful of real CIS benchmark rules cold and how syntax differs across Cisco, Juniper, Arista.",
+      why:"The single clearest projector demo in the field, and configs to test on are everywhere. Reads as tedious to others, so the crowd stays thin."},
+    {r:5, id:"SIH26102", org:"MoSPI", ntro:false, theme:"AI / GovTech", title:"Fraud & Anomaly Detection in the MPLADS Scheme", teams:127, demo:8, build:9, odds:"a",
+      build_what:"An analytics platform over MPLADS sanctions, spend and works data that flags cost overruns, duplicate works and unusual patterns, with explainable, drill-down alerts on a dashboard and map.",
+      magic:"A district map where suspicious works glow red, each click showing exactly why it was flagged.",
+      qa:"Anomaly detection is common here, so your edge is explainability. Be ready to justify every flag, not just the model.",
+      why:"Strong civic narrative and very buildable on tabular data. Win it on transparent, defensible flags rather than a fancy model."},
+    {r:6, id:"SIH26106", org:"AICTE", ntro:false, theme:"Cyber / Forensics", title:"Email Threat Detection, Geolocation & Forensics", teams:127, demo:9, build:9, odds:"a",
+      build_what:"NLP phishing detection fused with deep header forensics (SPF/DKIM/DMARC, Received chains), IP geolocation and WHOIS to trace an email's probable origin and draw an attribution graph.",
+      magic:"Paste a phishing email, get a fraud score, a world-map trace of its route, and a 'probable origin' pin.",
+      qa:"Header spoofing, relay chains and why geolocation is probabilistic. Don't over-claim attribution certainty.",
+      why:"Very visual and buildable on public phishing corpora. AICTE (not defence) means a slightly larger but still workable crowd."}
+  ];
+
+  var TABLE=[
+    {r:1,id:"SIH26145",org:"NTRO",ntro:true,title:"AI Threat Detection in Unidirectional IP Traffic",theme:"Cyber / Network AI",teams:102,demo:8,build:9,odds:"g"},
+    {r:2,id:"SIH26159",org:"NTRO",ntro:true,title:"SecureMailScope — Email Crypto Posture",theme:"Cyber / Forensics",teams:112,demo:8,build:9,odds:"g"},
+    {r:3,id:"SIH26183",org:"MHA",ntro:false,title:"Crypto-Fraud Exchange Attribution",theme:"Cyber / Blockchain",teams:140,demo:9,build:8,odds:"a"},
+    {r:4,id:"SIH26155",org:"NTRO",ntro:true,title:"Multi-Vendor Compliance Auditor",theme:"Cyber / Compliance",teams:112,demo:10,build:9,odds:"g"},
+    {r:5,id:"SIH26102",org:"MoSPI",ntro:false,title:"MPLADS Fraud & Anomaly Detection",theme:"AI / GovTech",teams:127,demo:8,build:9,odds:"a"},
+    {r:6,id:"SIH26106",org:"AICTE",ntro:false,title:"Email Threat, Geolocation & Forensics",theme:"Cyber / Forensics",teams:127,demo:9,build:9,odds:"a"},
+    {r:7,id:"SIH26034",org:"Consumer Affairs",ntro:false,title:"Legal Metrology Label Compliance Scanner",theme:"AI / Vision",teams:140,demo:8,build:9,odds:"a"},
+    {r:8,id:"SIH26104",org:"AICTE",ntro:false,title:"Real-Time Voice-Cloning Attack Detection",theme:"AI / Audio",teams:140,demo:9,build:8,odds:"a"},
+    {r:9,id:"SIH26187",org:"MHA",ntro:false,title:"Border Video Analytics on CCTV",theme:"AI / Vision",teams:127,demo:8,build:8,odds:"a"},
+    {r:10,id:"SIH26156",org:"NTRO",ntro:true,title:"Universal Log Pre-processing Framework",theme:"Cyber / Data",teams:112,demo:6,build:8,odds:"g"},
+    {r:11,id:"SIH26157",org:"NTRO",ntro:true,title:"SOC Supervisory Analytics (SAT-SA)",theme:"Cyber / Analytics",teams:102,demo:5,build:6,odds:"g"},
+    {r:12,id:"SIH26150",org:"NTRO",ntro:true,title:"Multi-Vendor DVR/NVR Forensics",theme:"Cyber / Forensics",teams:102,demo:6,build:5,odds:"g"}
+  ];
+
+  // ---------- render table ----------
+  function bar(v){return '<span class="bar"><i style="width:'+(v*10)+'%"></i></span>';}
+  function oddsLabel(o){return o==='g'?'THIN':o==='a'?'MEDIUM':'HEAVY';}
+  var tb=document.getElementById('rankBody');
+  tb.innerHTML=TABLE.map(function(p){
+    return '<tr class="'+(p.r<=6?'top':'')+'">'
+      +'<td class="rk">'+p.r+'</td>'
+      +'<td><div class="pstitle">'+p.title+'</div><div class="pstheme">'+p.id+' · '+p.theme+'</div></td>'
+      +'<td><span class="orgchip'+(p.ntro?' ntro':'')+'">'+p.org+'</span></td>'
+      +'<td class="rt"><span class="odds '+p.odds+'">'+oddsLabel(p.odds)+'</span></td>'
+      +'<td class="rt"><span class="teams">~'+p.teams+'</span></td>'
+      +'<td class="rt">'+bar(p.demo)+'</td>'
+      +'<td class="rt">'+bar(p.build)+'</td>'
+      +'</tr>';
+  }).join('');
+
+  // ---------- render dossiers ----------
+  var dz=document.getElementById('dossier');
+  dz.innerHTML=PS.map(function(p){
+    var isPick=(p.id==="SIH26155"||p.id==="SIH26145");
+    return '<article class="dcard'+(isPick?' pick':'')+'">'
+      +'<div class="dhead">'
+        +'<div class="drank">'+p.r+'</div>'
+        +'<div class="dhtext">'
+          +'<div class="did"><span class="psid">'+p.id+'</span><span class="orgchip'+(p.ntro?' ntro':'')+'">'+p.org+'</span>'+(isPick?'<span class="pickflag">Recommended</span>':'')+'</div>'
+          +'<h3>'+p.title+'</h3>'
+        +'</div>'
+      +'</div>'
+      +'<div class="dbody">'
+        +'<div class="drow"><div class="k">What to build</div><div class="v">'+p.build_what+'</div></div>'
+        +'<div class="drow"><div class="k">Magic moment</div><div class="v">'+p.magic+'</div></div>'
+        +'<div class="drow"><div class="k">Q&amp;A defence</div><div class="v">'+p.qa+'</div></div>'
+        +'<div class="drow"><div class="k">Why it ranks</div><div class="v">'+p.why+'</div></div>'
+      +'</div>'
+      +'<div class="metrics">'
+        +'<div class="metric"><span class="ml">Crowd</span><span class="mv">~'+p.teams+' <small>teams</small></span></div>'
+        +'<div class="metric"><span class="ml">Demo</span><span class="mv">'+p.demo+'<small>/10</small></span></div>'
+        +'<div class="metric"><span class="ml">Build</span><span class="mv">'+p.build+'<small>/10</small></span></div>'
+        +'<div class="metric"><span class="ml">Theme</span><span class="mv" style="font-size:14px">'+p.theme+'</span></div>'
+      +'</div>'
+    +'</article>';
+  }).join('');
+</script>
