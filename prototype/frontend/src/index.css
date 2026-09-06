@@ -1,0 +1,148 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================================================
+   Design tokens. Default = the SOC "operations console" dark theme (Primer /
+   Geist-grade neutrals with a refined teal accent and legible, non-neon
+   semantics). A light theme is provided as a projector fallback (.light on root).
+   ========================================================================== */
+:root, .dark {
+  --background: #0a0e13;      /* app base — deep blue-charcoal, not pure black */
+  --surface-2: #0e141c;       /* recessed panes (editor, rail) */
+  --card: #111823;            /* raised surfaces */
+  --card-2: #141c28;          /* nested raised surfaces (rows) */
+  --popover: #141c28;
+  --foreground: #e7edf4;
+  --card-foreground: #e7edf4;
+  --popover-foreground: #e7edf4;
+  --muted: #172029;
+  --muted-foreground: #8a97a5;
+  --faint: #5f6d7b;           /* least-important text / ids */
+  --border: #212b37;
+  --border-strong: #2c3846;
+  --input: #1a222d;
+  --ring: #2fb2be;
+
+  --primary: #2fb2be;         /* refined teal accent, tied to the deck palette */
+  --primary-strong: #38c3d0;
+  --primary-foreground: #04161a;
+  --primary-soft: rgba(47,178,190,0.13);
+
+  --pass: #46c265;            /* legible green on dark, not acid */
+  --pass-soft: rgba(70,194,101,0.13);
+  --fail: #f76c73;            /* warm red, softened from neon */
+  --fail-soft: rgba(247,108,115,0.13);
+  --warn: #e3b341;            /* attention amber */
+  --warn-soft: rgba(227,179,65,0.14);
+
+  --secondary: #172029;
+  --secondary-foreground: #d6dee7;
+  --accent: #172431;
+  --accent-foreground: #e7edf4;
+  --destructive: #f76c73;
+  --radius: 0.6rem;
+
+  --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono Variable", ui-monospace, "SF Mono", monospace;
+}
+
+.light {
+  --background: #f4f6f8;
+  --surface-2: #eef1f4;
+  --card: #ffffff;
+  --card-2: #f7f9fa;
+  --popover: #ffffff;
+  --foreground: #16232b;
+  --card-foreground: #16232b;
+  --popover-foreground: #16232b;
+  --muted: #eaeef1;
+  --muted-foreground: #566772;
+  --faint: #8494a0;
+  --border: #dde4e9;
+  --border-strong: #cdd7dd;
+  --input: #e6ebee;
+  --ring: #0b6b74;
+  --primary: #0b6b74;
+  --primary-strong: #095860;
+  --primary-foreground: #ffffff;
+  --primary-soft: rgba(11,107,116,0.09);
+  --pass: #1e8449; --pass-soft: rgba(30,132,73,0.10);
+  --fail: #c0392b; --fail-soft: rgba(192,57,43,0.09);
+  --warn: #b9770e; --warn-soft: rgba(185,119,14,0.11);
+  --secondary: #eef1f4; --secondary-foreground: #2b3a43;
+  --accent: #e9eef1; --accent-foreground: #16232b;
+  --destructive: #c0392b;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface-2: var(--surface-2);
+  --color-card: var(--card);
+  --color-card-2: var(--card-2);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-faint: var(--faint);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-primary: var(--primary);
+  --color-primary-strong: var(--primary-strong);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-soft: var(--primary-soft);
+  --color-pass: var(--pass);
+  --color-pass-soft: var(--pass-soft);
+  --color-fail: var(--fail);
+  --color-fail-soft: var(--fail-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+}
+
+* { border-color: var(--border); }
+html, body, #root { height: 100%; }
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-feature-settings: "cv01","cv03","ss03";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+::selection { background: var(--primary-soft); }
+
+/* focus-visible ring for keyboard users on every interactive element */
+:where(button, a, input, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* refined thin scrollbars */
+.scroll-thin { scrollbar-width: thin; scrollbar-color: var(--border-strong) transparent; }
+.scroll-thin::-webkit-scrollbar { width: 10px; height: 10px; }
+.scroll-thin::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 8px; border: 3px solid transparent; background-clip: content-box; }
+.scroll-thin::-webkit-scrollbar-thumb:hover { background: var(--muted-foreground); background-clip: content-box; }
+
+.tabular { font-variant-numeric: tabular-nums; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+}

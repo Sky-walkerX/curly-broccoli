@@ -1,0 +1,160 @@
+# Network device hardening rule pack.
+# Each rule checks ONE fact in the Canonical Security Model, so it applies to any vendor
+# that maps into that model. References point at the real benchmark item so findings are
+# defensible in expert Q&A. `on_unknown` says what to do when the fact wasn't determined:
+# na = not assessed (honest "we couldn't tell"), fail = fail-closed.
+meta:
+  name: Network Device Hardening (CIS / NIST / STIG subset)
+  version: "1.0"
+
+rules:
+  - id: NET-TELNET
+    title: Disable Telnet on remote-admin lines
+    severity: high
+    reference: CIS IOS 1.2 · NIST 800-53 AC-17 · STIG V-215807
+    op: custom
+    custom: telnet_off
+    on_unknown: na
+    rationale: Telnet carries credentials and sessions in cleartext; anyone on-path can read them.
+    fix: |
+      line vty 0 4
+       transport input ssh
+
+  - id: NET-SSHV2
+    title: Enforce SSH version 2
+    severity: high
+    reference: CIS IOS 1.5.3 · STIG V-215814
+    field: services.ssh_version
+    op: equals
+    value: 2
+    on_unknown: na
+    rationale: SSHv1 has known cryptographic weaknesses; only v2 is acceptable.
+    fix: |
+      ip ssh version 2
+
+  - id: NET-HTTP
+    title: Disable the cleartext HTTP server
+    severity: medium
+    reference: CIS IOS 1.3.1 · STIG V-215808
+    field: services.http_server
+    op: is_false
+    on_unknown: na
+    rationale: The plaintext web UI exposes management over unencrypted HTTP.
+    fix: |
+      no ip http server
+
+  - id: NET-ENSECRET
+    title: Protect privileged mode with an enable secret
+    severity: high
+    reference: CIS IOS 1.1.1 · NIST 800-53 IA-5
+    field: auth.enable_secret
+    op: is_true
+    on_unknown: na
+    rationale: A reversible enable-password is not enough; only a hashed enable-secret protects privileged access.
+    fix: |
+      enable secret <STRONG_SECRET>
+
+  - id: NET-PWENC
+    title: Encrypt stored passwords
+    severity: medium
+    reference: CIS IOS 1.1.4 · NIST 800-53 IA-5(1)
+    field: auth.password_encryption
+    op: is_true
+    on_unknown: na
+    rationale: Without this, passwords sit in the config in cleartext.
+    fix: |
+      service password-encryption
+
+  - id: NET-SNMP
+    title: No default or writable SNMP communities
+    severity: high
+    reference: CIS IOS 3.x · STIG V-215815
+    op: custom
+    custom: snmp_hardening
+    on_unknown: na
+    rationale: Communities like 'public'/'private' are guessable; read-write ones let attackers reconfigure the device.
+    fix: |
+      no snmp-server community public
+      no snmp-server community private
+      snmp-server community <RANDOM> RO <ACL>
+
+  - id: NET-AAA
+    title: Enable AAA (centralized auth)
+    severity: medium
+    reference: CIS IOS 1.1.10 · NIST 800-53 AC-2
+    field: auth.aaa_new_model
+    op: is_true
+    on_unknown: na
+    rationale: AAA gives per-user accounts and an audit trail instead of shared local passwords.
+    fix: |
+      aaa new-model
+
+  - id: NET-LOG
+    title: Enable logging
+    severity: medium
+    reference: CIS IOS 2.2 · NIST 800-53 AU-2
+    field: logging.enabled
+    op: is_true
+    on_unknown: na
+    rationale: No logging means no forensic trail after an incident.
+    fix: |
+      logging host <SYSLOG_IP>
+      logging buffered 16384 informational
+
+  - id: NET-NTP
+    title: Configure a trusted time source (NTP)
+    severity: low
+    reference: CIS IOS 2.3 · NIST 800-53 AU-8
+    field: ntp.configured
+    op: is_true
+    on_unknown: na
+    rationale: Without synced time, log timestamps can't be correlated across devices.
+    fix: |
+      ntp server <NTP_IP>
+
+  - id: NET-VTYTIMEOUT
+    title: Set an idle timeout on admin sessions
+    severity: medium
+    reference: CIS IOS 1.6.1 · STIG V-215811
+    field: vty.exec_timeout
+    op: timeout_ok
+    on_unknown: na
+    rationale: A '0 0' (never) timeout leaves an unattended session open indefinitely.
+    fix: |
+      line vty 0 4
+       exec-timeout 10 0
+
+  - id: NET-VTYACL
+    title: Restrict who can reach the admin lines
+    severity: medium
+    reference: CIS IOS 1.6.2 · NIST 800-53 AC-17
+    field: vty.access_class
+    op: exists
+    on_unknown: fail
+    rationale: With no access-class ACL, the management plane is reachable from anywhere.
+    fix: |
+      access-list 10 permit <MGMT_SUBNET>
+      line vty 0 4
+       access-class 10 in
+
+  - id: NET-CDP
+    title: Disable neighbor discovery broadcast
+    severity: low
+    reference: CIS IOS 1.7 · STIG V-215810
+    field: services.cdp_enabled
+    op: is_false
+    on_unknown: na
+    rationale: CDP/LLDP leaks device model and topology to anyone on the wire.
+    fix: |
+      no cdp run
+
+  - id: NET-BANNER
+    title: Present a login banner
+    severity: low
+    reference: CIS IOS 1.8 · NIST 800-53 AC-8
+    field: banner_login
+    op: is_true
+    on_unknown: na
+    rationale: A legal banner is required to support prosecution of unauthorized access.
+    fix: |
+      banner login ^C Authorized access only. ^C

@@ -10,9 +10,14 @@ presentations. We are competing in the **Software** edition.
 - **Open to-dos before submission:** (1) fill team name/ID on both title slides (placeholders live);
   (2) record the demo video, then swap the QR link off the placeholder (see Demo-video QR below);
   (3) verify the Gartner misconfiguration stat on SIH26155 slide 6.
-- **Next build step:** the working **prototype** for the magic demo. Plan to start with **SIH26155**
-  (compliance auditor) — its "upload a config → instant pass/fail + fix" flow is the cleaner demo.
-  Nothing is coded yet.
+- **Prototype (SIH26155) — BUILT & working end-to-end** in `prototype/`. React+Vite+Tailwind UI +
+  FastAPI backend + local Ollama (`qwen2.5:3b`) + YAML rule packs (13 CIS/NIST/STIG checks) + SQLite +
+  ReportLab PDF. All three demo acts verified in-browser: (1) Cisco config → instant 52% report with
+  copy-paste fixes; hardened → 100%; (2) never-seen **AcmeOS** → local LLM proposes the canonical
+  mappings, cross-checked by a keyword heuristic, human confirms; (3) re-audit → now a deterministic
+  "learned vendor" (100% match), no code change. Runs fully offline. One command: `cd prototype && ./run.sh`.
+- **Prototype to-dos next:** add a real second known-vendor parser (Juniper) beyond Cisco; expand the
+  rule pack past the 13-check subset; audit-history view in the UI; package for air-gapped install.
 
 ## Who we are (team profile)
 - Strong at **AI/ML + deep learning**, **full-stack web/app**, and **cybersecurity / systems**.
@@ -93,6 +98,10 @@ Both share PCAP/flow parsing + Python + dashboard stack, so building one advance
 - `corpus/raw/` — parsed 233 PS (`sih2026_all_ps.json`), crowd model outputs, 2024/25 winner tables.
 - `corpus/analysis/sih-patterns.md` — the "what wins here" read.
 - Ranked battle-plan artifact: https://claude.ai/code/artifact/24e9820f-9661-4ac6-b381-b47df5099c66
+- `prototype/` — **the working SIH26155 prototype** (compliance auditor). `backend/` (FastAPI app,
+  parsers, rules, LLM client, SQLite, PDF), `frontend/` (React+Vite+Tailwind), `fixtures/` (Cisco +
+  AcmeOS demo configs), `run.sh` (one-command build+serve on :8099), `README.md` (architecture + 3-act
+  demo script). Offline: Python venv + Ollama, no cloud.
 - `decks/` — the idea presentations. `SIH26155-compliance-auditor.{html,pdf}` and
   `SIH26145-threat-detection.{html,pdf}` (HTML is the editable source, PDF is what gets submitted);
   `render.sh` (HTML→PDF for both), `make_qr.py` + `qr-demo.svg` + `qr-url.txt` (the demo QR).

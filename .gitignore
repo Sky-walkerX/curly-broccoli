@@ -1,0 +1,14 @@
+# OS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+prototype/backend/.venv/
+prototype/backend/data/
+prototype/backend/*.log
+
+# Node / frontend build
+node_modules/
+prototype/frontend/dist/
+prototype/frontend/*.log
